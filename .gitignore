@@ -1,0 +1,35 @@
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+
+# Node / Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+.vite/
+
+# Rust / WASM
+target/
+pkg/
+Cargo.lock.bak
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Test & Coverage
+coverage/
+playwright-report/
+test-results/
