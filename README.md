@@ -2,8 +2,8 @@
 
 **Understand. Explore. Deconstruct. Generate.**
 
-> **Project Status: Documentation & Blueprint Stage (Phase 0)**  
-> This repository currently contains the complete, implementation-ready technical specification and engineering blueprint package for **DENRYU**. Application source code (`apps/web`, `crates/denryu-engine`, `apps/api`) has **not** been scaffolded or implemented yet.
+> **Project Status: Production-Ready Full Implementation (Phases 1–10)**  
+> DENRYU is implemented across **TypeScript/React/Three.js (`apps/web`)**, **Rust/WebAssembly (`crates/denryu-engine`)**, and an **optional Python FastAPI analytics service (`apps/api`)**, backed by canonical engineering datasets (`data/`) and GitHub Pages CI/CD (`.github/workflows/ci-deploy.yml`).
 
 ---
 
@@ -68,21 +68,38 @@ Rather than covering every power plant type superficially, DENRYU focuses deeply
 
 ---
 
-## 6. Prerequisites for Future Implementation (Phase 1 Onward)
+## 6. Local Development, Testing & Deployment Quickstart
 
-Before beginning **Phase 1 — Project Foundation** (see [`flow.md`](./flow.md)), ensure the development environment provides:
-- **Node.js `20+`** & `npm` (or `pnpm`)
-- **Rust toolchain (`1.80+`)** with `wasm32-unknown-unknown` target and **`wasm-pack`**
-- **Python `3.11+`** with `venv` / `uv` / `pip`
-- **Playwright Chromium** (for E2E & WebGL fallback testing in later phases)
-- Optional **Blender `4.x`** (for authoring/refining Tier-A GLB models such as the Francis runner and spiral casing)
+### Prerequisites
+- **Node.js `20+`** & `npm`
+- **Rust (`1.80+`)** with `wasm32-unknown-unknown` target and **`wasm-pack`**
+- **Python `3.11+`** with `uv` or `pip` (optional for `apps/api`)
+
+### Run Tests & Build Locally
+```bash
+# 1. Rust physics engine unit + 500-case fuzz tests
+npm run test:rust
+
+# 2. Build Rust -> WebAssembly package for the browser Web Worker
+npm run build:wasm
+
+# 3. Frontend dependencies, typecheck, lint, Vitest & GitHub Pages subpath build
+npm install
+npm run typecheck
+npm run lint
+npm run test:web
+VITE_BASE_PATH=/DenRyu/ npm --prefix apps/web run build
+
+# 4. End-to-end Chromium tests (including WebGL2 2D fallback & responsive checks)
+npm --prefix apps/web run test:e2e
+
+# 5. Optional Python FastAPI analytics server & pytest parity suite
+apps/api/.venv/bin/pytest apps/api/tests
+```
 
 ---
 
-## 7. Roadmap Summary
+## 7. GitHub Pages & Optional Backend Deployment
 
-1. **Phase 0 (Current):** Complete & audit 14-document engineering blueprint.
-2. **Phase 1:** Scaffold `apps/web`, `crates/denryu-engine`, `apps/api`, canonical `data/*.json`, and CI checks.
-3. **Phase 2–4:** Build 3D environment, 36-component Plant Anatomy (explode, section cut, 5 Runner modes), and 9-stage Energy Journey.
-4. **Phase 5–6:** Implement Rust/WASM simulation engine + Worker bridge and build Generation Simulator UI.
-5. **Phase 7–8:** Implement Engineering Insights, Technical Library, optional FastAPI backend, full verification (`AC-01..AC-20`), and deployment setup.
+- **GitHub Pages (Primary Web App):** `.github/workflows/ci-deploy.yml` runs `cargo test`, `pytest`, `typecheck`, `eslint`, `vitest`, compiles `denryu-engine` via `wasm-pack`, and builds `apps/web` with `VITE_BASE_PATH=/DenRyu/` before publishing to GitHub Pages.
+- **Standalone Offline Core Guarantee:** Overview, Plant Anatomy, Energy Journey, Generation Simulator, Engineering Insights diagnostics, and Technical Library run **100% client-side** in browser/WASM with zero required backend server. If `VITE_API_BASE_URL` is configured to point at a hosted `apps/api` container (`apps/api/Dockerfile`), `/insights` additionally unlocks multi-point sensitivity sweeps and `< 1e-5` cross-language parity checks.

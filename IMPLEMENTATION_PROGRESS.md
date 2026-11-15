@@ -2,7 +2,7 @@
 
 **Project:** DENRYU — Power Plant Anatomy & Energy Systems Explorer  
 **Last Updated:** 2026-11-16  
-**Current Stage:** **Phase 7 Complete — Engineering Insights, Technical Library & FastAPI Analytics Service** (Moving to Phase 8–10: Playwright E2E Validation, GitHub Pages CI/CD & Final Sync)
+**Current Stage:** **Phases 1–10 Complete — Production-Ready Release Verified Across Rust, WASM Worker, Python FastAPI, React/Three.js & Playwright E2E**
 
 ---
 
@@ -97,3 +97,8 @@
   - Implemented `TechnicalLibraryPage` (`/library`) with domain category/search filters, glossary cards linking to `/anatomy`, KaTeX equations, SI unit conversion table, Synthetic Model assumptions/limitations, asset credits, and technical bibliography.
   - Completed FastAPI analytics endpoints (`GET /api/v1/plant/config`, `POST /api/v1/analytics/sensitivity`, `POST /api/v1/analytics/compare-scenarios`, `POST /api/v1/analytics/validate-output`) with unified `ErrorEnvelope` handling (`400`, `422`, `500`) and `< 1e-5` IEEE-754 parity with `denryu-engine`.
   - Verified `pytest` (6/6 passing), `npm run test:web` (17/17 passing), `typecheck`, `lint`, and `VITE_BASE_PATH=/DenRyu/ vite build`.
+- **Phases 8–10 (Complete):**
+  - Added `.github/workflows/ci-deploy.yml` automating Rust tests, Python pytest, wasm-pack build, frontend typecheck/lint/vitest, subpath Vite build (`VITE_BASE_PATH=/DenRyu/`), and GitHub Pages deployment on `main`.
+  - Added `assets/ASSET_LICENSE_LOG.md` and synchronized `README.md` with actual monorepo build, test, and deployment procedures.
+  - Added `apps/web/playwright.config.ts`, `apps/web/e2e/core-journey.spec.ts`, and `apps/web/e2e/resilience.spec.ts`; hardened `simulation.worker.ts` `serde_wasm_bindgen` `Map`/enum validation unwrapping and mobile grid `min-w-0`/`overflow-x-hidden` constraints.
+  - Full verification run passing cleanly: `cargo test` (9/9), `pytest` (6/6), `vitest` (17/17), `typecheck`, `eslint`, `VITE_BASE_PATH=/DenRyu/ vite build`, and `playwright test` (6/6 in Chromium against `/DenRyu/` preview).

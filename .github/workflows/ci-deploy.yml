@@ -1,0 +1,96 @@
+name: DENRYU Verify & Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  verify-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Set up Rust toolchain with wasm32 target
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Cache Cargo dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: crates/denryu-engine -> target
+
+      - name: Install wasm-pack
+        run: cargo install wasm-pack --locked
+
+      - name: Run Rust physics engine tests
+        run: cargo test --manifest-path crates/denryu-engine/Cargo.toml
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python API dependencies and run pytest
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ./apps/api
+          pytest apps/api/tests
+
+      - name: Build Rust/WASM package for web worker
+        run: npm run build:wasm
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Run frontend typecheck, lint, and unit tests
+        run: |
+          npm run typecheck
+          npm run lint
+          npm run test:web
+
+      - name: Build frontend with GitHub Pages subpath base
+        env:
+          VITE_BASE_PATH: /DenRyu/
+        run: npm --prefix apps/web run build
+
+      - name: Configure GitHub Pages
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages artifact
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/web/dist
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: verify-and-build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

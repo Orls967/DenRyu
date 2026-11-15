@@ -39,9 +39,61 @@ async function ensureEngine(): Promise<WasmSimulationEngine> {
   return engine;
 }
 
+function toPlainObject(val: unknown): unknown {
+  if (val instanceof Map) {
+    const out: Record<string, unknown> = {};
+    for (const [k, v] of val.entries()) {
+      out[String(k)] = toPlainObject(v);
+    }
+    return out;
+  }
+  if (Array.isArray(val)) {
+    return val.map(toPlainObject);
+  }
+  if (val && typeof val === 'object') {
+    const out: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(val)) {
+      out[k] = toPlainObject(v);
+    }
+    return out;
+  }
+  return val;
+}
+
 function normalizeError(err: unknown): { code?: string; field?: string; message: string } {
-  if (err && typeof err === 'object') {
-    const obj = err as Record<string, unknown>;
+  if (err instanceof Error) {
+    return { message: err.message };
+  }
+  const plain = toPlainObject(err);
+  if (plain && typeof plain === 'object') {
+    const obj = plain as Record<string, unknown>;
+    if (obj.outOfRange && typeof obj.outOfRange === 'object') {
+      const inner = obj.outOfRange as Record<string, unknown>;
+      const detail = (inner.detail ?? inner) as Record<string, unknown>;
+      if (typeof detail.message === 'string') {
+        return {
+          code: 'OUT_OF_RANGE',
+          field: typeof detail.field === 'string' ? detail.field : undefined,
+          message: detail.message,
+        };
+      }
+    }
+    if (obj.nonFiniteInput && typeof obj.nonFiniteInput === 'object') {
+      const nf = obj.nonFiniteInput as Record<string, unknown>;
+      const field = typeof nf.field === 'string' ? nf.field : 'input';
+      return {
+        code: 'NON_FINITE_INPUT',
+        field,
+        message: `Value in '${field}' must be a finite number.`,
+      };
+    }
+    if (obj.invalidTimestep && typeof obj.invalidTimestep === 'object') {
+      const ts = obj.invalidTimestep as Record<string, unknown>;
+      return {
+        code: 'INVALID_TIMESTEP',
+        message: typeof ts.message === 'string' ? ts.message : 'Invalid timestep.',
+      };
+    }
     if (typeof obj.message === 'string') {
       return {
         code: typeof obj.code === 'string' ? obj.code : undefined,
@@ -49,8 +101,10 @@ function normalizeError(err: unknown): { code?: string; field?: string; message:
         message: obj.message,
       };
     }
-    if (err instanceof Error) {
-      return { message: err.message };
+    try {
+      return { message: JSON.stringify(plain) };
+    } catch {
+      return { message: 'Validation failed in WASM engine.' };
     }
   }
   return { message: String(err ?? 'Unknown WASM simulation error') };

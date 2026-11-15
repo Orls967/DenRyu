@@ -29,7 +29,7 @@ export function AppShell() {
   const setMobileNavOpen = useUiStore((s) => s.setMobileNavOpen);
 
   return (
-    <div className="flex min-h-screen flex-col bg-canvas text-text-primary">
+    <div className="flex min-h-screen flex-col overflow-x-hidden bg-canvas text-text-primary">
       <header className="sticky top-0 z-40 border-b border-subtle bg-surface/95 backdrop-blur-sm">
         <div className="mx-auto flex h-14 max-w-[1800px] items-center justify-between gap-4 px-4">
           <div className="flex items-center gap-3">

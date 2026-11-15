@@ -182,7 +182,7 @@ export function EngineeringInsightsPage() {
         <>
           {/* Rule-based Diagnostics + Loss Chart */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-            <div className="lg:col-span-7 space-y-3">
+            <div className="lg:col-span-7 min-w-0 space-y-3">
               <h2 className="flex items-center gap-2 text-sm font-mono uppercase tracking-wider text-text-secondary">
                 <Activity className="h-4 w-4 text-cyan-accent" />
                 Active Operating-Point Diagnostics
@@ -234,7 +234,7 @@ export function EngineeringInsightsPage() {
               })}
             </div>
 
-            <div className="lg:col-span-5 space-y-4">
+            <div className="lg:col-span-5 min-w-0 space-y-4">
               <Panel className="p-4">
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-sm font-semibold text-text-primary">
@@ -392,7 +392,7 @@ export function EngineeringInsightsPage() {
                   Gracefully degrades in standalone static deployments while powering multi-point parameter sweeps &lt;1e-5 parity verification when `VITE_API_BASE_URL` is connected.
                 </p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <select
                   aria-label="Sweep parameter"
                   value={sweepParam}

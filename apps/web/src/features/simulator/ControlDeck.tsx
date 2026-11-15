@@ -158,7 +158,6 @@ export function ControlDeck() {
                     : 'border-subtle bg-elevated/50 text-text-secondary hover:text-text-primary'
                 }`}
               >
-                <span className="font-mono text-[10px] mr-1">{preset.code}</span>
                 <span className="truncate">{preset.shortLabel}</span>
               </button>
             );
