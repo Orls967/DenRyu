@@ -174,7 +174,7 @@ export function ControlDeck() {
           unit="m"
           value={input.netHeadM}
           min={0}
-          max={150}
+          max={130}
           step={0.5}
           error={validationErrors.netHeadM}
           onChange={(v) => void updateInput({ netHeadM: v })}
@@ -221,8 +221,8 @@ export function ControlDeck() {
           label="Turbine Peak Ref η"
           unit="—"
           value={input.turbineEfficiencyRef}
-          min={0.5}
-          max={0.98}
+          min={0.4}
+          max={0.95}
           step={0.01}
           error={validationErrors.turbineEfficiencyRef}
           onChange={(v) => void updateInput({ turbineEfficiencyRef: v })}
@@ -233,7 +233,7 @@ export function ControlDeck() {
           label="Generator Peak Ref η"
           unit="—"
           value={input.generatorEfficiencyRef}
-          min={0.8}
+          min={0.6}
           max={0.99}
           step={0.005}
           error={validationErrors.generatorEfficiencyRef}

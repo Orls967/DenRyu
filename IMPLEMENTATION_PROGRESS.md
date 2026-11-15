@@ -2,7 +2,7 @@
 
 **Project:** DENRYU — Power Plant Anatomy & Energy Systems Explorer  
 **Last Updated:** 2026-11-16  
-**Current Stage:** **Phase 5 & 6 Complete — Rust/WASM Simulation Worker & Generation Simulator (`/simulator`)** (Moving to Phase 7: Engineering Insights, Technical Library & FastAPI Analytics)
+**Current Stage:** **Phase 7 Complete — Engineering Insights, Technical Library & FastAPI Analytics Service** (Moving to Phase 8–10: Playwright E2E Validation, GitHub Pages CI/CD & Final Sync)
 
 ---
 
@@ -92,3 +92,8 @@
   - Implemented `simulatorStore.ts` (120-point ring buffer, inline Rust field error propagation, Scenario Presets A–F, play/pause/step/reset).
   - Implemented `GenerationSimulatorPage`, `ControlDeck`, and `SimulationCharts` (live KPIs, operating warnings with deep links to `/anatomy`, paired live 3D turbine-generator cutaway, and 4 Recharts visualizations).
   - Verified `npm run typecheck`, `npm run lint`, `npm run test:web` (14/14 passing), and `VITE_BASE_PATH=/DenRyu/ vite build` (bundling `simulation.worker.js` and `denryu_engine_bg.wasm`).
+- **Phase 7 (Complete):**
+  - Implemented `insightsEngine.ts`, `analyticsClient.ts` (`5000ms` timeout & standalone offline graceful degradation), and `EngineeringInsightsPage` (`/insights`) with active operating diagnostics, loss waterfall chart, WASM-evaluated Scenario A–E comparison table, and optional FastAPI sensitivity sweep + parity validator.
+  - Implemented `TechnicalLibraryPage` (`/library`) with domain category/search filters, glossary cards linking to `/anatomy`, KaTeX equations, SI unit conversion table, Synthetic Model assumptions/limitations, asset credits, and technical bibliography.
+  - Completed FastAPI analytics endpoints (`GET /api/v1/plant/config`, `POST /api/v1/analytics/sensitivity`, `POST /api/v1/analytics/compare-scenarios`, `POST /api/v1/analytics/validate-output`) with unified `ErrorEnvelope` handling (`400`, `422`, `500`) and `< 1e-5` IEEE-754 parity with `denryu-engine`.
+  - Verified `pytest` (6/6 passing), `npm run test:web` (17/17 passing), `typecheck`, `lint`, and `VITE_BASE_PATH=/DenRyu/ vite build`.

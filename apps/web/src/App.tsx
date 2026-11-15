@@ -2,17 +2,11 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import { AppShell } from '@/app/AppShell';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { EnergyJourneyPage } from '@/features/energy-journey/EnergyJourneyPage';
+import { EngineeringInsightsPage } from '@/features/insights/EngineeringInsightsPage';
+import { TechnicalLibraryPage } from '@/features/library/TechnicalLibraryPage';
 import { OverviewPage } from '@/features/overview/OverviewPage';
 import { PlantAnatomyPage } from '@/features/plant-anatomy/PlantAnatomyPage';
 import { GenerationSimulatorPage } from '@/features/simulator/GenerationSimulatorPage';
-
-function PlaceholderRoute({ title }: { title: string }) {
-  return (
-    <div className="p-6 text-sm text-text-secondary">
-      Loading {title}...
-    </div>
-  );
-}
 
 export function App() {
   return (
@@ -24,8 +18,8 @@ export function App() {
             <Route path="/anatomy" element={<PlantAnatomyPage />} />
             <Route path="/journey" element={<EnergyJourneyPage />} />
             <Route path="/simulator" element={<GenerationSimulatorPage />} />
-            <Route path="/insights" element={<PlaceholderRoute title="Engineering Insights" />} />
-            <Route path="/library" element={<PlaceholderRoute title="Technical Library" />} />
+            <Route path="/insights" element={<EngineeringInsightsPage />} />
+            <Route path="/library" element={<TechnicalLibraryPage />} />
           </Route>
         </Routes>
       </ErrorBoundary>
