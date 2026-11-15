@@ -2,7 +2,7 @@
 
 **Project:** DENRYU — Power Plant Anatomy & Energy Systems Explorer  
 **Last Updated:** 2026-11-16  
-**Current Stage:** **Phase 4 Complete — Guided 9-Stage Energy Journey (`/journey`)** (Moving to Phase 5 & 6: Rust/WASM Simulation Worker & Generation Simulator)
+**Current Stage:** **Phase 5 & 6 Complete — Rust/WASM Simulation Worker & Generation Simulator (`/simulator`)** (Moving to Phase 7: Engineering Insights, Technical Library & FastAPI Analytics)
 
 ---
 
@@ -87,3 +87,8 @@
 - **Phase 4 (Complete):**
   - Implemented `EnergyJourneyPage` (`/journey`) with camera choreography presets, highlight/transparent shell states, physics animation modes, manual-orbit detection with **Re-center Stage Camera**, auto-play dwell timer, keyboard Arrow navigation, KaTeX governing formulas, loss mechanisms, clickable active component chips (`/anatomy?component=...`), Stage 04 5-mode Runner CTA, and Stage 09 Replay/Simulator completion flow.
   - Verified `npm run typecheck`, `npm run lint`, `npm run test:web` (10/10 passing), and `VITE_BASE_PATH=/DenRyu/ vite build`.
+- **Phase 5 & 6 (Complete):**
+  - Built `simulation.worker.ts` + `SimulationBridge` (`apps/web/src/services/simulationBridge.ts`) executing `crates/denryu-engine` WASM inside a dedicated Web Worker with correlation IDs and structured `SimulationValidationError` handling (zero physics duplicated in TS).
+  - Implemented `simulatorStore.ts` (120-point ring buffer, inline Rust field error propagation, Scenario Presets A–F, play/pause/step/reset).
+  - Implemented `GenerationSimulatorPage`, `ControlDeck`, and `SimulationCharts` (live KPIs, operating warnings with deep links to `/anatomy`, paired live 3D turbine-generator cutaway, and 4 Recharts visualizations).
+  - Verified `npm run typecheck`, `npm run lint`, `npm run test:web` (14/14 passing), and `VITE_BASE_PATH=/DenRyu/ vite build` (bundling `simulation.worker.js` and `denryu_engine_bg.wasm`).
