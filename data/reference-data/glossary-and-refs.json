@@ -1,0 +1,219 @@
+{
+  "glossary": [
+    {
+      "id": "term-net-head",
+      "term": "Net Head (H)",
+      "category": "Hydraulics",
+      "symbol": "H",
+      "unit": "m",
+      "definition": "Effective hydraulic energy per unit weight available across the turbine after subtracting intake, trash-rack, tunnel, and penstock friction losses from gross elevation head (Z_hw - Z_tw).",
+      "relatedComponentIds": ["comp-reservoir", "comp-penstock", "comp-spiral-casing"]
+    },
+    {
+      "id": "term-bep",
+      "term": "Best Efficiency Point (BEP)",
+      "category": "Turbomachinery",
+      "symbol": "Q_BEP",
+      "unit": "m³/s",
+      "definition": "Operating discharge and head point where incoming water angle matches runner blade leading-edge angle cleanly with minimal exit swirl, maximizing hydraulic efficiency.",
+      "relatedComponentIds": ["comp-runner", "comp-runner-blades", "comp-guide-vanes"]
+    },
+    {
+      "id": "term-wicket-gates",
+      "term": "Guide Vanes / Wicket Gates",
+      "category": "Turbomachinery",
+      "symbol": "u_gv",
+      "unit": "%",
+      "definition": "Annular ring of pivoting hydrofoil vanes surrounding a Francis runner that simultaneously throttle volumetric flow rate Q and adjust tangential swirl angle entering the runner.",
+      "relatedComponentIds": ["comp-guide-vanes", "comp-stay-vanes"]
+    },
+    {
+      "id": "term-draft-tube",
+      "term": "Draft Tube & Diffuser Recovery",
+      "category": "Turbomachinery",
+      "symbol": "v_out",
+      "unit": "m/s",
+      "definition": "Submerged expanding conduit beneath a reaction turbine runner that decelerates discharge flow, recovering kinetic velocity head as sub-atmospheric suction pressure beneath the runner.",
+      "relatedComponentIds": ["comp-draft-tube", "comp-draft-tube-outlet"]
+    },
+    {
+      "id": "term-cavitation",
+      "term": "Cavitation & Part-Load Vortex Rope",
+      "category": "Turbomachinery",
+      "symbol": "sigma",
+      "unit": "dimensionless",
+      "definition": "Formation and violent collapse of vapor bubbles where local static pressure drops below water vapor pressure, or helical pressure-pulsation ropes formed in the draft tube at < 45-60% flow.",
+      "relatedComponentIds": ["comp-runner-blades", "comp-draft-tube"]
+    },
+    {
+      "id": "term-water-hammer",
+      "term": "Water Hammer & Surge Tank Buffering",
+      "category": "Hydraulics",
+      "symbol": "Delta p",
+      "unit": "Pa",
+      "definition": "Acoustic pressure wave triggered by rapid flow velocity change in a closed conduit. A surge tank intercepts the pressure tunnel to absorb fluid momentum as safe open-surface oscillation.",
+      "relatedComponentIds": ["comp-surge-tank", "comp-pressure-tunnel", "comp-penstock"]
+    },
+    {
+      "id": "term-synchronous-speed",
+      "term": "Synchronous Speed Lock",
+      "category": "Electrical",
+      "symbol": "n_s",
+      "unit": "rpm",
+      "definition": "Exact steady-state rotational speed dictated by interconnected grid frequency f and generator pole count N_p via n_s = 120f / N_p (250 rpm for 50 Hz, 24 poles). Load variations change torque, not steady-state RPM.",
+      "relatedComponentIds": ["comp-rotor", "comp-stator-winding", "comp-electrical-grid"]
+    },
+    {
+      "id": "term-excitation",
+      "term": "Excitation & AVR",
+      "category": "Electrical",
+      "symbol": "I_f",
+      "unit": "A DC",
+      "definition": "Controlled DC current fed to rotor field windings by the Automatic Voltage Regulator (AVR) to regulate stator terminal voltage and reactive power (MVAR) while speed stays grid-locked.",
+      "relatedComponentIds": ["comp-excitation-system", "comp-field-winding"]
+    },
+    {
+      "id": "term-step-up",
+      "term": "Generator Step-Up Transformation",
+      "category": "Electrical",
+      "symbol": "V_2 / V_1",
+      "unit": "kV",
+      "definition": "Boosting 11 kV generator output up to 132+ kV transmission voltage reduces line current proportionally and cuts resistive I^2R heat losses by (V_2 / V_1)^2.",
+      "relatedComponentIds": ["comp-step-up-transformer", "comp-switchyard", "comp-transmission-line"]
+    }
+  ],
+  "equations": [
+    {
+      "id": "eq-gate-flow",
+      "title": "Gate Orifice Discharge Capacity",
+      "latex": "Q_{\\text{avail}}(H, u_{\\text{gv}}) = Q_{\\text{cap,rated}} \\left(\\frac{u_{\\text{gv}}}{100}\\right) \\sqrt{\\frac{\\max(H, 0)}{H_{\\text{rated}}}}",
+      "variables": "Q_cap,rated = 72.0 m³/s, H_rated = 85.0 m, u_gv in [0, 100] %",
+      "notes": "Orifice scaling restricts physically achievable flow when head drops or wicket gates partially close."
+    },
+    {
+      "id": "eq-hydraulic-power",
+      "title": "Hydraulic Input Power",
+      "latex": "P_h = \\rho \\, g \\, Q_{\\text{actual}} \\, H",
+      "variables": "rho = 1000 kg/m³, g = 9.80665 m/s², Q in m³/s, H in m, P_h in W",
+      "notes": "Fundamental steady-state fluid power entering the turbine spiral casing."
+    },
+    {
+      "id": "eq-mechanical-power",
+      "title": "Turbine Mechanical Shaft Power & Torque",
+      "latex": "P_m = \\min(P_{m,\\max},\\ P_h \\eta_t), \\qquad T = \\frac{P_m}{\\omega}, \\qquad \\omega = \\frac{2\\pi n}{60}",
+      "variables": "P_m in W (cap 58 MW), T in N·m, omega in rad/s (>= 0.5 rad/s guard)",
+      "notes": "At synchronous speed (250 rpm -> 26.18 rad/s), 45.93 MW produces ~1.754 MN·m of shaft torque."
+    },
+    {
+      "id": "eq-sync-speed",
+      "title": "Synchronous Speed Relationship",
+      "latex": "n_s = \\frac{120 \\, f}{N_p}",
+      "variables": "f = 50 Hz (or 60 Hz), N_p = 24 poles -> n_s = 250.0 rpm",
+      "notes": "Grid-tied synchronous units remain speed-locked regardless of load changes."
+    },
+    {
+      "id": "eq-electrical-power",
+      "title": "Generated & Grid-Delivered Electrical Power",
+      "latex": "P_e = \\min(P_{e,\\max},\\ P_m \\eta_g) = \\rho g Q H \\eta_t \\eta_g, \\qquad P_{\\text{delivered}} = \\min(P_e, P_{\\text{load,req}})",
+      "variables": "P_e in W (cap 55 MW), eta_overall = P_e / P_h",
+      "notes": "Overall conversion efficiency equals the product eta_t * eta_g when unclamped."
+    }
+  ],
+  "assumptionsAndLimitations": [
+    {
+      "title": "Synthetic Educational Plant Baseline (denryu-hydro-unit-01)",
+      "detail": "Nominal values (85.0 m rated net head, 60.0 m³/s flow, 50 MW mechanical rating, 24 poles, 50 Hz, 92% peak turbine efficiency, 97.5% peak generator efficiency) are illustrative educational parameters, not measured SCADA telemetry from an operating power station."
+    },
+    {
+      "title": "Smooth C1 Efficiency Curves vs. OEM Hill Charts",
+      "detail": "Francis turbine and synchronous generator efficiency curves are documented smooth algebraic approximations reflecting part-load swirl/incidence drop and constant-plus-I²R electrical losses, rather than proprietary manufacturer model-test hill tables."
+    },
+    {
+      "title": "System-Level Steady/Quasi-Steady Model (No CFD, FEA, or MOC)",
+      "detail": "DENRYU does not solve 3D Navier-Stokes CFD meshes, structural finite-element stresses, or Method-of-Characteristics (MOC) elastic water-hammer PDEs. Net Head (H) represents effective turbine inlet head after conveyance friction losses."
+    },
+    {
+      "title": "Conceptual Modular 3D Geometry",
+      "detail": "The 3D facility and double-curved 15-blade Francis runner are engineered procedural educational representations calibrated to 1 unit = 1 meter conventions rather than manufacturer fabrication CAD."
+    }
+  ],
+  "assetCredits": [
+    {
+      "asset": "DENRYU Procedural Hydroelectric Facility & Francis Runner Geometry",
+      "author": "DENRYU Engineering Implementation",
+      "license": "Original Project Asset (MIT / Project License)",
+      "notes": "Mathematically swept 15-blade mixed-flow Francis runner, helical tapering spiral casing, 20 pivoting wicket gates, 24-pole salient rotor, and 36-component plant assembly authored directly in Three.js."
+    },
+    {
+      "asset": "Typography (Space Grotesk, Inter, JetBrains Mono)",
+      "author": "Open Font License (SIL OFL 1.1)",
+      "license": "SIL Open Font License 1.1",
+      "notes": "System-safe font stack with tabular-nums alignment for numerical readouts."
+    }
+  ],
+  "references": [
+    {
+      "id": "ref-iec-60041",
+      "title": "Field acceptance tests to determine the hydraulic performance of hydraulic turbines, storage pumps and pump-turbines",
+      "organizationOrAuthors": "International Electrotechnical Commission (IEC)",
+      "year": "1991 (Corr. 1996)",
+      "category": "standard",
+      "identifier": "IEC 60041 (3rd ed.)",
+      "scopeSummary": "Standard definitions of net head, discharge, hydraulic power, and field efficiency testing for reaction hydraulic turbines."
+    },
+    {
+      "id": "ref-iec-60193",
+      "title": "Hydraulic turbines, storage pumps and pump-turbines — Model acceptance tests",
+      "organizationOrAuthors": "International Electrotechnical Commission (IEC)",
+      "year": "2019",
+      "category": "standard",
+      "identifier": "IEC 60193 (Ed. 3.0)",
+      "scopeSummary": "Laboratory model testing conventions, Thoma cavitation number, runaway speed, and hydraulic similarity laws."
+    },
+    {
+      "id": "ref-usbr-20",
+      "title": "Selecting Hydraulic Reaction Turbines",
+      "organizationOrAuthors": "U.S. Department of the Interior, Bureau of Reclamation",
+      "year": "1954 (rev. 1976)",
+      "category": "government_manual",
+      "identifier": "USBR Engineering Monograph No. 20",
+      "scopeSummary": "Classic engineering guidance on Francis turbine specific speed, runner sizing, spiral casing geometry, and setting depth."
+    },
+    {
+      "id": "ref-usace-mech",
+      "title": "Hydroelectric Power Plants Mechanical Design",
+      "organizationOrAuthors": "U.S. Army Corps of Engineers",
+      "year": "1995",
+      "category": "government_manual",
+      "identifier": "USACE EM 1110-2-4205",
+      "scopeSummary": "Mechanical design criteria for intakes, gates, penstocks, main inlet valves, turbines, and powerhouse cranes."
+    },
+    {
+      "id": "ref-ieee-c50-12",
+      "title": "IEEE Standard for 50 Hz and 60 Hz Synchronous Generators and Generator/Motors Coupled to Hydraulic Turbines and Rated 5 MVA and Above",
+      "organizationOrAuthors": "Institute of Electrical and Electronics Engineers (IEEE)",
+      "year": "2005",
+      "category": "standard",
+      "identifier": "IEEE Std C50.12",
+      "scopeSummary": "Electrical, thermal insulation class, overspeed withstand, and salient-pole construction requirements for hydro generators."
+    },
+    {
+      "id": "ref-gulliver-arndt",
+      "title": "Hydropower Engineering Handbook",
+      "organizationOrAuthors": "J. S. Gulliver & R. E. A. Arndt (Eds.)",
+      "year": "1991",
+      "category": "textbook",
+      "identifier": "McGraw-Hill",
+      "scopeSummary": "Comprehensive engineering reference covering civil works, conveyance hydraulics, turbomachinery, and electrical integration."
+    },
+    {
+      "id": "ref-warnick",
+      "title": "Hydropower Engineering",
+      "organizationOrAuthors": "C. C. Warnick",
+      "year": "1984",
+      "category": "textbook",
+      "identifier": "Prentice-Hall",
+      "scopeSummary": "Foundational textbook on hydroelectric head, flow-duration analysis, penstock sizing, and turbine selection."
+    }
+  ]
+}

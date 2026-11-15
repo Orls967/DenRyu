@@ -1,0 +1,290 @@
+[
+  {
+    "id": "rel-dam-impounds-reservoir",
+    "fromComponentId": "comp-dam",
+    "toComponentId": "comp-reservoir",
+    "kind": "structural_support",
+    "directionality": "unidirectional",
+    "description": "Concrete gravity dam monolith resists hydrostatic water pressure and impounds the elevated reservoir pool."
+  },
+  {
+    "id": "rel-reservoir-to-trash-rack",
+    "fromComponentId": "comp-reservoir",
+    "toComponentId": "comp-trash-rack",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "Submerged reservoir water approaches the upstream intake bar screen under hydrostatic head."
+  },
+  {
+    "id": "rel-reservoir-to-spillway",
+    "fromComponentId": "comp-reservoir",
+    "toComponentId": "comp-spillway",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "Excess floodwater above full supply level bypasses generation through the gated dam spillway."
+  },
+  {
+    "id": "rel-spillway-to-downstream",
+    "fromComponentId": "comp-spillway",
+    "toComponentId": "comp-downstream-channel",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "Spillway chute and stilling basin dissipate flood energy safely into the downstream river."
+  },
+  {
+    "id": "rel-trash-rack-to-intake",
+    "fromComponentId": "comp-trash-rack",
+    "toComponentId": "comp-water-intake",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "Filtered water passes smoothly across the bar screen into the flared concrete intake bellmouth."
+  },
+  {
+    "id": "rel-intake-to-intake-gate",
+    "fromComponentId": "comp-water-intake",
+    "toComponentId": "comp-intake-gate",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "Accelerated bellmouth inflow passes through the emergency guard gate shaft."
+  },
+  {
+    "id": "rel-intake-gate-to-headrace",
+    "fromComponentId": "comp-intake-gate",
+    "toComponentId": "comp-headrace",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "Open intake gate admits pressurized water into the headrace approach conduit."
+  },
+  {
+    "id": "rel-headrace-to-pressure-tunnel",
+    "fromComponentId": "comp-headrace",
+    "toComponentId": "comp-pressure-tunnel",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "Headrace delivers closed-conduit water into the underground rock/concrete-lined pressure tunnel."
+  },
+  {
+    "id": "rel-pressure-tunnel-to-surge-tank",
+    "fromComponentId": "comp-pressure-tunnel",
+    "toComponentId": "comp-surge-tank",
+    "kind": "hydraulic_flow",
+    "directionality": "bidirectional",
+    "description": "Vertical riser tee exchanges transient mass oscillations to cushion pressure waves during gate changes."
+  },
+  {
+    "id": "rel-pressure-tunnel-to-penstock",
+    "fromComponentId": "comp-pressure-tunnel",
+    "toComponentId": "comp-penstock",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "Pressurized flow leaves the tunnel beneath the surge tank and enters the steep steel penstock."
+  },
+  {
+    "id": "rel-penstock-to-miv",
+    "fromComponentId": "comp-penstock",
+    "toComponentId": "comp-main-inlet-valve",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "High-pressure water descending the penstock arrives at the powerhouse turbine main inlet valve."
+  },
+  {
+    "id": "rel-miv-to-spiral-casing",
+    "fromComponentId": "comp-main-inlet-valve",
+    "toComponentId": "comp-spiral-casing",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "Open inlet valve admits pressurized water tangentially into the tapering volute scroll case."
+  },
+  {
+    "id": "rel-spiral-casing-to-stay-vanes",
+    "fromComponentId": "comp-spiral-casing",
+    "toComponentId": "comp-stay-vanes",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "360-degree volute distributes uniform swirling flow radially inward across fixed stay vanes."
+  },
+  {
+    "id": "rel-stay-vanes-to-guide-vanes",
+    "fromComponentId": "comp-stay-vanes",
+    "toComponentId": "comp-guide-vanes",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "Pre-aligned flow enters the pivoting wicket gate cascade for discharge and swirl regulation."
+  },
+  {
+    "id": "rel-guide-vanes-to-runner",
+    "fromComponentId": "comp-guide-vanes",
+    "toComponentId": "comp-runner",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "Pivoting wicket gates inject swirl and regulated discharge across the radial vaneless gap into the Francis runner."
+  },
+  {
+    "id": "rel-runner-blades-to-runner",
+    "fromComponentId": "comp-runner-blades",
+    "toComponentId": "comp-runner",
+    "kind": "mechanical_coupling",
+    "directionality": "unidirectional",
+    "description": "15 double-curved blades transfer integrated hydrodynamic pressure and momentum torque into the runner crown and band."
+  },
+  {
+    "id": "rel-runner-to-draft-tube",
+    "fromComponentId": "comp-runner",
+    "toComponentId": "comp-draft-tube",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "Low-pressure water exits the runner eye axially downward into the expanding draft tube diffuser."
+  },
+  {
+    "id": "rel-runner-to-main-shaft",
+    "fromComponentId": "comp-runner",
+    "toComponentId": "comp-main-shaft",
+    "kind": "mechanical_coupling",
+    "directionality": "unidirectional",
+    "description": "Bolted runner crown transmits shaft torque and axial thrust vertically upward along the forged main shaft."
+  },
+  {
+    "id": "rel-bearings-support-shaft",
+    "fromComponentId": "comp-bearings",
+    "toComponentId": "comp-main-shaft",
+    "kind": "structural_support",
+    "directionality": "unidirectional",
+    "description": "Hydrodynamic tilting-pad thrust and guide bearings carry vertical rotating mass and constrain radial runout."
+  },
+  {
+    "id": "rel-main-shaft-to-rotor",
+    "fromComponentId": "comp-main-shaft",
+    "toComponentId": "comp-rotor",
+    "kind": "mechanical_coupling",
+    "directionality": "unidirectional",
+    "description": "Main shaft delivers mechanical rotational power directly into the 24-pole salient-pole generator rotor."
+  },
+  {
+    "id": "rel-exciter-to-field-winding",
+    "fromComponentId": "comp-excitation-system",
+    "toComponentId": "comp-field-winding",
+    "kind": "electrical_power",
+    "directionality": "unidirectional",
+    "description": "Static thyristor AVR supplies regulated DC excitation current to the rotating rotor field coils."
+  },
+  {
+    "id": "rel-field-winding-on-rotor",
+    "fromComponentId": "comp-field-winding",
+    "toComponentId": "comp-rotor",
+    "kind": "structural_support",
+    "directionality": "unidirectional",
+    "description": "24 copper pole coils are mounted concentrically on the salient pole bodies of the rotor rim."
+  },
+  {
+    "id": "rel-rotor-to-stator-winding",
+    "fromComponentId": "comp-rotor",
+    "toComponentId": "comp-stator-winding",
+    "kind": "electromagnetic",
+    "directionality": "unidirectional",
+    "description": "Rotating 24-pole magnetic flux sweeps across the air gap to induce three-phase AC EMF in stator coils."
+  },
+  {
+    "id": "rel-stator-supports-winding",
+    "fromComponentId": "comp-stator",
+    "toComponentId": "comp-stator-winding",
+    "kind": "structural_support",
+    "directionality": "unidirectional",
+    "description": "Laminated silicon-steel stator core anchors armature coils and channels magnetic return flux."
+  },
+  {
+    "id": "rel-housing-encloses-stator",
+    "fromComponentId": "comp-generator-housing",
+    "toComponentId": "comp-stator",
+    "kind": "structural_support",
+    "directionality": "unidirectional",
+    "description": "Sealed generator barrel encloses the stator, rotor, and closed-loop ventilation air circuit."
+  },
+  {
+    "id": "rel-cooling-cools-stator",
+    "fromComponentId": "comp-cooling-system",
+    "toComponentId": "comp-stator",
+    "kind": "thermal_cooling",
+    "directionality": "bidirectional",
+    "description": "Air-to-water finned radiator banks extract core and copper I2R heat from recirculated generator air."
+  },
+  {
+    "id": "rel-stator-winding-to-terminal",
+    "fromComponentId": "comp-stator-winding",
+    "toComponentId": "comp-generator-terminal",
+    "kind": "electrical_power",
+    "directionality": "unidirectional",
+    "description": "Three-phase stator phase leads terminate at insulated bushings inside the generator terminal box."
+  },
+  {
+    "id": "rel-terminal-to-busbar",
+    "fromComponentId": "comp-generator-terminal",
+    "toComponentId": "comp-busbar",
+    "kind": "electrical_power",
+    "directionality": "unidirectional",
+    "description": "Medium-voltage high-current AC enters the three isolated-phase aluminum bus ducts."
+  },
+  {
+    "id": "rel-busbar-to-breaker",
+    "fromComponentId": "comp-busbar",
+    "toComponentId": "comp-circuit-breaker",
+    "kind": "electrical_power",
+    "directionality": "unidirectional",
+    "description": "Busbar conducts generated power into the three-pole generator synchronizing circuit breaker."
+  },
+  {
+    "id": "rel-breaker-to-transformer",
+    "fromComponentId": "comp-circuit-breaker",
+    "toComponentId": "comp-step-up-transformer",
+    "kind": "electrical_power",
+    "directionality": "unidirectional",
+    "description": "Closed synchronizing breaker feeds 11 kV power into the primary delta windings of the step-up transformer."
+  },
+  {
+    "id": "rel-transformer-to-switchyard",
+    "fromComponentId": "comp-step-up-transformer",
+    "toComponentId": "comp-switchyard",
+    "kind": "electrical_power",
+    "directionality": "unidirectional",
+    "description": "High-voltage bushings deliver stepped-up 132 kV AC into the outdoor switchyard protection bay."
+  },
+  {
+    "id": "rel-switchyard-to-transmission",
+    "fromComponentId": "comp-switchyard",
+    "toComponentId": "comp-transmission-line",
+    "kind": "electrical_power",
+    "directionality": "unidirectional",
+    "description": "Dead-end gantry feeds HV AC onto overhead ACSR conductors suspended on steel lattice towers."
+  },
+  {
+    "id": "rel-transmission-to-grid",
+    "fromComponentId": "comp-transmission-line",
+    "toComponentId": "comp-electrical-grid",
+    "kind": "electrical_power",
+    "directionality": "unidirectional",
+    "description": "Overhead transmission corridor delivers electrical energy into the synchronized regional power grid."
+  },
+  {
+    "id": "rel-draft-tube-to-outlet",
+    "fromComponentId": "comp-draft-tube",
+    "toComponentId": "comp-draft-tube-outlet",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "Expanding concrete elbow discharges decelerated water through twin submerged outlet bays."
+  },
+  {
+    "id": "rel-outlet-to-tailrace",
+    "fromComponentId": "comp-draft-tube-outlet",
+    "toComponentId": "comp-tailrace",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "Submerged outlet keeps water seal intact while releasing flow smoothly into the tailrace pool."
+  },
+  {
+    "id": "rel-tailrace-to-downstream",
+    "fromComponentId": "comp-tailrace",
+    "toComponentId": "comp-downstream-channel",
+    "kind": "hydraulic_flow",
+    "directionality": "unidirectional",
+    "description": "Wide tailrace channel returns 100% of turbined river volume cleanly into the natural downstream channel."
+  }
+]

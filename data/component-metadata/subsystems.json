@@ -1,0 +1,98 @@
+[
+  {
+    "id": "sub-reservoir-dam",
+    "order": 1,
+    "code": "A",
+    "name": "Reservoir & Dam",
+    "summary": "Impounds elevated headwater behind a concrete gravity dam, providing gravitational potential energy, filtered submerged intake, emergency isolation, and flood spillway bypass.",
+    "cameraPresetKey": "cam-preset-dam-overview",
+    "componentIds": [
+      "comp-reservoir",
+      "comp-dam",
+      "comp-water-intake",
+      "comp-trash-rack",
+      "comp-intake-gate",
+      "comp-spillway"
+    ]
+  },
+  {
+    "id": "sub-water-conveyance",
+    "order": 2,
+    "code": "B",
+    "name": "Water Conveyance",
+    "summary": "Transfers pressurized water from the dam intake through headrace and rock-lined pressure tunnel past the surge tank down the steel penstock to the main inlet valve.",
+    "cameraPresetKey": "cam-preset-conveyance-profile",
+    "componentIds": [
+      "comp-headrace",
+      "comp-pressure-tunnel",
+      "comp-surge-tank",
+      "comp-penstock",
+      "comp-main-inlet-valve"
+    ]
+  },
+  {
+    "id": "sub-turbine",
+    "order": 3,
+    "code": "C",
+    "name": "Turbine",
+    "summary": "Distributes pressurized water 360 degrees through spiral casing, stay vanes, and pivoting guide vanes onto the mixed-flow Francis runner, converting fluid energy into shaft torque before draft-tube pressure recovery.",
+    "cameraPresetKey": "cam-preset-turbine-cutaway",
+    "componentIds": [
+      "comp-spiral-casing",
+      "comp-stay-vanes",
+      "comp-guide-vanes",
+      "comp-runner",
+      "comp-runner-blades",
+      "comp-main-shaft",
+      "comp-draft-tube"
+    ]
+  },
+  {
+    "id": "sub-generator",
+    "order": 4,
+    "code": "D",
+    "name": "Generator",
+    "summary": "Vertical 24-pole salient-pole synchronous generator converting shaft rotation into three-phase AC electricity at 250 rpm (50 Hz), supported by tilting-pad bearings, static exciter, and closed-loop coolers.",
+    "cameraPresetKey": "cam-preset-generator-hall",
+    "componentIds": [
+      "comp-rotor",
+      "comp-stator",
+      "comp-field-winding",
+      "comp-stator-winding",
+      "comp-excitation-system",
+      "comp-bearings",
+      "comp-cooling-system",
+      "comp-generator-housing"
+    ]
+  },
+  {
+    "id": "sub-electrical-transmission",
+    "order": 5,
+    "code": "E",
+    "name": "Electrical Transmission",
+    "summary": "Routes 11 kV three-phase power from generator terminals via isolated-phase busbars and synchronizing breaker to the step-up transformer, outdoor switchyard, and high-voltage grid lines.",
+    "cameraPresetKey": "cam-preset-switchyard-grid",
+    "componentIds": [
+      "comp-generator-terminal",
+      "comp-busbar",
+      "comp-circuit-breaker",
+      "comp-step-up-transformer",
+      "comp-switchyard",
+      "comp-transmission-line",
+      "comp-electrical-grid"
+    ]
+  },
+  {
+    "id": "sub-discharge",
+    "order": 6,
+    "code": "F",
+    "name": "Discharge",
+    "summary": "Returns decelerated turbine discharge through submerged draft tube outlet piers and tailrace channel into the downstream river with 100% water mass conservation.",
+    "cameraPresetKey": "cam-preset-tailrace-exit",
+    "componentIds": [
+      "comp-draft-tube-outlet",
+      "comp-tailrace",
+      "comp-downstream-channel"
+    ]
+  }
+]

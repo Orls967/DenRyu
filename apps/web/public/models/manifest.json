@@ -1,0 +1,701 @@
+{
+  "version": "1.0.0",
+  "plantId": "denryu-hydro-unit-01",
+  "coordinateSystem": {
+    "upAxis": "+Y",
+    "downstreamAxis": "+X",
+    "lateralAxis": "+Z",
+    "unit": "meter",
+    "origin": [
+      0,
+      0,
+      0
+    ]
+  },
+  "components": [
+    {
+      "componentId": "comp-reservoir",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Reservoir",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        32.0,
+        22.0,
+        32.0
+      ],
+      "boundingRadiusM": 35.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-dam",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Dam",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        36.0,
+        24.0,
+        34.0
+      ],
+      "boundingRadiusM": 32.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-water-intake",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_WaterIntake",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        -14.0,
+        8.0,
+        -14.0
+      ],
+      "boundingRadiusM": 6.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-trash-rack",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_TrashRack",
+      "lodSupported": false,
+      "explodeVector": [
+        -4.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        -10.0,
+        4.0,
+        -8.0
+      ],
+      "boundingRadiusM": 3.5,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-intake-gate",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_IntakeGate",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        12.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        -10.0,
+        8.0,
+        10.0
+      ],
+      "boundingRadiusM": 4.5,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-spillway",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Spillway",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        22.0,
+        18.0,
+        22.0
+      ],
+      "boundingRadiusM": 18.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-headrace",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Headrace",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        10.0,
+        8.0,
+        12.0
+      ],
+      "boundingRadiusM": 6.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-pressure-tunnel",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_PressureTunnel",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        12.0,
+        8.0,
+        12.0
+      ],
+      "boundingRadiusM": 7.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-surge-tank",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_SurgeTank",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        6.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        14.0,
+        10.0,
+        14.0
+      ],
+      "boundingRadiusM": 9.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-penstock",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Penstock",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        2.5,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        24.0,
+        18.0,
+        26.0
+      ],
+      "boundingRadiusM": 22.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-main-inlet-valve",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_MainInletValve",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        3.5
+      ],
+      "cameraFocusOffset": [
+        5.5,
+        3.5,
+        6.5
+      ],
+      "boundingRadiusM": 3.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-spiral-casing",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_SpiralCasing",
+      "lodSupported": true,
+      "explodeVector": [
+        -2.8,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        8.0,
+        5.5,
+        8.0
+      ],
+      "boundingRadiusM": 5.2,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-stay-vanes",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_StayVanes",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        2.5,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        5.5,
+        3.8,
+        5.5
+      ],
+      "boundingRadiusM": 2.8,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-guide-vanes",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_GuideVanes",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        1.5,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        4.8,
+        3.2,
+        4.8
+      ],
+      "boundingRadiusM": 2.3,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-runner",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Runner",
+      "lodSupported": true,
+      "explodeVector": [
+        0.0,
+        -3.2,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        4.5,
+        2.2,
+        4.5
+      ],
+      "boundingRadiusM": 1.8,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-runner-blades",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_RunnerBlades",
+      "lodSupported": true,
+      "explodeVector": [
+        0.0,
+        -4.2,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        3.6,
+        1.6,
+        3.6
+      ],
+      "boundingRadiusM": 1.5,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-main-shaft",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_MainShaft",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        7.5,
+        3.0,
+        7.5
+      ],
+      "boundingRadiusM": 4.5,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-draft-tube",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_DraftTube",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        -2.5,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        10.0,
+        4.0,
+        10.0
+      ],
+      "boundingRadiusM": 6.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-rotor",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Rotor",
+      "lodSupported": true,
+      "explodeVector": [
+        0.0,
+        5.2,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        6.5,
+        4.5,
+        6.5
+      ],
+      "boundingRadiusM": 3.2,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-stator",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Stator",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        7.5,
+        4.5,
+        7.5
+      ],
+      "boundingRadiusM": 3.8,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-field-winding",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_FieldWinding",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        5.8,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        5.8,
+        3.8,
+        5.8
+      ],
+      "boundingRadiusM": 3.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-stator-winding",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_StatorWinding",
+      "lodSupported": true,
+      "explodeVector": [
+        0.0,
+        1.4,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        6.2,
+        4.2,
+        6.2
+      ],
+      "boundingRadiusM": 3.3,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-excitation-system",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_ExcitationSystem",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        1.8,
+        -3.0
+      ],
+      "cameraFocusOffset": [
+        5.5,
+        3.5,
+        -5.5
+      ],
+      "boundingRadiusM": 2.5,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-bearings",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Bearings",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        3.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        5.5,
+        3.0,
+        5.5
+      ],
+      "boundingRadiusM": 2.4,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-cooling-system",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_CoolingSystem",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        -3.5
+      ],
+      "cameraFocusOffset": [
+        8.5,
+        4.5,
+        8.5
+      ],
+      "boundingRadiusM": 4.2,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-generator-housing",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_GeneratorHousing",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        7.5,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        9.5,
+        6.0,
+        9.5
+      ],
+      "boundingRadiusM": 4.8,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-generator-terminal",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_GeneratorTerminal",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        5.0,
+        3.5,
+        -5.0
+      ],
+      "boundingRadiusM": 2.2,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-busbar",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Busbar",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        1.5,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        7.5,
+        5.0,
+        7.5
+      ],
+      "boundingRadiusM": 4.5,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-circuit-breaker",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_CircuitBreaker",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        2.2,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        5.5,
+        3.5,
+        5.5
+      ],
+      "boundingRadiusM": 2.5,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-step-up-transformer",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_StepUpTransformer",
+      "lodSupported": true,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        8.5,
+        5.5,
+        8.5
+      ],
+      "boundingRadiusM": 4.5,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-switchyard",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Switchyard",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        14.0,
+        8.0,
+        14.0
+      ],
+      "boundingRadiusM": 9.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-transmission-line",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_TransmissionLine",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        22.0,
+        14.0,
+        22.0
+      ],
+      "boundingRadiusM": 18.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-electrical-grid",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_ElectricalGrid",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        14.0,
+        10.0,
+        14.0
+      ],
+      "boundingRadiusM": 8.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-draft-tube-outlet",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_DraftTubeOutlet",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        9.0,
+        5.0,
+        9.0
+      ],
+      "boundingRadiusM": 5.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-tailrace",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Tailrace",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        18.0,
+        10.0,
+        18.0
+      ],
+      "boundingRadiusM": 14.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    },
+    {
+      "componentId": "comp-downstream-channel",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_DownstreamChannel",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        20.0,
+        12.0,
+        20.0
+      ],
+      "boundingRadiusM": 16.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  ]
+}

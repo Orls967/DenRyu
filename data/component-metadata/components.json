@@ -1,0 +1,2798 @@
+[
+  {
+    "id": "comp-reservoir",
+    "officialName": "Reservoir",
+    "alternativeNames": [
+      "Impoundment",
+      "Headwater Pool",
+      "Forebay Storage"
+    ],
+    "subsystemId": "sub-reservoir-dam",
+    "physicalLocation": "Upstream basin behind the dam crest, extending to the watershed valley limits.",
+    "purpose": "Store river inflow and maintain an elevated water surface (headwater elevation) creating gravitational potential energy and regulating seasonal/diurnal flow variability.",
+    "engineeringPrinciple": "Gravitational potential energy per unit volume $E_{\\text{pot}}/V = \\rho g \\Delta z$ and hydrostatic pressure head relative to tailwater elevation ($H_{\\text{gross}} = Z_{\\text{headwater}} - Z_{\\text{tailwater}}$).",
+    "constructionAndMaterials": "Natural valley topography bounded by engineered shoreline stabilization, upstream riprap protection, bathymetric silt basin, and reinforced concrete dam face.",
+    "operatingMechanism": "Inflow from upstream tributaries fills the storage volume between Minimum Operating Level (MOL) and Full Supply Level (FSL); withdrawal through the intake lowers stored volume according to hydrological balance ($\\Delta V/\\Delta t = Q_{\\text{in}} - Q_{\\text{turbine}} - Q_{\\text{spill}} - Q_{\\text{evap}}$).",
+    "typicalOperatingConsiderations": "Drawdown affects available gross head ($H_{\\text{gross}}$) and downstream turbine efficiency; thermal stratification and dissolved oxygen gradients near deep intakes.",
+    "potentialFailureModes": [
+      "Reservoir sedimentation reducing live storage",
+      "shoreline slope instability/landslides causing impulse waves",
+      "eutrophication or floating debris accumulation"
+    ],
+    "maintenanceConsiderations": [
+      "Periodic bathymetric silt surveys, debris skimming, water quality monitoring, and watershed inflow gauging"
+    ],
+    "educationalExplanation": "*General principle:* Water does not generate electricity simply by moving fast horizontally—elevation difference above the turbine creates usable hydraulic head. *Simplified representation:* DENRYU visualizes a cutaway upstream reservoir slice and parameterizes effective head directly as `Net Head (H)` in the simulator rather than simulating multi-year reservoir hydrology.",
+    "engineeringParameters": [
+      {
+        "key": "comp-reservoir-param-1",
+        "label": "Headwater elevation",
+        "valueText": "Headwater elevation ($Z_{\\text{hw}}$, plant-dependent",
+        "unit": "contextual",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-reservoir-param-2",
+        "label": "DENRYU illustrative reference `~485 m` ASL yielding `90 m` gross",
+        "valueText": "DENRYU illustrative reference `~485 m` ASL yielding `90 m` gross head above tailwater)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-reservoir-param-3",
+        "label": "active storage volume",
+        "valueText": "active storage volume (plant-dependent, $10^7–10^{10}\\ \\text{m}^3$)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-reservoir-param-4",
+        "label": "water density $\\rho \\approx 1000\\ \\text{kg/m}^3$.",
+        "valueText": "water density $\\rho \\approx 1000\\ \\text{kg/m}^3$.",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-01-water-storage"
+    ],
+    "relatedSimulationVariables": [
+      "netHeadM",
+      "hydraulicPowerW"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-reservoir",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Reservoir",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        32.0,
+        22.0,
+        32.0
+      ],
+      "boundingRadiusM": 35.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-dam",
+    "officialName": "Dam",
+    "alternativeNames": [
+      "Concrete Gravity Dam",
+      "Impounding Structure"
+    ],
+    "subsystemId": "sub-reservoir-dam",
+    "physicalLocation": "Across the river gorge between the reservoir and downstream valley.",
+    "purpose": "Safely impound reservoir water, resist hydrostatic, uplift, and seismic forces, and provide structural integration for the intake and spillway.",
+    "engineeringPrinciple": "Static equilibrium against overturning and sliding ($F_{\\text{hydrostatic}} = \\frac{1}{2} \\rho g h^2 L$); concrete gravity section transfers horizontal water thrust downward into bedrock foundation via self-weight and friction/shear keys.",
+    "constructionAndMaterials": "Mass concrete or roller-compacted concrete (RCC) in stepped monolith blocks with vertical waterstops, internal inspection/drainage galleries, foundation grout curtain, and relief drains.",
+    "operatingMechanism": "Passive civil structure continuously balancing fluctuating hydrostatic thrust, pore uplift pressure along the foundation interface, and thermal expansion/contraction across monolith joints.",
+    "typicalOperatingConsiderations": "Monitoring foundation uplift pressure, seepage flow rates in drainage galleries, and piezometric levels during high-pool events.",
+    "potentialFailureModes": [
+      "Excessive foundation uplift reducing shear resistance",
+      "alkali-silica reaction (ASR) concrete swelling",
+      "monolith joint waterstop leakage",
+      "overtopping during extreme probable maximum flood (PMF)"
+    ],
+    "maintenanceConsiderations": [
+      "Continuous instrumentation telemetry (pendulums, piezometers, weirs), concrete crack grouting, gallery drain cleaning, and periodic dam safety inspections"
+    ],
+    "educationalExplanation": "*General principle:* The dam creates the vertical elevation drop required for high head while absorbing millions of kilonewtons of horizontal water thrust. *Plant-specific note:* DENRYU depicts a concrete gravity dam; other real sites use arch dams, buttress dams, or earth/rockfill embankments depending on valley geology.",
+    "engineeringParameters": [
+      {
+        "key": "comp-dam-param-1",
+        "label": "Structural height",
+        "valueText": "Structural height (plant-dependent",
+        "unit": "contextual",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-dam-param-2",
+        "label": "illustrative `105 m`)",
+        "valueText": "illustrative `105 m`)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-dam-param-3",
+        "label": "crest length",
+        "valueText": "crest length (plant-dependent)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-dam-param-4",
+        "label": "factor of safety against sliding/overturning",
+        "valueText": "factor of safety against sliding/overturning (governed by USBR/USACE dam safety standards).",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-01-water-storage"
+    ],
+    "relatedSimulationVariables": [
+      "netHeadM"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-dam",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Dam",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        36.0,
+        24.0,
+        34.0
+      ],
+      "boundingRadiusM": 32.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-water-intake",
+    "officialName": "Water Intake",
+    "alternativeNames": [
+      "Power Intake",
+      "Intake Tower",
+      "Bellmouth Intake"
+    ],
+    "subsystemId": "sub-reservoir-dam",
+    "physicalLocation": "Submerged on the upstream face of the dam or adjacent abutment below Minimum Operating Level.",
+    "purpose": "Draw water smoothly from the reservoir into the conveyance conduit with minimal hydraulic entrance loss, zero air-entraining vortices, and controlled shutoff capability.",
+    "engineeringPrinciple": "Streamlined bellmouth contraction minimizes flow separation and entrance loss ($h_e = K_e \\frac{v^2}{2g}$, typically $K_e \\approx 0.04–0.10$); adequate submergence depth ($S > S_{\\text{critical}}$) prevents surface air-core vortex formation.",
+    "constructionAndMaterials": "Reinforced concrete bellmouth piers, curved transition throat, embedded steel gate slots, stoplog guides, and air-vent shaft downstream of the gate slot.",
+    "operatingMechanism": "Hydrostatic pressure drives water past the trash rack and bellmouth into the headrace/pressure tunnel whenever the intake gate is open and downstream turbine demand exists.",
+    "typicalOperatingConsiderations": "Avoid low-submergence operation that draws air pockets into the penstock (causing slug flow and pressure surges).",
+    "potentialFailureModes": [
+      "Air-entraining vortex ingestion",
+      "concrete cavitation or erosion at sharp gate slot edges",
+      "submerged silt blockage during low reservoir levels"
+    ],
+    "maintenanceConsiderations": [
+      "Underwater ROV/diver inspection of concrete bellmouth surfaces, air vent clearing, and stoplog seal inspection"
+    ],
+    "educationalExplanation": "*General principle:* Accelerating stationary reservoir water smoothly into a pressurized pipe requires a curved bellmouth—sharp square entrances cause turbulence and permanent energy loss before water even enters the tunnel.",
+    "engineeringParameters": [
+      {
+        "key": "comp-water-intake-param-1",
+        "label": "Design intake velocity",
+        "valueText": "Design intake velocity (`~1.5–3.0 m/s` typical at trash rack/throat, plant-dependent)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-water-intake-param-2",
+        "label": "submergence depth above crown",
+        "valueText": "submergence depth above crown",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-water-intake-param-3",
+        "label": "entrance loss coefficient $K_e$.",
+        "valueText": "entrance loss coefficient $K_e$.",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-02-water-intake"
+    ],
+    "relatedSimulationVariables": [
+      "actualFlowRateM3s",
+      "requestedFlowRateM3s"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-water-intake",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_WaterIntake",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        -14.0,
+        8.0,
+        -14.0
+      ],
+      "boundingRadiusM": 6.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-trash-rack",
+    "officialName": "Trash Rack",
+    "alternativeNames": [
+      "Intake Screen",
+      "Debris Bar Screen"
+    ],
+    "subsystemId": "sub-reservoir-dam",
+    "physicalLocation": "Outer upstream entrance plane of `comp-water-intake`.",
+    "purpose": "Intercept logs, ice, rocks, aquatic vegetation, and solid debris before water enters the hydraulic conveyance and Francis runner passages.",
+    "engineeringPrinciple": "Mechanical bar-screen filtration sized with low approach velocity ($v_{\\text{approach}} \\le 1.0–1.5\\ \\text{m/s}$) and streamlined bar profiles to limit differential head loss ($\\Delta h_{\\text{rack}} = K_{\\text{bar}} (t/b)^{4/3} (v^2/2g) \\sin\\alpha$, Kirschmer's formula).",
+    "constructionAndMaterials": "Galvanized or stainless structural steel flat/teardrop bars welded to horizontal support frames seated in concrete intake guides, often paired with mechanical trash-rack rakes.",
+    "operatingMechanism": "Stationary barrier; differential head sensors upstream and downstream monitor clogging buildup and trigger raking cycles.",
+    "typicalOperatingConsiderations": "Heavy storm inflows can rapidly load racks with leaves/wood; excessive differential pressure can buckle bars if uncleaned.",
+    "potentialFailureModes": [
+      "Structural collapse under severe debris blockage",
+      "flow-induced bar vibration (vortex shedding) causing weld fatigue",
+      "corrosion pitting"
+    ],
+    "maintenanceConsiderations": [
+      "Automated or crane-mounted trash raking, differential pressure instrument calibration, periodic underwater coating/weld inspection"
+    ],
+    "educationalExplanation": "*General principle:* A single submerged log passing through high-velocity penstock water can jam guide vanes or fracture curved Francis runner blades; trash racks safeguard the entire plant while keeping velocity low enough to minimize head loss.",
+    "engineeringParameters": [
+      {
+        "key": "comp-trash-rack-param-1",
+        "label": "Clear bar spacing",
+        "valueText": "Clear bar spacing (plant-dependent, typically `50–150 mm` for medium-head Francis units)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-trash-rack-param-2",
+        "label": "clean head loss",
+        "valueText": "clean head loss (`< 0.1–0.3 m`)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-trash-rack-param-3",
+        "label": "allowable differential clogging limit",
+        "valueText": "allowable differential clogging limit (`~1.0–2.0 m`).",
+        "unit": "m",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-02-water-intake"
+    ],
+    "relatedSimulationVariables": [
+      "actualFlowRateM3s",
+      "netHeadM"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-trash-rack",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_TrashRack",
+      "lodSupported": false,
+      "explodeVector": [
+        -4.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        -10.0,
+        4.0,
+        -8.0
+      ],
+      "boundingRadiusM": 3.5,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-intake-gate",
+    "officialName": "Intake Gate",
+    "alternativeNames": [
+      "Head Gate",
+      "Emergency Guard Gate",
+      "Roller Gate"
+    ],
+    "subsystemId": "sub-reservoir-dam",
+    "physicalLocation": "Vertical gate shaft immediately downstream of the intake bellmouth inside the dam or intake tower.",
+    "purpose": "Isolate the headrace tunnel and penstock from the reservoir for dewatering, maintenance, and emergency overspeed/pipe-rupture closure.",
+    "engineeringPrinciple": "Vertical rectangular steel leaf guided on low-friction rollers or slide bearings, actuated by hydraulic hoists or wire-rope winches; seals under full hydrostatic reservoir pressure against embedded steel frames.",
+    "constructionAndMaterials": "Welded structural carbon steel skin plate and horizontal box girders, stainless-steel sealing seats, elastomeric J-seals, hydraulic cylinder hoist at deck level, and bypass filling valve.",
+    "operatingMechanism": "Normally held fully raised out of the flow path during generation. Before opening against an empty penstock, a small bypass valve floods the conduit to equalize hydrostatic pressure across the gate leaf; in emergency closure, gravity + hydraulic thrust drives closure against flowing water.",
+    "typicalOperatingConsiderations": "Never crack-open an un-equalized gate under high head (risk of seal tearing and cavitation); ensure downstream air-vent pipe remains open during draining to avoid vacuum collapse of the conduit.",
+    "potentialFailureModes": [
+      "Damaged elastomer seals causing leakage",
+      "gate jamming in debris-fouled slots",
+      "hydraulic hoist cylinder leakage",
+      "failure to seat during emergency shutdown"
+    ],
+    "maintenanceConsiderations": [
+      "Periodic stroke testing, seal replacement during planned outages, hydraulic fluid sampling, and slot guide lubrication"
+    ],
+    "educationalExplanation": "*General principle:* Unlike `comp-guide-vanes` (which throttle flow continuously during generation), the intake gate is an upstream isolation safety barrier—always wide open in normal operation and closed only for emergency shutoff or conduit inspection.",
+    "engineeringParameters": [
+      {
+        "key": "comp-intake-gate-param-1",
+        "label": "Design hydrostatic pressure head",
+        "valueText": "Design hydrostatic pressure head",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-intake-gate-param-2",
+        "label": "closure time",
+        "valueText": "closure time (plant-dependent, emergency shutoff typically `30–120 s`)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-intake-gate-param-3",
+        "label": "hoist lifting capacity.",
+        "valueText": "hoist lifting capacity.",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-02-water-intake"
+    ],
+    "relatedSimulationVariables": [
+      "operatingCondition",
+      "actualFlowRateM3s"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-intake-gate",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_IntakeGate",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        12.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        -10.0,
+        8.0,
+        10.0
+      ],
+      "boundingRadiusM": 4.5,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-spillway",
+    "officialName": "Spillway",
+    "alternativeNames": [
+      "Flood Release Structure",
+      "Ogee Crest Spillway",
+      "Radial Gate Spillway"
+    ],
+    "subsystemId": "sub-reservoir-dam",
+    "physicalLocation": "Integrated across the central or flank crest bays of `comp-dam`, discharging down a concrete chute into the river below.",
+    "purpose": "Safely pass excess floodwaters around the powerhouse when reservoir inflow exceeds storage capacity and turbine discharge, preventing dam overtopping.",
+    "engineeringPrinciple": "Controlled weir hydraulics ($Q_{\\text{spill}} = C_d L H_s^{3/2}$ for free crest flow, or submerged orifice flow under radial tainter gates) paired with an ogee profile matching the lower nappe of a free-falling jet to avoid negative pressure cavitation, ending in a hydraulic-jump stilling basin to dissipate kinetic energy safely.",
+    "constructionAndMaterials": "High-strength abrasion-resistant concrete ogee crest and chute, training walls, radial steel tainter gates (or gated crest piers), and concrete baffle blocks / flip bucket / stilling basin at the toe.",
+    "operatingMechanism": "Radial gates lift incrementally in balanced bay sequences during flood events to release excess water while maintaining safe reservoir water level.",
+    "typicalOperatingConsiderations": "Symmetric gate opening prevents asymmetric cross-currents and riverbed scour in the downstream channel; spilled water represents bypassed potential energy that produces zero electricity.",
+    "potentialFailureModes": [
+      "Chute concrete cavitation/erosion at surface irregularities",
+      "radial gate trunnion friction corrosion",
+      "downstream toe scour undermining the stilling basin"
+    ],
+    "maintenanceConsiderations": [
+      "Post-flood chute and stilling basin inspections, gate trunnion lubrication, hoist wire/cylinder inspection, concrete surface repair"
+    ],
+    "educationalExplanation": "*General principle:* A spillway protects structural survival of the dam during floods by safely converting massive gravitational potential energy into harmless turbulence inside a stilling basin instead of letting water overtop the dam crest.",
+    "engineeringParameters": [
+      {
+        "key": "comp-spillway-param-1",
+        "label": "Probable Maximum Flood",
+        "valueText": "Probable Maximum Flood (PMF) discharge capacity (plant-dependent)",
+        "unit": "m",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-spillway-param-2",
+        "label": "crest elevation",
+        "valueText": "crest elevation",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-spillway-param-3",
+        "label": "gate width/height",
+        "valueText": "gate width/height",
+        "unit": "contextual",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-spillway-param-4",
+        "label": "stilling basin tailwater conjugate depth.",
+        "valueText": "stilling basin tailwater conjugate depth.",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-01-water-storage",
+      "stage-09-water-discharge"
+    ],
+    "relatedSimulationVariables": [
+      "actualFlowRateM3s"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-spillway",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Spillway",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        22.0,
+        18.0,
+        22.0
+      ],
+      "boundingRadiusM": 18.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-headrace",
+    "officialName": "Headrace",
+    "alternativeNames": [
+      "Headrace Conduit",
+      "Intake Conduit",
+      "Approach Conduit"
+    ],
+    "subsystemId": "sub-water-conveyance",
+    "physicalLocation": "Immediately downstream of `comp-intake-gate`, leading water away from the dam intake toward the pressure tunnel / hillside conveyance.",
+    "purpose": "Convey low-pressure water from the intake structure toward the high-gradient pressure tunnel with minimum friction loss.",
+    "engineeringPrinciple": "Incompressible closed-conduit or covered-channel steady flow governed by continuity ($Q = A v$) and Darcy-Weisbach head loss ($h_f = f \\frac{L}{D} \\frac{v^2}{2g}$).",
+    "constructionAndMaterials": "Reinforced concrete box or circular conduit with smooth troweled interior finish to minimize Manning/Darcy friction roughness.",
+    "operatingMechanism": "Operates full under moderate reservoir static pressure head; transitions smoothly into the rock-bored or buried pressure tunnel.",
+    "typicalOperatingConsiderations": "Keep velocity moderate so friction losses remain small relative to total head; ensure slow filling during commissioning to purge air pockets.",
+    "potentialFailureModes": [
+      "Concrete joint leakage, longitudinal cracking under internal pressure surges, internal biofilm/silt roughness buildup increasing friction loss"
+    ],
+    "maintenanceConsiderations": [
+      "Dewatered internal visual walkdown during major multi-year outages, joint sealant renewal"
+    ],
+    "educationalExplanation": "*Plant-specific note:* In compact dam-toe powerhouses, the intake connects almost directly to a short embedded penstock; in longer terrain layouts (modeled here for full educational clarity), a headrace and pressure tunnel carry water horizontally before the steep penstock drop.",
+    "engineeringParameters": [
+      {
+        "key": "comp-headrace-param-1",
+        "label": "Internal diameter/area",
+        "valueText": "Internal diameter/area (plant-dependent",
+        "unit": "m",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-headrace-param-2",
+        "label": "illustrative `~4.8 m` equivalent diameter yielding `~3.3 m/s` at",
+        "valueText": "illustrative `~4.8 m` equivalent diameter yielding `~3.3 m/s` at `60 m³/s`)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-headrace-param-3",
+        "label": "design velocity",
+        "valueText": "design velocity (`2.5–4.0 m/s`)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-headrace-param-4",
+        "label": "roughness height.",
+        "valueText": "roughness height.",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-03-water-conveyance"
+    ],
+    "relatedSimulationVariables": [
+      "actualFlowRateM3s",
+      "netHeadM"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-headrace",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Headrace",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        10.0,
+        8.0,
+        12.0
+      ],
+      "boundingRadiusM": 6.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-pressure-tunnel",
+    "officialName": "Pressure Tunnel",
+    "alternativeNames": [
+      "Headrace Pressure Tunnel",
+      "Rock-Bored Power Tunnel"
+    ],
+    "subsystemId": "sub-water-conveyance",
+    "physicalLocation": "Underground/hillside conduit connecting the headrace to the surge tank base and top of the steep penstock.",
+    "purpose": "Transport pressurized water horizontally through terrain toward the powerhouse drop while withstanding internal hydrostatic pressure and transient surges.",
+    "engineeringPrinciple": "Pressurized conduit flow governed by Bernoulli's equation with Darcy-Weisbach friction loss ($H_{\\text{total}} = z + \\frac{p}{\\rho g} + \\frac{v^2}{2g}$); surrounding rock mass and concrete/steel liner share internal hoop tension.",
+    "constructionAndMaterials": "Excavated rock tunnel lined with reinforced concrete (or steel lining near low-cover zones and bifurcations) with contact/consolidation grouting into rock.",
+    "operatingMechanism": "Continuously pressurized column of water transferring fluid mass toward the penstock; elastic water inertia in this long conduit is precisely why a surge tank is required downstream.",
+    "typicalOperatingConsiderations": "Rapid turbine gate closure decelerates the entire tunnel water column ($\\Delta p = \\rho a \\Delta v$ Joukowsky limit if unprotected), producing high transient pressures unless relieved at the surge tank.",
+    "potentialFailureModes": [
+      "Unlined rockfall/spalling",
+      "concrete liner longitudinal cracking causing external groundwater exfiltration",
+      "unvented air accumulation at high points"
+    ],
+    "maintenanceConsiderations": [
+      "Periodic dewatered tunnel inspection, rock-trap cleanout upstream of penstock transition, seepage monitoring"
+    ],
+    "educationalExplanation": "*General principle:* Water traveling at `~3–4 m/s` inside a long pressure tunnel carries immense momentum—thousands of metric tons of moving mass that cannot stop instantaneously without severe pressure spikes.",
+    "engineeringParameters": [
+      {
+        "key": "comp-pressure-tunnel-param-1",
+        "label": "Length & diameter",
+        "valueText": "Length & diameter (plant-dependent",
+        "unit": "m",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-pressure-tunnel-param-2",
+        "label": "illustrative `~4.5 m` diameter)",
+        "valueText": "illustrative `~4.5 m` diameter)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-pressure-tunnel-param-3",
+        "label": "internal design pressure",
+        "valueText": "internal design pressure",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-pressure-tunnel-param-4",
+        "label": "rock-cover ratio",
+        "valueText": "rock-cover ratio",
+        "unit": "contextual",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-03-water-conveyance"
+    ],
+    "relatedSimulationVariables": [
+      "actualFlowRateM3s",
+      "netHeadM"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-pressure-tunnel",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_PressureTunnel",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        12.0,
+        8.0,
+        12.0
+      ],
+      "boundingRadiusM": 7.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-surge-tank",
+    "officialName": "Surge Tank",
+    "alternativeNames": [
+      "Surge Shaft",
+      "Surge Chamber",
+      "Pressure-Relief Standpipe"
+    ],
+    "subsystemId": "sub-water-conveyance",
+    "physicalLocation": "Vertical cylindrical shaft rising near the junction between `comp-pressure-tunnel` and `comp-penstock`.",
+    "purpose": "Protect the pressure tunnel and penstock from destructive water-hammer pressure surges during rapid turbine load rejection or startup, and supply rapid transient water volume during load acceptance.",
+    "engineeringPrinciple": "Mass oscillation and pressure-wave reflection. When `comp-guide-vanes` close quickly, moving water in the pressure tunnel diverts upward into the open-surface surge tank, converting kinetic energy into temporary potential elevation ($\\Delta z_{\\text{surge}}$) and reflecting negative pressure waves back rather than hammering the upstream tunnel; governed by Thoma stability criterion ($A_{\\text{st}} > A_{\\text{Thoma}}$) for damped oscillations.",
+    "constructionAndMaterials": "Vertical reinforced concrete or steel-lined shaft extending above maximum reservoir level (with spillway overflow or upper/lower expansion chambers in throttled/differential designs).",
+    "operatingMechanism": "During steady generation, tank water level sits at reservoir elevation minus tunnel friction head loss. On sudden turbine gate closure, level rises above reservoir elevation and oscillates before damping out; on sudden gate opening, tank supplies immediate water acceleration while tunnel flow catches up.",
+    "typicalOperatingConsiderations": "Maintain free air venting at top of tank; ensure orifice port remains unobstructed; verify governor opening/closing times align with Thoma stability margin.",
+    "potentialFailureModes": [
+      "Downsurge dropping below tunnel crown and drawing air into the penstock",
+      "overflow spills",
+      "concrete liner spalling from cyclic hydraulic pressures",
+      "orifice erosion"
+    ],
+    "maintenanceConsiderations": [
+      "Water-level transducer calibration, inspection of top vent screens, concrete surface inspection during shutdowns"
+    ],
+    "educationalExplanation": "*General principle:* Think of a surge tank as a hydraulic shock absorber and local buffer—it converts high-speed water-hammer pressure spikes into slow, harmless vertical sloshing inside an atmospheric shaft.",
+    "engineeringParameters": [
+      {
+        "key": "comp-surge-tank-param-1",
+        "label": "Tank cross-sectional area",
+        "valueText": "Tank cross-sectional area ($A_{\\text{st}}$)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-surge-tank-param-2",
+        "label": "orifice throat diameter",
+        "valueText": "orifice throat diameter (for throttled tanks)",
+        "unit": "m",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-surge-tank-param-3",
+        "label": "maximum upsurge/downsurge elevations",
+        "valueText": "maximum upsurge/downsurge elevations (must stay below top spill and above tunnel crown to prevent air ingestion).",
+        "unit": "m",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-03-water-conveyance"
+    ],
+    "relatedSimulationVariables": [
+      "guideVaneOpeningPct",
+      "netHeadM"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-surge-tank",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_SurgeTank",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        6.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        14.0,
+        10.0,
+        14.0
+      ],
+      "boundingRadiusM": 9.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-penstock",
+    "officialName": "Penstock",
+    "alternativeNames": [
+      "High-Pressure Penstock",
+      "Steel Pressure Pipe"
+    ],
+    "subsystemId": "sub-water-conveyance",
+    "physicalLocation": "Inclined or vertical steel pressure conduit descending from the surge tank / tunnel transition down to the powerhouse main inlet valve.",
+    "purpose": "Channel pressurized water steeply downward into the Francis turbine while safely containing full static + dynamic hydrostatic pressure and accelerating flow toward the spiral casing.",
+    "engineeringPrinciple": "Hydrostatic & hydrodynamic pressure containment ($\\sigma_{\\text{hoop}} = \\frac{p D}{2 t}$); internal pressure increases sharply with vertical descent ($p \\approx \\rho g h_{\\text{static}} - \\rho g h_f$ during flow). Net head entering the turbine equals gross head minus friction and minor bend losses ($H_{\\text{net}} = H_{\\text{gross}} - \\Delta H_{\\text{loss}}$).",
+    "constructionAndMaterials": "High-tensile welded structural steel plates (e.g., ASTM A516/A537 or EN S355 equivalents, plant-dependent), circumferential external stiffener rings, concrete anchor blocks at bends, saddle supports, expansion joints, and internal epoxy anti-corrosion lining.",
+    "operatingMechanism": "Continuously conveys pressurized flow from upper conveyance into the turbine inlet; converts elevation drop directly into high static pressure head at the powerhouse floor.",
+    "typicalOperatingConsiderations": "Monitor expansion joints, concrete saddle movement, and drain valves; prevent vacuum conditions during rapid shutdowns via upstream air-admission valves.",
+    "potentialFailureModes": [
+      "External corrosion or internal lining delamination",
+      "fatigue cracking at bifurcation or circumferential welds",
+      "water-hammer overpressure rupture if guide vanes slam faster than design",
+      "buckling under accidental internal vacuum"
+    ],
+    "maintenanceConsiderations": [
+      "Ultrasonic thickness gauging, weld non-destructive testing (NDT), internal epoxy recoating, expansion gland repacking, anchor block drain checks"
+    ],
+    "educationalExplanation": "*General principle:* As water descends the penstock, gravitational elevation drops while internal fluid pressure rises enormously—delivering concentrated hydraulic power ($P_h = \\rho g Q H$) right to the turbine entrance. *Assumed simplification:* In DENRYU's simulator, the user directly controls `Net Head (H)` (head already accounting for penstock friction loss), while the Physics & Insights views explain the gross-to-net head loss relationship.",
+    "engineeringParameters": [
+      {
+        "key": "comp-penstock-param-1",
+        "label": "Internal diameter",
+        "valueText": "Internal diameter (illustrative `~3.4 m`, accelerating velocity to `~6.6 m/s` at `60 m³/s`)",
+        "unit": "m",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-penstock-param-2",
+        "label": "wall thickness",
+        "valueText": "wall thickness (increases toward bottom anchor)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-penstock-param-3",
+        "label": "design internal pressure",
+        "valueText": "design internal pressure (`~1.0–1.4 MPa` class at `~85–100 m` head)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-penstock-param-4",
+        "label": "illustrative conveyance head loss",
+        "valueText": "illustrative conveyance head loss ($\\Delta H_{\\text{loss}}$).",
+        "unit": "s",
+        "isPlantDependent": true
+      }
+    ],
+    "relatedStageIds": [
+      "stage-03-water-conveyance"
+    ],
+    "relatedSimulationVariables": [
+      "netHeadM",
+      "actualFlowRateM3s",
+      "hydraulicPowerW"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-penstock",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Penstock",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        2.5,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        24.0,
+        18.0,
+        26.0
+      ],
+      "boundingRadiusM": 22.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-main-inlet-valve",
+    "officialName": "Main Inlet Valve",
+    "alternativeNames": [
+      "Turbine Inlet Valve (TIV)",
+      "Butterfly Valve / Spherical Valve",
+      "Guard Valve"
+    ],
+    "subsystemId": "sub-water-conveyance",
+    "physicalLocation": "Inside the powerhouse turbine valve pit immediately upstream of `comp-spiral-casing`.",
+    "purpose": "Provide positive, watertight isolation of the turbine unit from the pressurized penstock during unit shutdown, maintenance, and emergency runaway protection without draining the entire penstock.",
+    "engineeringPrinciple": "Quarter-turn mechanical valve disc (lattice/through-flow butterfly valve for medium heads ~`50–150 m`, or full-bore rotary spherical valve for higher heads) rotated `90°` by a hydraulic servomotor and/or counterweight closure system; sealed by pressurized service-water or elastomer maintenance/service seals.",
+    "constructionAndMaterials": "Cast or welded steel valve body, streamlined lens-shaped butterfly disc (or spherical rotor plug), stainless-steel trunnion shafts and self-lubricating bronze bushings, hydraulic actuation cylinder, counterweight arm, and upstream/downstream bypass equalization pipe.",
+    "operatingMechanism": "Held fully open (`0°` alignment parallel to flow) during normal generation to minimize head loss. During startup, bypass valve equalizes spiral casing pressure to penstock pressure before main actuator opens the disc. During emergency shutdown or guide vane failure, counterweight/hydraulic pressure closes the valve safely against flow.",
+    "typicalOperatingConsiderations": "Never operate main actuator with high differential pressure unless engineered for emergency flow cut-off; monitor seal leakage during standstill to avoid turbine creeping.",
+    "potentialFailureModes": [
+      "Trunnion bearing seizure",
+      "inflatable/mechanical seal failure causing spiral casing leakage at standstill",
+      "bypass valve blockage preventing startup equalization",
+      "hydraulic actuator seal leak"
+    ],
+    "maintenanceConsiderations": [
+      "Periodic partial-stroke exercising, seal replacement during unit overhaul, hydraulic oil cleanliness checks, bypass strainer cleaning"
+    ],
+    "educationalExplanation": "*General principle:* Draining a long steel penstock takes hours and wastes water; the main inlet valve right outside the turbine allows engineers to isolate the Francis unit in under a minute while keeping the penstock full and pressurized. *Plant-specific note:* Medium-head units (~85 m) typically use streamlined butterfly valves, whereas very high-head units (> 200 m) use zero-obstruction spherical valves.",
+    "engineeringParameters": [
+      {
+        "key": "comp-main-inlet-valve-param-1",
+        "label": "Nominal bore diameter",
+        "valueText": "Nominal bore diameter (matching spiral casing inlet, illustrative `~3.0–3.2 m`)",
+        "unit": "m",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-main-inlet-valve-param-2",
+        "label": "full-flow head loss coefficient",
+        "valueText": "full-flow head loss coefficient ($K_v \\approx 0.1–0.25$ for streamlined butterfly)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-main-inlet-valve-param-3",
+        "label": "emergency closing time",
+        "valueText": "emergency closing time (`~30–60 s`).",
+        "unit": "m",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-03-water-conveyance",
+      "stage-04-turbine-conversion"
+    ],
+    "relatedSimulationVariables": [
+      "operatingCondition",
+      "actualFlowRateM3s"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-main-inlet-valve",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_MainInletValve",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        3.5
+      ],
+      "cameraFocusOffset": [
+        5.5,
+        3.5,
+        6.5
+      ],
+      "boundingRadiusM": 3.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-spiral-casing",
+    "officialName": "Spiral Casing",
+    "alternativeNames": [
+      "Scroll Case",
+      "Volute Casing"
+    ],
+    "subsystemId": "sub-turbine",
+    "physicalLocation": "Surrounding the outer perimeter of the stay ring and Francis runner pit inside the powerhouse substructure.",
+    "purpose": "Distribute pressurized water uniformly around the full `360°` circumference of the stay vanes and guide vanes with constant radial/tangential inlet velocity and minimal hydraulic loss.",
+    "engineeringPrinciple": "Conservation of mass and free-vortex angular momentum ($r v_\\theta = \\text{const}$): as water flows around the spiral and bleeds inward into the turbine periphery, the circular cross-sectional area decreases progressively with azimuthal angle ($A(\\theta) \\propto (1 - \\theta/2\\pi)$) so tangential velocity and static pressure remain uniform around the runner perimeter.",
+    "constructionAndMaterials": "Fabricated welded steel plate segments (forming circular cross-sections wrapped in a snail-shell volute, often partially embedded in powerhouse concrete with compressible cork/foam wrap around upper half to control concrete tensile cracking); welded directly to the cast/welded stay ring.",
+    "operatingMechanism": "Stationary hydraulic distributor; converts rectilinear pipe flow from the main inlet valve into an axisymmetric inward swirling sheet entering the stay vanes.",
+    "typicalOperatingConsiderations": "Maintain balanced pressure tapping telemetry (Winter-Kennedy index flow taps often installed on spiral casing cross-sections to monitor relative discharge).",
+    "potentialFailureModes": [
+      "Fatigue cracking near the baffle plate / tongue junction",
+      "internal erosion-corrosion from silt-laden water",
+      "structural concrete-to-steel separation vibration"
+    ],
+    "maintenanceConsiderations": [
+      "Periodic dewatered internal inspection of welds (especially tongue/nose vane), Winter-Kennedy piezometer port flushing, coating touch-up"
+    ],
+    "educationalExplanation": "*General principle:* If pressurized pipe water hit only one side of a turbine wheel, uneven forces would wreck the bearings and waste energy. The tapering snail-shell geometry ensures every single degree around the `360°` intake receives equal flow and swirl.",
+    "engineeringParameters": [
+      {
+        "key": "comp-spiral-casing-param-1",
+        "label": "Inlet diameter",
+        "valueText": "Inlet diameter (illustrative `~2.8–3.0 m`)",
+        "unit": "m",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-spiral-casing-param-2",
+        "label": "design pressure including water-hammer allowance",
+        "valueText": "design pressure including water-hammer allowance (typically `1.3–1.5×` max static head)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-spiral-casing-param-3",
+        "label": "spiral wrap angle",
+        "valueText": "spiral wrap angle (`~345°` to nose baffle).",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-04-turbine-conversion"
+    ],
+    "relatedSimulationVariables": [
+      "netHeadM",
+      "actualFlowRateM3s",
+      "hydraulicPowerW"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-spiral-casing",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_SpiralCasing",
+      "lodSupported": true,
+      "explodeVector": [
+        -2.8,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        8.0,
+        5.5,
+        8.0
+      ],
+      "boundingRadiusM": 5.2,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-stay-vanes",
+    "officialName": "Stay Vanes",
+    "alternativeNames": [
+      "Stay Ring Vanes",
+      "Speed Ring Pillars"
+    ],
+    "subsystemId": "sub-turbine",
+    "physicalLocation": "Fixed annular ring forming the inner throat of `comp-spiral-casing` immediately outside `comp-guide-vanes`.",
+    "purpose": "Perform a dual mechanical and hydraulic role: structurally transfer massive axial hydraulic pressure and generator/concrete foundation loads across the water passage, while pre-guiding swirling spiral water smoothly toward the movable guide vanes.",
+    "engineeringPrinciple": "Hydrofoil column struts aligned along the natural spiral flow angle ($\\alpha_0$) to minimize drag and incidence shock while acting as structural tension/compression columns connecting the upper and lower stay-ring crowns against internal spiral pressure.",
+    "constructionAndMaterials": "Cast or welded structural steel / stainless-clad upper and lower annular crowns joined by `12–24` fixed streamlined hydrofoil vanes (`16–20` typical in medium-head Francis designs).",
+    "operatingMechanism": "Stationary (non-pivoting); serves as structural backbone holding the head cover, bottom ring, and spiral casing open against pressurized water.",
+    "typicalOperatingConsiderations": "Flow alignment errors at extreme off-design discharges cause trailing-edge vortex shedding (Von Kármán street), occasionally inducing acoustic singing or vane cracking if natural frequencies coincide.",
+    "potentialFailureModes": [
+      "Trailing-edge fatigue cracking from Von Kármán vortex shedding",
+      "abrasive sand erosion on leading edges",
+      "cavitation pitting in separated wakes"
+    ],
+    "maintenanceConsiderations": [
+      "Magnetic-particle or dye-penetrant NDT inspection of vane-to-crown fillets during overhauls",
+      "trailing-edge profile grinding (\"Donaldson chamfer\") if singing occurs"
+    ],
+    "educationalExplanation": "*General principle:* Stay vanes look similar to guide vanes, which often confuses learners—the critical difference is that stay vanes are **welded fixed structural pillars** carrying immense forces while pre-aligning the swirl, whereas the inner guide vanes **pivot** to control flow.",
+    "engineeringParameters": [
+      {
+        "key": "comp-stay-vanes-param-1",
+        "label": "Number of stay vanes",
+        "valueText": "Number of stay vanes (typically matches or is half the guide vane count, avoiding harmonic resonance multiples)",
+        "unit": "m",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-stay-vanes-param-2",
+        "label": "leading-edge inlet angle matching spiral flow angle.",
+        "valueText": "leading-edge inlet angle matching spiral flow angle.",
+        "unit": "m",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-04-turbine-conversion"
+    ],
+    "relatedSimulationVariables": [
+      "turbineEfficiency"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-stay-vanes",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_StayVanes",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        2.5,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        5.5,
+        3.8,
+        5.5
+      ],
+      "boundingRadiusM": 2.8,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-guide-vanes",
+    "officialName": "Guide Vanes / Wicket Gates",
+    "alternativeNames": [
+      "Wicket Gates",
+      "Distributor Vanes"
+    ],
+    "subsystemId": "sub-turbine",
+    "physicalLocation": "Concentric annular ring situated immediately between `comp-stay-vanes` and the outer inlet perimeter of `comp-runner`.",
+    "purpose": "Continuously regulate water flow rate ($Q$) entering the runner, set the optimal tangential swirl velocity ($v_{u1}$) required by the runner blades, and shut off water admission to start, load-control, or stop the unit.",
+    "engineeringPrinciple": "Pivoting hydrofoil cascade connected via crank arms and shear pins to a hydraulic governor-actuated regulating ring. Changing gate angle $\\alpha_1$ simultaneously adjusts throat opening area ($A_{\\text{gate}}$) and angular momentum ($r_1 v_{u1}$) entering the runner per the Euler turbomachinery equation ($T = \\rho Q (r_1 v_{u1} - r_2 v_{u2})$).",
+    "constructionAndMaterials": "Precision-machined cast martensitic stainless steel (e.g., CA6NM / 13Cr-4Ni) hydrofoil blades with upper and lower integral trunnion stems rotating in bronze/self-lubricating bushings inside the head cover and bottom ring; linked via levers, breaking links/shear pins, and twin hydraulic servomotors acting on the regulating ring.",
+    "operatingMechanism": "The turbine governor commands hydraulic servomotors to rotate the regulating ring, pivoting all `20–24` guide vanes synchronously from `0%` (fully closed contact) to `100%` (maximum rated opening). Shear pins fracture intentionally if debris jams a single gate, protecting adjacent linkage.",
+    "typicalOperatingConsiderations": "Operating at very small openings (`< 25–30%`) produces severe throttle turbulence, incidence shock, and draft-tube cavitation vortex rope; gate seals wear over time allowing slight leakage at closed position.",
+    "potentialFailureModes": [
+      "Shear pin breakage from debris jamming",
+      "bushing seizure or galling",
+      "end-clearance erosion increasing closed-gate leakage",
+      "hydraulic servomotor drift"
+    ],
+    "maintenanceConsiderations": [
+      "Gate-to-gate clearance and facing seal checks, regulating ring linkage greasing, shear pin inspection, governor deadband and stroke-time calibration"
+    ],
+    "educationalExplanation": "*General principle:* Guide vanes act as the turbine's throttle AND steering wheel at the same time—they decide both *how much* water enters and *at what angle* it strikes the runner blades.",
+    "engineeringParameters": [
+      {
+        "key": "comp-guide-vanes-param-1",
+        "label": "Number of wicket gates",
+        "valueText": "Number of wicket gates (illustrative `20` vanes)",
+        "unit": "m",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-guide-vanes-param-2",
+        "label": "opening range",
+        "valueText": "opening range (`0–100%`, nominal BEP around `~75–85%` opening depending on head)",
+        "unit": "%",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-guide-vanes-param-3",
+        "label": "governor stroke rate limits",
+        "valueText": "governor stroke rate limits (closing time typically `5–12 s` tuned against penstock surge).",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-04-turbine-conversion"
+    ],
+    "relatedSimulationVariables": [
+      "guideVaneOpeningPct",
+      "actualFlowRateM3s",
+      "turbineEfficiency"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-guide-vanes",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_GuideVanes",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        1.5,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        4.8,
+        3.2,
+        4.8
+      ],
+      "boundingRadiusM": 2.3,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-runner",
+    "officialName": "Runner",
+    "alternativeNames": [
+      "Francis Turbine Runner",
+      "Turbine Wheel"
+    ],
+    "subsystemId": "sub-turbine",
+    "physicalLocation": "Central rotating core inside the distributor throat (`comp-guide-vanes`), bolted onto the bottom flange of `comp-main-shaft` directly above `comp-draft-tube`.",
+    "purpose": "Convert the pressure energy and kinetic angular momentum of incoming pressurized water into smooth mechanical shaft torque and continuous rotational power.",
+    "engineeringPrinciple": "**Reaction + Mixed-Flow Turbomachinery (Euler Turbine Equation):** Unlike an impulse Pelton wheel operating in air, a Francis runner runs completely submerged under pressure. As water flows radially inward and curves axially downward through the narrowing blade passages, both static pressure drops (reaction effect, typically ~50% of energy conversion) and tangential velocity decreases (impulse/angular momentum change), generating shaft torque: $$T = \\rho Q (r_1 v_{u1} - r_2 v_{u2}), \\qquad P_m = T \\omega = \\rho g Q H \\eta_t$$",
+    "constructionAndMaterials": "Single-piece cast or fabricated/welded martensitic stainless steel (`13Cr-4Ni` / ASTM A743 CA6NM) consisting of: (1) upper **Crown** (hub bolted to shaft), (2) lower **Band** (shroud ring encircling blade outer tips with labyrinth seal rings), and (3) `13–17` double-curved 3D **Runner Blades** (`comp-runner-blades`) spanning between crown and band.",
+    "operatingMechanism": "Water enters the outer diameter radially around the full `360°` periphery, transfers angular momentum to the blades while dropping in pressure, and exits axially downward out the runner eye into the draft tube at near-zero residual swirl at Best Efficiency Point (BEP).",
+    "typicalOperatingConsiderations": "Must stay set below tailwater elevation sufficient to satisfy Thoma cavitation parameter ($\\sigma_{\\text{plant}} > \\sigma_{\\text{critical}}$); avoid prolonged operation in rough part-load band (`< 45%` flow) where helical draft-tube vortex rope causes vibration.",
+    "potentialFailureModes": [
+      "Cavitation pitting on low-pressure suction side near trailing edge",
+      "high-cycle fatigue cracking at blade-to-crown/band fillets (rotor-stator interaction pressure pulsations)",
+      "silt abrasion erosion",
+      "labyrinth seal wear increasing volumetric leakage loss"
+    ],
+    "maintenanceConsiderations": [
+      "Periodic cavitation dye-penetrant NDT, stainless weld-overlay repair and template grinding of pitted blades, labyrinth seal clearance measurements, dynamic balancing checks"
+    ],
+    "educationalExplanation": "*Why Francis differs from Pelton & Kaplan:* A **Pelton** runner uses open-air buckets hit by high-velocity water jets (high head, low flow). A **Kaplan** propeller uses flat-pitched axial blades ideal for low heads and huge flows. A **Francis** runner uniquely bridges the middle: water enters **radially** around the edge under full pressure and exits **axially** through the center, giving it signature twisted 3D spoon-shaped blades enclosed between a crown and band.",
+    "engineeringParameters": [
+      {
+        "key": "comp-runner-param-1",
+        "label": "Runner discharge diameter",
+        "valueText": "Runner discharge diameter ($D_2$, illustrative `~2.4–2.8 m`)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-runner-param-2",
+        "label": "specific speed",
+        "valueText": "specific speed ($N_s$, medium-head Francis typically `~120–250` metric $n_{q}$ equivalent `~35–75`)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-runner-param-3",
+        "label": "synchronous speed",
+        "valueText": "synchronous speed (`250 rpm` in DENRYU 50 Hz 24-pole configuration)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-runner-param-4",
+        "label": "runaway overspeed capability",
+        "valueText": "runaway overspeed capability (`~1.7–2.1×` synchronous speed per IEC/IEEE mechanical design margins)",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-04-turbine-conversion"
+    ],
+    "relatedSimulationVariables": [
+      "turbineMechanicalPowerW",
+      "turbineTorqueNm",
+      "turbineEfficiency",
+      "rotationalSpeedRpm"
+    ],
+    "supportsRunnerModes": true,
+    "assetRef": {
+      "componentId": "comp-runner",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Runner",
+      "lodSupported": true,
+      "explodeVector": [
+        0.0,
+        -3.2,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        4.5,
+        2.2,
+        4.5
+      ],
+      "boundingRadiusM": 1.8,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-runner-blades",
+    "officialName": "Runner Blades",
+    "alternativeNames": [
+      "Francis Buckets",
+      "Runner Vanes"
+    ],
+    "subsystemId": "sub-turbine",
+    "physicalLocation": "Curved hydrofoil passages welded/cast between the upper crown and lower band of `comp-runner`.",
+    "purpose": "Extract fluid energy smoothly through continuous aerodynamic/hydrodynamic pressure differential between the pressure (concave) face and suction (convex) face while turning the water `90°` from radial inward to axial downward flow.",
+    "engineeringPrinciple": "3D hydrofoil boundary-layer aerodynamics/hydrodynamics and velocity-triangle matching ($w = c - u$): blade inlet angle ($\\beta_1$) aligns smoothly with relative water velocity at BEP to avoid shock loss, while trailing-edge twist ($\\beta_2$) matches varying peripheral blade speed ($u = \\omega r$) from crown to band so exit whirl approaches zero ($v_{u2} \\approx 0$).",
+    "constructionAndMaterials": "`13–17` double-curved hydrofoil blades (illustrative `15` blades—odd/prime-like relative to `20` guide vanes to prevent synchronous pressure-pulse resonance) formed via 5-axis CNC milling or precision investment/sand casting in `13Cr-4Ni` stainless steel.",
+    "operatingMechanism": "Stationary relative to the runner hub; rotates integrally with `comp-runner`, experiencing steady centrifugal + hydraulic bending loads overlaid by periodic pressure pulses as each blade passes stationary guide vanes.",
+    "typicalOperatingConsiderations": "At off-BEP flow rates, incoming relative angle mismatches $\\beta_1$, causing leading-edge flow separation, eddy losses, and potential suction-side cavitation clouds.",
+    "potentialFailureModes": [
+      "Trailing-edge suction-side cavitation pitting",
+      "fillet fatigue cracking from rotor-stator interaction (RSI)",
+      "leading-edge sediment erosion",
+      "Karman vortex trailing-edge vibration"
+    ],
+    "maintenanceConsiderations": [
+      "Ultrasonic thickness verification, profile-gauge blade shape checking after weld repairs, polishing suction faces to maintain hydraulic smoothness"
+    ],
+    "educationalExplanation": "*General principle:* Notice how a Francis blade twists dramatically from top to bottom—near the outer edge it sits almost vertical to catch radial water cleanly, while near the bottom center it curves nearly horizontal like a fan blade to push water axially downward without wasting rotational energy in the exit swirl.",
+    "engineeringParameters": [
+      {
+        "key": "comp-runner-blades-param-1",
+        "label": "Blade count",
+        "valueText": "Blade count (`15` illustrative vs. `20` guide vanes)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-runner-blades-param-2",
+        "label": "inlet/outlet blade angles",
+        "valueText": "inlet/outlet blade angles ($\\beta_1, \\beta_2$ varying spanwise from crown to band)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-runner-blades-param-3",
+        "label": "minimum surface pressure margin against vapor pressure",
+        "valueText": "minimum surface pressure margin against vapor pressure ($p_{\\min} > p_v$).",
+        "unit": "m",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-04-turbine-conversion"
+    ],
+    "relatedSimulationVariables": [
+      "turbineEfficiency",
+      "turbineTorqueNm"
+    ],
+    "supportsRunnerModes": true,
+    "assetRef": {
+      "componentId": "comp-runner-blades",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_RunnerBlades",
+      "lodSupported": true,
+      "explodeVector": [
+        0.0,
+        -4.2,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        3.6,
+        1.6,
+        3.6
+      ],
+      "boundingRadiusM": 1.5,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-main-shaft",
+    "officialName": "Main Shaft",
+    "alternativeNames": [
+      "Turbine-Generator Shaft",
+      "Vertical Drive Shaft"
+    ],
+    "subsystemId": "sub-turbine",
+    "physicalLocation": "Vertical central axis extending from the Francis runner hub upward through the turbine head cover seal, intermediate flange coupling, and generator thrust/guide bearings to `comp-rotor`.",
+    "purpose": "Transmit mechanical torque and rotational power reliably from the submerged turbine runner to the generator rotor while carrying axial hydraulic thrust and shaft weight.",
+    "engineeringPrinciple": "Torsional shear transmission ($\\tau_{\\max} = \\frac{T r}{J}$, where $P_m = T \\omega$) combined with axial compression/tension (total weight of runner + shaft + rotor + hydraulic downward thrust on the crown) and lateral whirling critical-speed stiffness ($n_{\\text{critical}} \\gg n_{\\text{runaway}}$).",
+    "constructionAndMaterials": "Heavy forged alloy steel (e.g., AISI 4140 / 34CrNiMo6 class) machined with integral forged coupling flanges joined by precision fitted tension bolts, replaceable stainless shaft sleeve through the turbine shaft seal, and polished bearing journals.",
+    "operatingMechanism": "Rotates synchronously with the runner and generator rotor (`250 rpm` in DENRYU), transferring pure mechanical work upward across the powerhouse floor boundary.",
+    "typicalOperatingConsiderations": "Maintain shaft alignment plumb within strict tolerances; monitor shaft vibration proximity probes (`X-Y` radial orbit); ensure turbine shaft seal prevents powerhouse flooding.",
+    "potentialFailureModes": [
+      "Shaft seal wear/overheating causing water ingress into turbine pit",
+      "bearing journal scoring",
+      "coupling bolt loosening under torsional shock (short-circuit torque transient)",
+      "misalignment-induced cyclic bending fatigue"
+    ],
+    "maintenanceConsiderations": [
+      "Laser/piano-wire shaft plumbness & coupling runout alignment checks, shaft seal carbon/rubber packing replacement, NDT on flange fillets"
+    ],
+    "educationalExplanation": "*General principle:* Even though the shaft simply looks like a thick steel rod, at full load it simultaneously carries hundreds of tons of downward hydraulic thrust and twists under more than a million Newton-meters of torque—yet connects wet fluid mechanics below directly to clean electromagnetism above.",
+    "engineeringParameters": [
+      {
+        "key": "comp-main-shaft-param-1",
+        "label": "Shaft torque",
+        "valueText": "Shaft torque ($T = P_m / \\omega$, e.g., `~1.74 MN·m` at `45.5 MW, 250 rpm`)",
+        "unit": "m",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-main-shaft-param-2",
+        "label": "outer diameter",
+        "valueText": "outer diameter (illustrative `~0.65–0.80 m` solid or hollow-bored)",
+        "unit": "m",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-main-shaft-param-3",
+        "label": "mechanical shaft seal leakage tolerance",
+        "valueText": "mechanical shaft seal leakage tolerance",
+        "unit": "m",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-main-shaft-param-4",
+        "label": "lateral runout tolerance",
+        "valueText": "lateral runout tolerance (`< 0.05 mm`).",
+        "unit": "mm",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-05-mechanical-transmission"
+    ],
+    "relatedSimulationVariables": [
+      "turbineTorqueNm",
+      "turbineMechanicalPowerW",
+      "rotationalSpeedRpm"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-main-shaft",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_MainShaft",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        7.5,
+        3.0,
+        7.5
+      ],
+      "boundingRadiusM": 4.5,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-draft-tube",
+    "officialName": "Draft Tube",
+    "alternativeNames": [
+      "Elbow Draft Tube",
+      "Diffuser Cone"
+    ],
+    "subsystemId": "sub-turbine",
+    "physicalLocation": "Embedded in concrete powerhouse foundation directly underneath `comp-runner`, curving `90°` horizontally out toward `comp-draft-tube-outlet`.",
+    "purpose": "Recover residual kinetic energy leaving the runner by smoothly decelerating exit water in an expanding diffuser, and enable setting the turbine above tailwater (or recover elevation head down to tailwater) via controlled sub-atmospheric suction pressure.",
+    "engineeringPrinciple": "**Bernoulli Diffuser Pressure Recovery:** Because cross-sectional area increases steadily from runner exit ($A_2$) to outlet ($A_3$), water velocity drops ($v_3 \\ll v_2$), converting dynamic velocity head ($\\frac{v_2^2 - v_3^2}{2g}$) back into static pressure recovery so pressure right beneath the runner drops below atmospheric ($p_2 < p_{\\text{atm}}$), maximizing effective net head across the runner!",
+    "constructionAndMaterials": "Upper conical steel liner (stainless-clad near runner throat to resist cavitation pitting) transitioning into a smooth curved `90°` reinforced concrete elbow and horizontally expanding concrete rectangular diffuser channels (often split by concrete splitter piers).",
+    "operatingMechanism": "Stationary divergent hydraulic passage; runs completely full and submerged below tailwater level at all times during operation to sustain continuous vacuum siphon/pressure recovery without air break.",
+    "typicalOperatingConsiderations": "At part-load (`40–65%` flow), residual swirl leaving the runner forms an unstable helical **vortex rope** inside the draft tube cone causing `~0.2–0.5 Hz` Rheingans pressure surges and audible thumping; air admission through the runner nose cone is often used industrially to cushion this pulsation.",
+    "potentialFailureModes": [
+      "Throat liner cavitation pitting",
+      "vortex-rope fatigue vibration cracking steel-to-concrete anchor ties",
+      "uplift/collapse of liner if drained rapidly without exterior drain relief"
+    ],
+    "maintenanceConsiderations": [
+      "Dewatering via tailrace stoplogs to inspect cone liner, cavitation repair, checking air admission pipe, clearing debris at splitter piers"
+    ],
+    "educationalExplanation": "*General principle:* Without a draft tube, water shooting out of the runner would waste up to 10–15% of total head as unused exit kinetic energy AND the plant would lose the elevation head between the runner and the river surface below. The widening elbow gently brakes the water, creating beneficial suction underneath the runner.",
+    "engineeringParameters": [
+      {
+        "key": "comp-draft-tube-param-1",
+        "label": "Cone divergence angle",
+        "valueText": "Cone divergence angle (typically `6–10°` total angle to prevent boundary-layer separation)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-draft-tube-param-2",
+        "label": "submergence elevation relative to tailwater",
+        "valueText": "submergence elevation relative to tailwater (Thoma cavitation setting)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-draft-tube-param-3",
+        "label": "diffuser recovery efficiency",
+        "valueText": "diffuser recovery efficiency (`~70–85%` typical).",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-04-turbine-conversion",
+      "stage-09-water-discharge"
+    ],
+    "relatedSimulationVariables": [
+      "netHeadM",
+      "turbineEfficiency"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-draft-tube",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_DraftTube",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        -2.5,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        10.0,
+        4.0,
+        10.0
+      ],
+      "boundingRadiusM": 6.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-rotor",
+    "officialName": "Rotor",
+    "alternativeNames": [
+      "Salient-Pole Rotor",
+      "Rotating Magnetic Field Assembly"
+    ],
+    "subsystemId": "sub-generator",
+    "physicalLocation": "Inside the vertical generator pit/barrel, mounted concentrically inside `comp-stator` atop `comp-main-shaft`.",
+    "purpose": "Rotate a multi-pole DC magnetic field smoothly past the stationary armature coils (`comp-stator-winding`) to induce three-phase alternating voltage and provide rotational inertia ($H_{\\text{inertia}}$) stabilizing grid frequency.",
+    "engineeringPrinciple": "Synchronous electromechanical rotation locked to grid frequency: $$n_s = \\frac{120 f}{N_p}$$ (e.g., $N_p = 24$ poles at $f = 50\\ \\text{Hz} \\implies n_s = 250\\ \\text{rpm}$). Low-speed hydraulic turbines require large-diameter, high-pole-count **salient-pole** rotors rather than 2-pole cylindrical steam-turbine rotors.",
+    "constructionAndMaterials": "Heavy forged steel shaft hub, radial spider arms, laminated high-strength steel rim shrunk/keyed onto spider, and `24` bolted/dovetailed salient pole bodies carrying DC `comp-field-winding` coils plus copper damper (amortisseur) bars embedded in pole shoes, plus upper/lower ventilation fan blades.",
+    "operatingMechanism": "Driven mechanically by `comp-main-shaft` while energized by DC current from `comp-excitation-system`. Magnetic attraction between the rotating rotor poles and the stator's rotating magnetic field locks rotor speed strictly to grid frequency (`n_s`) during synchronized operation, transmitting load torque across the air gap.",
+    "typicalOperatingConsiderations": "Maintain uniform air gap symmetry (`< 5–10%` eccentricity) to prevent unbalanced magnetic pull (UMP); damper windings suppress hunting oscillations during grid faults.",
+    "potentialFailureModes": [
+      "Rotor rim/pole wedge loosening under centrifugal overspeed cycles",
+      "inter-turn field winding shorts causing thermal bowing and vibration",
+      "damper bar cracking from negative-sequence currents"
+    ],
+    "maintenanceConsiderations": [
+      "Air-gap measurement via feeler gauges/capacitive probes, pole-drop impedance testing, wedge tightness taps, brush/slip-ring cleaning, mechanical brake pad inspection on lower rotor brake track"
+    ],
+    "educationalExplanation": "*Why hydro rotors look wide and flat:* Unlike 3000-rpm steam turbines, Francis water wheels spin slowly (`~100–600 rpm`). To still produce `50 Hz` or `60 Hz` grid AC, the rotor needs many magnetic north/south pole pairs (`24` poles in DENRYU) arranged around a wide-diameter flywheel rim.",
+    "engineeringParameters": [
+      {
+        "key": "comp-rotor-param-1",
+        "label": "Number of poles",
+        "valueText": "Number of poles ($N_p = 24$ illustrative)",
+        "unit": "m",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-rotor-param-2",
+        "label": "synchronous speed",
+        "valueText": "synchronous speed (`250 rpm` at `50 Hz`",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-rotor-param-3",
+        "label": "`300 rpm` at `60 Hz`)",
+        "valueText": "`300 rpm` at `60 Hz`)",
+        "unit": "rpm",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-rotor-param-4",
+        "label": "air gap radial clearance",
+        "valueText": "air gap radial clearance (typically `~12–25 mm` plant-dependent)",
+        "unit": "mm",
+        "isPlantDependent": true
+      }
+    ],
+    "relatedStageIds": [
+      "stage-05-mechanical-transmission",
+      "stage-06-electrical-generation"
+    ],
+    "relatedSimulationVariables": [
+      "rotationalSpeedRpm",
+      "turbineTorqueNm",
+      "generatorEfficiency",
+      "electricalGeneratedPowerW"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-rotor",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Rotor",
+      "lodSupported": true,
+      "explodeVector": [
+        0.0,
+        5.2,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        6.5,
+        4.5,
+        6.5
+      ],
+      "boundingRadiusM": 3.2,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-stator",
+    "officialName": "Stator",
+    "alternativeNames": [
+      "Stator Core & Frame",
+      "Armature Frame"
+    ],
+    "subsystemId": "sub-generator",
+    "physicalLocation": "Stationary cylindrical ring encircling `comp-rotor` inside `comp-generator-housing`, bolted down to powerhouse concrete soleplates.",
+    "purpose": "Provide a low-reluctance laminated magnetic return path for rotating rotor flux, structurally support `comp-stator-winding` against electromagnetic short-circuit torques, and channel cooling air radially through core ducts.",
+    "engineeringPrinciple": "Alternating magnetic flux passing through steel experiences eddy-current and hysteresis iron losses ($P_{\\text{core}} \\propto f^{1.3–2} B_{\\max}^2$). Constructing the stator core from thin stacked, varnished silicon-steel laminations dramatically limits eddy current circulation and core heating.",
+    "constructionAndMaterials": "Welded structural steel cylindrical frame with radial support ribs, stacked `0.35–0.5 mm` grain-oriented or low-loss non-oriented electrical silicon-steel core punchings clamped tightly between heavy end-fingers/through-bolts, and axial cooling air spacers creating radial ventilation ducts.",
+    "operatingMechanism": "Remains strictly stationary while conducting alternating magnetic flux induced by the spinning rotor poles and resisting equal-and-opposite electromagnetic reaction torque directly into the powerhouse foundation.",
+    "typicalOperatingConsiderations": "Core compression clamping pressure must remain tight to prevent lamination fretting (\"red-dust\" iron oxide powder); avoid over-fluxing ($V/f > 1.05$ p.u.) which saturates core iron and spikes core heating.",
+    "potentialFailureModes": [
+      "Loose core lamination wedges causing vibration and slot insulation abrasion",
+      "inter-laminar insulation breakdown creating local hot spots",
+      "soleplate thermal expansion distortion causing ovalization"
+    ],
+    "maintenanceConsiderations": [
+      "ELCID (Electromagnetic Core Imperfection Detection) or rated-flux core ring tests, core-bolt torque checks, RTD core temperature trending, visual bore cleaning"
+    ],
+    "educationalExplanation": "*General principle:* The stator is not a solid cast iron pipe—it is assembled from tens of thousands of paper-thin insulated steel sheets stacked together so magnetic fields cross smoothly without turning the frame into a giant induction heater.",
+    "engineeringParameters": [
+      {
+        "key": "comp-stator-param-1",
+        "label": "Stator bore diameter",
+        "valueText": "Stator bore diameter (plant-dependent, illustrative `~4.8–5.5 m` for a `45 MW, 250 rpm` vertical hydro unit)",
+        "unit": "m",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-stator-param-2",
+        "label": "core stack length",
+        "valueText": "core stack length",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-stator-param-3",
+        "label": "core iron loss fraction",
+        "valueText": "core iron loss fraction (`~0.3–0.6%` of rated MVA)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-stator-param-4",
+        "label": "soleplate reaction torque rating.",
+        "valueText": "soleplate reaction torque rating.",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-06-electrical-generation"
+    ],
+    "relatedSimulationVariables": [
+      "generatorEfficiency",
+      "electricalGeneratedPowerW"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-stator",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Stator",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        7.5,
+        4.5,
+        7.5
+      ],
+      "boundingRadiusM": 3.8,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-field-winding",
+    "officialName": "Field Winding",
+    "alternativeNames": [
+      "Rotor Field Coils",
+      "Excitation Windings"
+    ],
+    "subsystemId": "sub-generator",
+    "physicalLocation": "Wound concentrically around each of the `24` salient pole bodies on the outer periphery of `comp-rotor`.",
+    "purpose": "Produce the steady, controllable DC magnetomotive force (MMF) establishing alternating North-South magnetic poles around the rotor perimeter.",
+    "engineeringPrinciple": "Ampère's circuital law ($\\oint \\mathbf{H}\\cdot d\\mathbf{l} = N I_f$): passing controlled DC excitation current $I_f$ through multi-turn pole coils builds magnetic flux $\\Phi_f$ per pole, directly governing induced internal stator EMF ($E_f \\propto \\omega \\Phi_f$) and generator reactive power ($Q_{\\text{VAR}}$) output.",
+    "constructionAndMaterials": "Edge-wound flat copper strap coils (allowing superior heat dissipation on outer edges) or insulated multi-turn rectangular copper conductors, insulated from the steel pole body with Class F/H epoxy-mica/Nomex pole collars and held firmly against centrifugal force by pole shoes and inter-pole V-blocks/braces.",
+    "operatingMechanism": "Series-connected pole coils alternate winding polarity (`N-S-N-S...` around all `24` poles) fed via rotor leads from `comp-excitation-system`. Increasing $I_f$ boosts magnetic flux, raising terminal voltage (open circuit) or reactive power export (grid-tied).",
+    "typicalOperatingConsiderations": "Monitor rotor ground-fault protection (single ground usually alarms, second ground shorts turns causing violent magnetic unbalance); respect field thermal overload limits during voltage sags.",
+    "potentialFailureModes": [
+      "Turn-to-turn insulation shorts (causing asymmetric heating and 1× shaft vibration)",
+      "copper thermal dusting",
+      "lead-wire fatigue at shaft bore transitions",
+      "earth fault from carbon/oil contamination"
+    ],
+    "maintenanceConsiderations": [
+      "Pole-drop AC impedance test, DC winding resistance check, Megger insulation resistance & polarization index (PI), inter-pole brace tightening"
+    ],
+    "educationalExplanation": "*General principle:* Unlike tiny bicycle dynamos using permanent magnets, utility hydroelectric generators use **electromagnets** on the rotor. Adjusting the DC current in these field coils lets grid operators regulate station voltage and reactive power cleanly even while turbine speed stays locked to `50 Hz`.",
+    "engineeringParameters": [
+      {
+        "key": "comp-field-winding-param-1",
+        "label": "Rated field current & voltage",
+        "valueText": "Rated field current & voltage (plant-dependent, typically `200–1200 A DC` at `100–400 V DC`)",
+        "unit": "A DC",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-field-winding-param-2",
+        "label": "insulation thermal class",
+        "valueText": "insulation thermal class (Class F `155 °C` / Class H `180 °C` per IEEE C50.12)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-field-winding-param-3",
+        "label": "$I^2 R$ copper field loss.",
+        "valueText": "$I^2 R$ copper field loss.",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-06-electrical-generation"
+    ],
+    "relatedSimulationVariables": [
+      "generatorEfficiency",
+      "electricalGeneratedPowerW"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-field-winding",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_FieldWinding",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        5.8,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        5.8,
+        3.8,
+        5.8
+      ],
+      "boundingRadiusM": 3.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-stator-winding",
+    "officialName": "Stator Winding",
+    "alternativeNames": [
+      "Armature Winding",
+      "Three-Phase Stator Coils"
+    ],
+    "subsystemId": "sub-generator",
+    "physicalLocation": "Embedded inside longitudinal slots around the inner bore of `comp-stator`, with curved end-turns projecting above and below the core iron.",
+    "purpose": "Serve as the stationary electrical conductor circuit where the rotating rotor magnetic field induces three-phase AC voltage and delivers load current out to the plant electrical system.",
+    "engineeringPrinciple": "**Faraday's Law of Electromagnetic Induction:** As `24` alternating magnetic poles sweep past spatially `120°`-displaced phase coil groups (`Phase A, B, C`), time-varying magnetic flux linkage ($\\lambda(t)$) induces balanced sinusoidal three-phase EMF: $$e(t) = -N \\frac{d\\Phi}{dt}, \\qquad E_{\\text{rms}} = 4.44 f N k_w \\Phi_f$$ Output electrical power equals active electromagnetic power minus $I^2 R$ stator copper loss and core/stray losses.",
+    "constructionAndMaterials": "Transposed Roebel copper bars (reduces skin-effect & circulating-current eddy losses inside thick conductors), insulated with high-voltage vacuum-pressure impregnated (VPI) mica-epoxy groundwall tape + semi-conductive corona slot armor, wedged tightly in slots with fiberglass ripple springs and braced at end-turns against short-circuit forces.",
+    "operatingMechanism": "Stationary conductors carrying high-voltage alternating current (`e.g., 10.5–13.8 kV` line-to-line typical medium-high hydro generator class) out via collector phase rings to `comp-generator-terminal`.",
+    "typicalOperatingConsiderations": "Slot-wedge tightness and end-winding bracing must resist `2×` to `10×` rated current electromagnetic forces during external faults; monitor partial discharge (PD) activity and embedded slot RTD temperatures.",
+    "potentialFailureModes": [
+      "Groundwall mica-epoxy insulation thermal aging or partial-discharge treeing",
+      "loose slot wedges causing slot-discharge erosion",
+      "end-winding corona or vibration fatigue",
+      "cooling blockage overheating conductors"
+    ],
+    "maintenanceConsiderations": [
+      "Offline Doble power-factor / tan-delta & partial-discharge testing, hi-pot withstand tests, end-winding bump tests, RTD checks, borescope inspection of wedging"
+    ],
+    "educationalExplanation": "*Why stator carries the high power instead of the rotor:* Putting `11 kV` and thousands of amperes on the **stationary** stator avoids pushing gigantic power currents through sliding carbon brushes—only modest DC excitation current goes to the spinning rotor!",
+    "engineeringParameters": [
+      {
+        "key": "comp-stator-winding-param-1",
+        "label": "Rated line-to-line terminal voltage",
+        "valueText": "Rated line-to-line terminal voltage (`10.5–13.8 kV` typical class, plant-dependent",
+        "unit": "m",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-stator-winding-param-2",
+        "label": "illustrative `11.0 kV` in DENRYU)",
+        "valueText": "illustrative `11.0 kV` in DENRYU)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-stator-winding-param-3",
+        "label": "rated current",
+        "valueText": "rated current (`~2.4–2.6 kA` per phase at `~45–50 MVA`)",
+        "unit": "kA",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-stator-winding-param-4",
+        "label": "stator copper loss",
+        "valueText": "stator copper loss ($\\propto I^2 R$, dominant load-dependent loss term in generator efficiency curve).",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-06-electrical-generation"
+    ],
+    "relatedSimulationVariables": [
+      "electricalGeneratedPowerW",
+      "generatorEfficiency"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-stator-winding",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_StatorWinding",
+      "lodSupported": true,
+      "explodeVector": [
+        0.0,
+        1.4,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        6.2,
+        4.2,
+        6.2
+      ],
+      "boundingRadiusM": 3.3,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-excitation-system",
+    "officialName": "Excitation System",
+    "alternativeNames": [
+      "Static Excitation System",
+      "AVR & Exciter Cubicle"
+    ],
+    "subsystemId": "sub-generator",
+    "physicalLocation": "Auxiliary floor cubicle beside/above the generator housing plus collector slip-ring brush gear (or brushless exciter assembly) on top of the shaft.",
+    "purpose": "Supply regulated DC current to `comp-field-winding` and automatically control terminal voltage, reactive power factor, and transient power-system stability via the Automatic Voltage Regulator (AVR) and Power System Stabilizer (PSS).",
+    "engineeringPrinciple": "Closed-loop feedback voltage/reactive power control: measures stator terminal voltage ($V_t$) via potential transformers (PTs), compares against setpoint, and modulates SCR thyristor firing angles (static excitation drawing from an excitation transformer) to raise or lower DC field current $I_f$ within milliseconds.",
+    "constructionAndMaterials": "Thyristor rectifier bridge cabinets, digital AVR/PSS controller racks, DC field circuit breaker & crowbar discharge resistor, excitation power transformer, and shaft-mounted copper/steel collector slip rings with carbon brush rigging (for static systems).",
+    "operatingMechanism": "During startup, field flashing builds initial voltage from station DC batteries until self-excitation takes over; during grid operation, AVR continuously compensates armature reaction as electrical load varies while respecting under-excitation (stator end-iron heating) and over-excitation (field thermal) limiters.",
+    "typicalOperatingConsiderations": "De-excitation crowbar must safely dissipate stored inductive rotor magnetic energy ($\\frac{1}{2} L_f I_f^2$) within seconds during an internal generator electrical fault trip.",
+    "potentialFailureModes": [
+      "Carbon brush arcing/rapid wear on collector rings",
+      "thyristor bridge fuse failure or cooling fan fault",
+      "AVR feedback PT loss causing dangerous over-excitation trip",
+      "field breaker contact welding"
+    ],
+    "maintenanceConsiderations": [
+      "Brush length/spring-tension replacement, slip-ring surface turning/cleaning, AVR calibration & step-response testing during planned outages, rectifier cabinet filter cleaning"
+    ],
+    "educationalExplanation": "*General principle:* Many students think spinning the turbine faster increases voltage—no! On a grid-tied generator, speed MUST stay fixed at synchronous speed (`250 rpm`). Instead, the **excitation system** acts like a magnetic dimmer switch, adjusting rotor magnetism to control voltage and reactive power.",
+    "engineeringParameters": [
+      {
+        "key": "comp-excitation-system-param-1",
+        "label": "Ceiling voltage ratio",
+        "valueText": "Ceiling voltage ratio (typically `1.6–2.0×` rated field voltage for transient grid stability)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-excitation-system-param-2",
+        "label": "response time",
+        "valueText": "response time (`< 50 ms` for static thyristor systems)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-excitation-system-param-3",
+        "label": "DC field current rating.",
+        "valueText": "DC field current rating.",
+        "unit": "contextual",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-06-electrical-generation"
+    ],
+    "relatedSimulationVariables": [
+      "generatorEfficiency",
+      "electricalGeneratedPowerW"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-excitation-system",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_ExcitationSystem",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        1.8,
+        -3.0
+      ],
+      "cameraFocusOffset": [
+        5.5,
+        3.5,
+        -5.5
+      ],
+      "boundingRadiusM": 2.5,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-bearings",
+    "officialName": "Bearings",
+    "alternativeNames": [
+      "Thrust & Guide Bearings (Tilting-Pad Hydrodynamic Bearings)"
+    ],
+    "subsystemId": "sub-generator",
+    "physicalLocation": "Upper/lower generator bearing brackets surrounding `comp-main-shaft` (combining an axial **Thrust Bearing** above or below the rotor and radial **Guide Bearings** along the shaft).",
+    "purpose": "Support the entire vertical axial weight of the rotating assembly plus downward hydraulic water thrust on the runner while maintaining concentric radial alignment of the rotor inside the narrow stator air gap with ultra-low friction.",
+    "engineeringPrinciple": "**Hydrodynamic Tilting-Pad Oil-Film Lubrication (Reynolds Equation):** As the rotating thrust collar drags oil into tapered wedge clearances under self-pivoting white-metal (Babbitt) pads, fluid film pressure rises enough to float hundreds of metric tons of rotating mass on an oil film roughly `30–80 µm` thick with zero metal-to-metal contact once running. High-pressure oil-jacking lift pumps inject oil beneath pads during low-speed startup/shutdown before the hydrodynamic wedge forms.",
+    "constructionAndMaterials": "Cast/fabricated steel bearing housing oil pot, mirror-finished forged steel thrust runner collar, pivoted Babbitt-lined (tin-antimony-copper alloy) or PTFE-faced tilting pads mounted on spherical pivots/springs, immersed water-cooled copper/stainless oil-cooler coils, high-pressure startup oil-lift pump manifold, and embedded pad RTDs.",
+    "operatingMechanism": "Stationary oil bath and self-pumping collar grooves circulate turbine oil continuously past tilting shoes and water-cooled heat exchangers; guide bearing pads center radial shaft runout within microns.",
+    "typicalOperatingConsiderations": "Never run below minimum speed without high-pressure lift oil active (risk of wiping soft Babbitt surface); verify electrical shaft-current insulation on upper bearing bracket to prevent EDM bearing pitting.",
+    "potentialFailureModes": [
+      "Babbitt pad wiping due to oil-lift failure or cooling loss",
+      "water contamination emulsifying bearing oil",
+      "shaft-voltage circulating currents causing electrical pitting",
+      "oil seal vapor leakage contaminating stator windings"
+    ],
+    "maintenanceConsiderations": [
+      "Periodic oil viscosity/moisture/wear-metal lab analysis, pad clearance & contact-pattern checking, oil-cooler pressure testing, shaft-grounding brush maintenance"
+    ],
+    "educationalExplanation": "*General principle:* How do you hang 300+ tons spinning at 250 rpm without grinding metal into dust? Tilting-pad bearings use clever wedge geometry so the spinning shaft itself pumps pressurized oil underneath its shoes, levitating the entire rotor-turbine stack on a film of oil thinner than a sheet of paper.",
+    "engineeringParameters": [
+      {
+        "key": "comp-bearings-param-1",
+        "label": "Axial thrust load capacity",
+        "valueText": "Axial thrust load capacity (hundreds of metric tons, plant-dependent)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-bearings-param-2",
+        "label": "normal Babbitt pad operating temperature",
+        "valueText": "normal Babbitt pad operating temperature (`~55–75 °C`, alarm `~85–90 °C`, trip `~95–100 °C`)",
+        "unit": "m",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-bearings-param-3",
+        "label": "mechanical friction loss",
+        "valueText": "mechanical friction loss (`~0.2–0.5%` of unit output, factored into `generatorEfficiency` / mechanical windage-friction).",
+        "unit": "m",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-05-mechanical-transmission",
+      "stage-06-electrical-generation"
+    ],
+    "relatedSimulationVariables": [
+      "rotationalSpeedRpm",
+      "generatorEfficiency"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-bearings",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Bearings",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        3.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        5.5,
+        3.0,
+        5.5
+      ],
+      "boundingRadiusM": 2.4,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-cooling-system",
+    "officialName": "Cooling System",
+    "alternativeNames": [
+      "Generator Air-to-Water Heat Exchangers",
+      "Closed-Loop Ventilation & Bearing Cooling"
+    ],
+    "subsystemId": "sub-generator",
+    "physicalLocation": "Finned radiator coolers mounted symmetrically around the outer circumference of `comp-stator` inside `comp-generator-housing`, plus cooling water manifolds to `comp-bearings`.",
+    "purpose": "Continuously remove heat generated by stator copper $I^2R$ losses, stator iron core losses, rotor field $I^2R$ losses, windage drag, and bearing friction so electrical insulation and bearing Babbitt remain well within safe thermal limits.",
+    "engineeringPrinciple": "Forced closed-loop air convection + water-cooled heat exchange ($Q_{\\text{heat}} = \\dot{m}_{\\text{air}} c_p \\Delta T_{\\text{air}} = U A \\Delta T_{\\text{lm}}$): rotor spider arms and fan blades pump warm air outward through rotor poles, across the air gap, through radial stator core ducts, and out through circumferential finned air-to-water heat exchangers before recirculating cool air back to rotor top/bottom.",
+    "constructionAndMaterials": "Radial cupronickel or stainless-steel finned-tube air-to-water heat exchanger banks bolted onto outer stator frame openings, closed-loop cooling water booster pumps, strainers, thermostatic control valves, and river/penstock raw-water secondary heat exchangers.",
+    "operatingMechanism": "As electrical load increases, stator $I^2R$ losses rise quadratically ($I^2 R$), raising generator air temperature; modulated cooling water flow through finned coils maintains cold air inlet around `~35–40 °C` and avoids moisture condensation during cold standby.",
+    "typicalOperatingConsiderations": "Maintain cooling water pressure slightly lower or carefully monitored against leakage inside generator pit; prevent biological fouling or silt buildup inside finned tubes.",
+    "potentialFailureModes": [
+      "Tube fouling/scaling reducing heat transfer and triggering stator over-temperature derating",
+      "cooling water tube leak spraying moisture onto high-voltage windings",
+      "raw-water strainer blockage"
+    ],
+    "maintenanceConsiderations": [
+      "Automated backwash strainer flushing, seasonal acid/mechanical tube descaling, hydrostatic leak testing of exchanger headers, flow-switch alarm verification"
+    ],
+    "educationalExplanation": "*General principle:* Even at an impressive `97%` generator efficiency, a `45 MW` hydro generator converts roughly `1.4 MW` of mechanical input straight into heat—equivalent to running nearly a thousand household space heaters inside an enclosed concrete room! Closed-loop air coolers carry that heat safely away into water pipes.",
+    "engineeringParameters": [
+      {
+        "key": "comp-cooling-system-param-1",
+        "label": "Heat rejection duty",
+        "valueText": "Heat rejection duty (typically `~1.5–3.0%` of rated MW, i.e., `~0.7–1.4 MW` thermal heat removed on a `45 MW` unit!)",
+        "unit": "%",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-cooling-system-param-2",
+        "label": "cold/hot air design delta",
+        "valueText": "cold/hot air design delta (`~40 °C → 65 °C`)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-cooling-system-param-3",
+        "label": "cooling water flow rate.",
+        "valueText": "cooling water flow rate.",
+        "unit": "contextual",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-06-electrical-generation"
+    ],
+    "relatedSimulationVariables": [
+      "generatorLossW",
+      "generatorEfficiency"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-cooling-system",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_CoolingSystem",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        -3.5
+      ],
+      "cameraFocusOffset": [
+        8.5,
+        4.5,
+        8.5
+      ],
+      "boundingRadiusM": 4.2,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-generator-housing",
+    "officialName": "Generator Housing",
+    "alternativeNames": [
+      "Generator Enclosure",
+      "Air Barrel",
+      "Pit Liner & Upper Cover"
+    ],
+    "subsystemId": "sub-generator",
+    "physicalLocation": "Cylindrical outer steel/concrete enclosure on the powerhouse generator floor surrounding `comp-stator`, `comp-rotor`, and `comp-cooling-system`.",
+    "purpose": "Form a sealed closed-loop ventilation chamber for cooling air, attenuate acoustic noise, protect personnel from high-voltage windings and high-speed rotating parts, and support upper bearing bridges and auxiliary sensors.",
+    "engineeringPrinciple": "Sealed structural pressure/containment shell engineered for low acoustic transmission, dust/moisture exclusion (preventing airborne contaminants from fouling HV windings), and fire-containment safety (`CO2` or water-mist suppression integration).",
+    "constructionAndMaterials": "Rolled structural steel cylindrical barrel (or concrete-lined pit barrel with removable steel upper deck covers/hatches), reinforced access doors with safety interlocks, acoustic insulation liner, and observation/fire-suppression ports.",
+    "operatingMechanism": "Passive structural and airflow boundary keeping chilled recirculated air contained and guided strictly through stator cooling ducts and heat exchangers rather than leaking into the generator hall.",
+    "typicalOperatingConsiderations": "Keep access doors dogged tight during operation so cooling airflow pressure drops don't short-circuit ventilation; verify fire-interlock dampers before startup.",
+    "potentialFailureModes": [
+      "Door gasket deterioration causing hot-air leaks into powerhouse",
+      "panel rattle vibration",
+      "condensation drip onto stator end-turns if internal space heaters fail while idle"
+    ],
+    "maintenanceConsiderations": [
+      "Door seal inspection, internal anti-condensation heater function check during shutdowns, paint/corrosion maintenance, safety interlock verification"
+    ],
+    "educationalExplanation": "*General principle:* In a real hydro powerhouse hall, you rarely see the giant spinning rotor directly—this protective steel barrel seals in cooled air, blocks dust, contains noise, and keeps engineers safe from `11,000-volt` copper bars and moving multi-ton steel inside.",
+    "engineeringParameters": [
+      {
+        "key": "comp-generator-housing-param-1",
+        "label": "Housing outer diameter",
+        "valueText": "Housing outer diameter (plant-dependent, illustrative `~7–9 m` barrel)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-generator-housing-param-2",
+        "label": "acoustic attenuation",
+        "valueText": "acoustic attenuation (`< 85 dBA` at 1 m on floor)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-generator-housing-param-3",
+        "label": "enclosure ingress/air-tightness rating.",
+        "valueText": "enclosure ingress/air-tightness rating.",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-06-electrical-generation"
+    ],
+    "relatedSimulationVariables": [
+      "generatorLossW"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-generator-housing",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_GeneratorHousing",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        7.5,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        9.5,
+        6.0,
+        9.5
+      ],
+      "boundingRadiusM": 4.8,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-generator-terminal",
+    "officialName": "Generator Terminal",
+    "alternativeNames": [
+      "Stator Output Terminals",
+      "Terminal Box & Star-Point Neutral Cubicle"
+    ],
+    "subsystemId": "sub-electrical-transmission",
+    "physicalLocation": "Terminal chamber mounted on the outer wall of `comp-generator-housing` (phase side and neutral star-point side).",
+    "purpose": "Provide the insulated electrical transition point collecting three-phase high-current power leads from `comp-stator-winding` into external busbars while housing metering/protection current transformers (CTs) and surge arresters.",
+    "engineeringPrinciple": "Three-phase star (wye) connected AC termination ($P_e = \\sqrt{3} V_L I_L \\cos\\phi$) where neutral ends connect through a high-resistance or distribution-transformer grounding cubicle to limit single-line-to-ground fault currents and avoid destructive stator core iron burning.",
+    "constructionAndMaterials": "Non-magnetic aluminum or stainless-steel terminal enclosure (prevents inductive eddy-current heating around heavy phase currents), glazed porcelain or epoxy stand-off bushings, bolted silver-plated copper terminal flags with flexible laminated copper expansion shunts, ring-type protection/metering CTs, and neutral-grounding transformer/resistor panel.",
+    "operatingMechanism": "Stationary electrical junction conducting full three-phase generator output current (`~2.4–2.6 kA` at `11 kV` class) safely out of the housing while isolating mechanical vibration via flexible braided shunts.",
+    "typicalOperatingConsiderations": "Inspect thermal imaging of bolted joints for loose-connection hotspots; verify neutral grounding resistor continuity and PT/CT secondary shorting blocks.",
+    "potentialFailureModes": [
+      "Loose terminal lug overheating/arcing",
+      "moisture condensation flashover across porcelain bushings",
+      "CT secondary open-circuit overvoltage",
+      "surge-arrester failure"
+    ],
+    "maintenanceConsiderations": [
+      "Infrared thermography during load runs, contact-resistance micro-ohm (Ductor) tests across bolted flex-links, bushing insulator cleaning, torque verification"
+    ],
+    "educationalExplanation": "*General principle:* Before electricity can head out to a national power grid, the generator's stator coils must tie together cleanly—three live phase leads carry outgoing power while the neutral ends meet in a controlled grounding path that protects the core during faults.",
+    "engineeringParameters": [
+      {
+        "key": "comp-generator-terminal-param-1",
+        "label": "Rated line-to-line voltage",
+        "valueText": "Rated line-to-line voltage (illustrative `11.0 kV` RMS, `50 Hz`)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-generator-terminal-param-2",
+        "label": "rated continuous current",
+        "valueText": "rated continuous current (`~2,500–3,000 A` class)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-generator-terminal-param-3",
+        "label": "Basic Impulse Insulation Level",
+        "valueText": "Basic Impulse Insulation Level (`BIL`, e.g., `75–95 kV`)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-generator-terminal-param-4",
+        "label": "short-time fault withstand rating.",
+        "valueText": "short-time fault withstand rating.",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-06-electrical-generation",
+      "stage-07-voltage-transformation"
+    ],
+    "relatedSimulationVariables": [
+      "electricalGeneratedPowerW",
+      "deliveredElectricalPowerW"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-generator-terminal",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_GeneratorTerminal",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        5.0,
+        3.5,
+        -5.0
+      ],
+      "boundingRadiusM": 2.2,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-busbar",
+    "officialName": "Busbar",
+    "alternativeNames": [
+      "Isolated Phase Bus (IPB) / Segregated Phase Bus Duct",
+      "Main Generator Bus"
+    ],
+    "subsystemId": "sub-electrical-transmission",
+    "physicalLocation": "Overhead or gallery-mounted metal-enclosed bus duct running between `comp-generator-terminal`, `comp-circuit-breaker`, and the low-voltage bushings of `comp-step-up-transformer`.",
+    "purpose": "Conduct heavy three-phase AC power at generator terminal voltage cleanly and safely between the generator and step-up transformer with minimal resistive loss, phase-to-phase fault risk, and electromagnetic interference.",
+    "engineeringPrinciple": "Low-resistance high-ampacity conductor sizing ($P_{\\text{loss}} = 3 I_{\\text{phase}}^2 R_{\\text{ac}}$); in Isolated Phase Bus (IPB) construction, each phase conductor sits centered inside an individual grounded aluminum sheath so induced shield currents nearly cancel external magnetic fields around adjacent steel powerhouse beams and eliminate phase-to-phase short circuits.",
+    "constructionAndMaterials": "Hollow tubular or channel-section aluminum or copper conductors supported by porcelain/epoxy post insulators inside weatherproof grounded aluminum enclosures, fitted with flexible braided expansion joints, desiccant breathers / pressurized dry-air systems, and tap-off leads for station service & excitation transformers.",
+    "operatingMechanism": "Passive heavy-duty electrical highway bridging powerhouse indoor switchgear to the outdoor transformer bay.",
+    "typicalOperatingConsiderations": "Maintain dry, dust-free interior enclosure air (anti-condensation heaters or low-pressure dry air purge) to avoid insulator surface tracking.",
+    "potentialFailureModes": [
+      "Insulator tracking flashover from moisture/condensation",
+      "support insulator cracking from short-circuit electrodynamic forces",
+      "overheating at improperly torqued flex-links",
+      "enclosure gasket leaks"
+    ],
+    "maintenanceConsiderations": [
+      "Thermography along enclosure joints, contact-resistance testing across bolted flex connectors, insulator cleaning and Megger insulation checks, heater continuity testing"
+    ],
+    "educationalExplanation": "*Why heavy aluminum tubes instead of flexible cables?* At `11 kV` and `45 MW`, the generator pushes roughly `2,400 amperes` per phase—far too massive for ordinary insulated cables. Rigid metal-enclosed busbars keep phases physically isolated and dissipate heat safely.",
+    "engineeringParameters": [
+      {
+        "key": "comp-busbar-param-1",
+        "label": "Rated voltage",
+        "valueText": "Rated voltage (`11.0 kV` illustrative)",
+        "unit": "kV",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-busbar-param-2",
+        "label": "continuous current rating",
+        "valueText": "continuous current rating (`~3,000 A` class)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-busbar-param-3",
+        "label": "busbar thermal rise limit",
+        "valueText": "busbar thermal rise limit (`<= 65 K` ambient rise per IEEE C37.23)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-busbar-param-4",
+        "label": "short-circuit peak withstand",
+        "valueText": "short-circuit peak withstand (`~80–150 kA` peak).",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-07-voltage-transformation"
+    ],
+    "relatedSimulationVariables": [
+      "deliveredElectricalPowerW"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-busbar",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Busbar",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        1.5,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        7.5,
+        5.0,
+        7.5
+      ],
+      "boundingRadiusM": 4.5,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-circuit-breaker",
+    "officialName": "Circuit Breaker",
+    "alternativeNames": [
+      "Generator Circuit Breaker (GCB) / Synchronizing Breaker"
+    ],
+    "subsystemId": "sub-electrical-transmission",
+    "physicalLocation": "Inline along `comp-busbar` between `comp-generator-terminal` and `comp-step-up-transformer` (or paired on the high-voltage switchyard bay side).",
+    "purpose": "Synchronize the generator smoothly onto the live electrical grid, carry continuous load current safely, and interrupt massive normal or short-circuit fault currents within milliseconds to protect the generator and transformer.",
+    "engineeringPrinciple": "**Controlled Arc Interruption at AC Current Zero-Crossing:** Pulling apart live contacts under thousands of amperes creates a superheated plasma arc. Vacuum interrupters or compressed `SF6` / clean-air blast chambers stretch, cool, and de-ionize the arc channel so dielectric strength recovers faster than the Transient Recovery Voltage (TRV) right at natural AC zero-crossing ($i(t) = 0$ occurring `100 times/s` at `50 Hz`). Synchronizing relays close contacts ONLY when generator voltage magnitude, frequency, and phase angle match the grid (`Δθ ≈ 0°`).",
+    "constructionAndMaterials": "Three-pole interrupter chambers (vacuum bottles or `SF6`/gas puffer poles), silver/copper-tungsten main and arcing contacts, spring-hydraulic stored-energy operating mechanism, current transformers, and parallel surge capacitors / disconnect switches.",
+    "operatingMechanism": "Remains open during turbine startup and speed ramp until automatic synchronizer verifies phase match (`< ±5°`), then snaps closed in `~40–60 ms`. On protective relay trip (differential, overcurrent, reverse power, overspeed), trip coil releases stored spring energy to interrupt full fault current in `2–3` AC cycles (`~40–60 ms`).",
+    "typicalOperatingConsiderations": "Out-of-phase closing causes catastrophic shaft torsional shock and transformer winding collapse; monitor gas pressure / vacuum integrity and trip-coil supervision continuously.",
+    "potentialFailureModes": [
+      "Contact erosion after repeated fault trips",
+      "trip-coil open circuit or mechanism spring latch failure (\"breaker failure\")",
+      "`SF6` seal leak / vacuum loss",
+      "pole-discrepancy (one phase failing to close/open)"
+    ],
+    "maintenanceConsiderations": [
+      "Contact timing & travel-curve analyzer tests, static/dynamic contact resistance measurement, gas dew-point/purity checks (if gas-insulated) or vacuum bottle hi-pot checks, trip/close coil battery testing"
+    ],
+    "educationalExplanation": "*General principle:* You cannot just turn off `45 MW` of spinning electrical power with a household light switch—air would explode into an arc flash. A generator circuit breaker traps and extinguishes that arc safely inside `~0.05 seconds` at the exact instant AC current crosses zero.",
+    "engineeringParameters": [
+      {
+        "key": "comp-circuit-breaker-param-1",
+        "label": "Rated voltage",
+        "valueText": "Rated voltage (`11–15 kV` class GCB)",
+        "unit": "kV",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-circuit-breaker-param-2",
+        "label": "continuous current",
+        "valueText": "continuous current (`~3,000 A`)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-circuit-breaker-param-3",
+        "label": "symmetrical interrupting rating",
+        "valueText": "symmetrical interrupting rating (typically `40–63 kA` RMS",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-circuit-breaker-param-4",
+        "label": "generator-fed faults exhibit high DC-offset asymmetry requiring ",
+        "valueText": "generator-fed faults exhibit high DC-offset asymmetry requiring special IEEE C37.013 GCB duty)",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-07-voltage-transformation"
+    ],
+    "relatedSimulationVariables": [
+      "operatingCondition",
+      "deliveredElectricalPowerW"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-circuit-breaker",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_CircuitBreaker",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        2.2,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        5.5,
+        3.5,
+        5.5
+      ],
+      "boundingRadiusM": 2.5,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-step-up-transformer",
+    "officialName": "Step-Up Transformer",
+    "alternativeNames": [
+      "Generator Step-Up Transformer (GSU)",
+      "Main Power Transformer"
+    ],
+    "subsystemId": "sub-electrical-transmission",
+    "physicalLocation": "Concrete outdoor transformer bay immediately outside the powerhouse wall, between the generator busbar exit and `comp-switchyard`.",
+    "purpose": "Transform generated medium-voltage, high-current AC (`~11 kV`) into high-voltage, low-current AC (`~110–220 kV` class) so bulk power transmits long distances with drastically reduced $I^2R$ line losses.",
+    "engineeringPrinciple": "**Mutual Electromagnetic Induction & Joule Heating Reduction:** $$\\frac{V_2}{V_1} = \\frac{N_2}{N_1}, \\qquad I_2 = I_1 \\frac{N_1}{N_2} \\text{ (ideal)}, \\qquad P_{\\text{line,loss}} = 3 I_2^2 R_{\\text{line}} \\propto \\frac{1}{V_2^2}$$ Stepping voltage up `10×` (e.g., `11 kV → 110 kV`) or `20×` (`11 kV → 220 kV`) drops transmission current by `10×` or `20×`—cutting resistive line heat losses by **`100×` or `400×`**!",
+    "constructionAndMaterials": "Three-limb grain-oriented electrical steel core, concentric copper primary (Delta) and secondary (Wye-grounded) windings, thermally upgraded Kraft paper insulation immersed in insulating mineral or ester transformer oil inside a heavy welded steel tank, external radiator fin banks with cooling fans (`ONAN/ONAF`), conservator expansion tank with Buchholz gas relay, HV porcelain/composite condenser bushings, and fire-containment oil pit.",
+    "operatingMechanism": "Stationary electromagnetic device operating continuously near `~99.2–99.7%` efficiency; dissipates small no-load core magnetization losses and load-dependent copper $I^2R$ losses via oil thermosyphon circulation through radiator banks.",
+    "typicalOperatingConsiderations": "Monitor top-oil and winding hot-spot temperatures, dissolved gas analysis (DGA) for arcing/overheating indicators, tap-changer position (off-circuit or on-load), and Buchholz relay gas alarms.",
+    "potentialFailureModes": [
+      "Winding insulation breakdown from moisture or lightning/switching surge",
+      "turn-to-turn short circuit triggering Buchholz/differential trip",
+      "HV bushing oil leak or partial discharge explosion",
+      "radiator fan/pump cooling fault"
+    ],
+    "maintenanceConsiderations": [
+      "Periodic oil Dissolved Gas Analysis (DGA), moisture/dielectric breakdown tests, Doble bushing & winding tan-delta testing, Sweep Frequency Response Analysis (SFRA), silica-gel breather drying, thermography"
+    ],
+    "educationalExplanation": "*Why step voltage up so high?* Because wire heat loss grows with the **square of current** ($I^2R$). Carrying `45 MW` over 50 km at `11 kV` (`~2,360 A`) would waste tens of percent heating the air; stepping up to `132 kV` drops current to `~197 A`, slashing line losses by over **`144×`**!",
+    "engineeringParameters": [
+      {
+        "key": "comp-step-up-transformer-param-1",
+        "label": "MVA rating",
+        "valueText": "MVA rating (illustrative `50–55 MVA` class matching ~`45 MW` at `0.85–0.90` power factor)",
+        "unit": "MVA",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-step-up-transformer-param-2",
+        "label": "voltage ratio",
+        "valueText": "voltage ratio (illustrative `11 kV / 132 kV` or `11 kV / 220 kV`, plant-dependent)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-step-up-transformer-param-3",
+        "label": "impedance `%Z`",
+        "valueText": "impedance `%Z` (`~10–14%` typical)",
+        "unit": "m",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-step-up-transformer-param-4",
+        "label": "cooling class",
+        "valueText": "cooling class (`ONAN/ONAF`)",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-07-voltage-transformation"
+    ],
+    "relatedSimulationVariables": [
+      "deliveredElectricalPowerW"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-step-up-transformer",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_StepUpTransformer",
+      "lodSupported": true,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        8.5,
+        5.5,
+        8.5
+      ],
+      "boundingRadiusM": 4.5,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-switchyard",
+    "officialName": "Switchyard",
+    "alternativeNames": [
+      "High-Voltage Substation",
+      "Outdoor Switchyard Bay"
+    ],
+    "subsystemId": "sub-electrical-transmission",
+    "physicalLocation": "Fenced gravel-surfaced outdoor high-voltage yard adjacent to the transformer bay and take-off transmission gantry.",
+    "purpose": "Safely switch, meter, protect, and route high-voltage power from the step-up transformer onto outgoing regional transmission lines while providing lightning surge arrest and visible maintenance isolation.",
+    "engineeringPrinciple": "Air-insulated high-voltage phase clearances (governed by BIL and phase-to-ground/phase-to-phase dielectric breakdown margins), busbar buswork redundancy (e.g., single-bus, breaker-and-a-half, or ring-bus topologies), instrument transformer voltage/current scaling (`PT/CVT` & `CT`) for protective relaying, and metal-oxide varistor (MOV) surge clamping.",
+    "constructionAndMaterials": "Crushed stone grounding grid surface (controls step-and-touch fault potentials), galvanized steel lattice portal gantries and equipment support stands, HV circuit breakers, motorized air-break disconnect switches, surge arresters, CTs, CVTs, aluminum tubular busbars, and protective ground mat.",
+    "operatingMechanism": "Motorized disconnect switches provide visible air-gap isolation ONLY after HV breakers open; protective relays monitor differential, distance, and overvoltage faults across the yard.",
+    "typicalOperatingConsiderations": "Strict lock-out/tag-out interlocking prevents opening disconnect switches under load; vegetation/bird/insulator contamination flashover mitigation.",
+    "potentialFailureModes": [
+      "Insulator pollution flashover in humid/coastal air",
+      "disconnect switch contact hot-spots",
+      "surge arrester thermal runaway",
+      "relay/DC battery auxiliary trip failure"
+    ],
+    "maintenanceConsiderations": [
+      "Infrared hotspot sweeps, breaker timing tests, insulator washing/RTV silicone coating, ground-grid impedance testing, protective relay secondary injection calibration"
+    ],
+    "educationalExplanation": "*General principle:* A switchyard is the traffic interchange between the power plant and the national grid—isolating faults in milliseconds, clamping lightning strikes, and safely decoupling equipment with visible open switches for maintenance crews.",
+    "engineeringParameters": [
+      {
+        "key": "comp-switchyard-param-1",
+        "label": "Nominal system voltage",
+        "valueText": "Nominal system voltage (`132 kV` / `220 kV` class, plant-dependent)",
+        "unit": "m",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-switchyard-param-2",
+        "label": "phase-to-phase air clearance",
+        "valueText": "phase-to-phase air clearance",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-switchyard-param-3",
+        "label": "ground-grid resistance",
+        "valueText": "ground-grid resistance (`< 1 Ω` typical target)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-switchyard-param-4",
+        "label": "BIL rating",
+        "valueText": "BIL rating (`550–950 kV` class).",
+        "unit": "kV",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-08-power-transmission"
+    ],
+    "relatedSimulationVariables": [
+      "deliveredElectricalPowerW"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-switchyard",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Switchyard",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        14.0,
+        8.0,
+        14.0
+      ],
+      "boundingRadiusM": 9.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-transmission-line",
+    "officialName": "Transmission Line",
+    "alternativeNames": [
+      "High-Voltage Overhead Transmission Line",
+      "Take-Off Line"
+    ],
+    "subsystemId": "sub-electrical-transmission",
+    "physicalLocation": "Overhead steel lattice towers and catenary phase conductors departing `comp-switchyard` take-off gantry toward the regional grid corridor.",
+    "purpose": "Transport high-voltage three-phase electrical energy efficiently across tens or hundreds of kilometers from the remote hydroelectric river gorge to population and industrial load centers.",
+    "engineeringPrinciple": "Three-phase AC power transfer across transmission line reactance ($P \\approx \\frac{V_s V_r}{X} \\sin\\delta$), balancing resistive Joule losses ($I^2 R$), corona discharge limits, sag-tension mechanical catenary physics, and thermal ampacity.",
+    "constructionAndMaterials": "Aluminum Conductor Steel Reinforced (`ACSR`) stranded phase conductors (aluminum outer strands for conductivity + steel inner core for tensile strength), overhead ground/shield wires (OPGW) above phases for lightning diversion, glass/ceramic/polymer suspension insulator strings, and galvanized steel lattice towers anchored on concrete foundations.",
+    "operatingMechanism": "Passive electromagnetic wave/power corridor carrying active (`MW`) and reactive (`MVAR`) power continuously in phase equilibrium with grid impedance.",
+    "typicalOperatingConsiderations": "Conductor thermal sag increases during high ambient heat + heavy current; wind-induced aeolian vibration and galloping; lightning trip auto-reclose coordination.",
+    "potentialFailureModes": [
+      "Lightning back-flashover across insulator strings",
+      "tree encroachment / phase-to-ground fault",
+      "extreme ice/wind mechanical tower loading",
+      "corroded splice overheating"
+    ],
+    "maintenanceConsiderations": [
+      "Helicopter/drone LiDAR clearance & corona UV/IR inspections, insulator string integrity testing, tower foundation & guy inspection, vegetation corridor clearing"
+    ],
+    "educationalExplanation": "*General principle:* Hydroelectric plants sit where valleys and rivers exist—often far from cities. High-voltage ACSR lines carry power over long distances with minimal loss using thin overhead shield wires above to intercept lightning before it strikes the live phases below.",
+    "engineeringParameters": [
+      {
+        "key": "comp-transmission-line-param-1",
+        "label": "Line voltage",
+        "valueText": "Line voltage (`132 kV` / `220 kV` illustrative)",
+        "unit": "kV",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-transmission-line-param-2",
+        "label": "thermal ampacity",
+        "valueText": "thermal ampacity",
+        "unit": "m",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-transmission-line-param-3",
+        "label": "surge impedance loading",
+        "valueText": "surge impedance loading (SIL)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-transmission-line-param-4",
+        "label": "phase conductor configuration and ground clearance.",
+        "valueText": "phase conductor configuration and ground clearance.",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-08-power-transmission"
+    ],
+    "relatedSimulationVariables": [
+      "deliveredElectricalPowerW",
+      "requestedLoadW"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-transmission-line",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_TransmissionLine",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        22.0,
+        14.0,
+        22.0
+      ],
+      "boundingRadiusM": 18.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-electrical-grid",
+    "officialName": "Electrical Grid",
+    "alternativeNames": [
+      "Interconnected Power Grid",
+      "Bulk Transmission Network & Load Center"
+    ],
+    "subsystemId": "sub-electrical-transmission",
+    "physicalLocation": "Downstream boundary node at the far end of `comp-transmission-line` representing the interconnected synchronous power system and consumer loads.",
+    "purpose": "Represent the external synchronized alternating-current system that absorbs generated electricity, sets nominal grid frequency (`50 Hz` or `60 Hz`), and imposes dynamic consumer electrical load demand (`requestedLoadW`).",
+    "engineeringPrinciple": "**Active Power Balance & Frequency Lock:** Across an interconnected AC grid, total instantaneous generation must continuously match total consumer load plus losses ($\\sum P_{\\text{gen}} = \\sum P_{\\text{load}} + P_{\\text{loss}}$). Because a single plant (`~45 MW`) couples synchronously into a much larger grid, grid frequency (`50 Hz`) dictates the rotor's locked synchronous speed (`250 rpm`), while load demand governs electrical torque opposing the turbine.",
+    "constructionAndMaterials": "Conceptual representation of substations, interconnected generation plants, distribution transformers, and industrial/residential end-use loads beyond the plant fence.",
+    "operatingMechanism": "Requests active power (`requestedLoadW` in DENRYU Simulator). If available plant generation (`electricalGeneratedPowerW`) is less than requested load, a **power deficit** exists (`deliveredElectricalPowerW = available`); in a real grid, other plants must pick up the deficit or frequency sags / under-frequency load shedding occurs.",
+    "typicalOperatingConsiderations": "Generator governor droop response (`~4–5%` typical) helps share sudden system frequency deviations across interconnected hydro units smoothly.",
+    "potentialFailureModes": [
+      "External grid short-circuit faults, voltage collapse, frequency excursions outside protection relay limits (`e.g., < 47.5 Hz` or `> 51.5 Hz`), loss-of-synchronism / islanding events"
+    ],
+    "maintenanceConsiderations": [
+      "Out of plant direct maintenance scope",
+      "coordinated through Regional Grid Dispatch / System Operator protection settings and telemetry tests"
+    ],
+    "educationalExplanation": "*Crucial misconception corrected:* Beginners often assume increasing electrical load slows down a hydro generator arbitrarily—or reducing water makes it spin at half speed while still on the grid. In reality, once synchronized to a large electrical grid, magnetic lock holds the generator strictly at `50 Hz` (`250 rpm`); changing load changes mechanical **torque** and guide-vane **flow demand**, not steady-state RPM!",
+    "engineeringParameters": [
+      {
+        "key": "comp-electrical-grid-param-1",
+        "label": "System nominal frequency",
+        "valueText": "System nominal frequency (`50 Hz` illustrative",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-electrical-grid-param-2",
+        "label": "configurable `50/60 Hz`)",
+        "valueText": "configurable `50/60 Hz`)",
+        "unit": "Hz",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-electrical-grid-param-3",
+        "label": "requested plant dispatch load",
+        "valueText": "requested plant dispatch load (`requestedLoadW`, default `40.0 MW` vs. `~44 MW` nominal output)",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-electrical-grid-param-4",
+        "label": "grid tie status.",
+        "valueText": "grid tie status.",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-08-power-transmission"
+    ],
+    "relatedSimulationVariables": [
+      "requestedLoadW",
+      "deliveredElectricalPowerW",
+      "synchronousSpeedRpm"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-electrical-grid",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_ElectricalGrid",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        14.0,
+        10.0,
+        14.0
+      ],
+      "boundingRadiusM": 8.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-draft-tube-outlet",
+    "officialName": "Draft Tube Outlet",
+    "alternativeNames": [
+      "Draft Tube Exit Portal",
+      "Tailwater Outlet Pier Bay"
+    ],
+    "subsystemId": "sub-discharge",
+    "physicalLocation": "Downstream submerged powerhouse wall exit where `comp-draft-tube` emerges horizontally into `comp-tailrace`.",
+    "purpose": "Release low-velocity water smoothly below the minimum tailwater surface without allowing external air backflow into the draft tube, and house stoplog slots for turbine dewatering.",
+    "engineeringPrinciple": "Submerged exit hydraulic seal: submerging the outlet soffit safely below minimum tailwater elevation ensures continuous liquid column vacuum integrity inside the draft tube diffuser while minimizing exit kinetic loss ($\\frac{v_{\\text{exit}}^2}{2g}$ kept small, typically `< 1–2%` of gross head).",
+    "constructionAndMaterials": "Reinforced concrete twin or single rectangular exit portal bays divided by streamlined structural splitter piers, embedded stainless/painted steel stoplog guide slots, and overhead gantry crane / monorail hoist deck for stoplog gate placement.",
+    "operatingMechanism": "Continuously submerged underwater outlet during generation; stoplog gates drop down into vertical slots solely during turbine inspection outages so dewatering pumps can empty the draft tube and spiral casing safely.",
+    "typicalOperatingConsiderations": "Never drop stoplogs under flowing conditions unless specifically designed as emergency closure gates; check differential water pressure before lifting stoplogs after maintenance.",
+    "potentialFailureModes": [
+      "Stoplog guide siltation preventing tight seal during dewatering",
+      "concrete spalling around pier noses",
+      "uneven exit flow circulation if one bay clogs"
+    ],
+    "maintenanceConsiderations": [
+      "Stoplog rubber J-seal replacement, underwater concrete/guide slot cleaning before planned outages, overhead stoplog crane inspection"
+    ],
+    "educationalExplanation": "*General principle:* Notice that the draft tube outlet stays completely underwater—if air could sneak backward up into the draft tube, the vacuum suction underneath the turbine runner would break immediately and efficiency would plunge.",
+    "engineeringParameters": [
+      {
+        "key": "comp-draft-tube-outlet-param-1",
+        "label": "Outlet exit velocity",
+        "valueText": "Outlet exit velocity (typically `~1.5–2.8 m/s`, substantially slower than runner exit)",
+        "unit": "m",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-draft-tube-outlet-param-2",
+        "label": "minimum tailwater submergence above outlet crown",
+        "valueText": "minimum tailwater submergence above outlet crown (`>= 0.5–1.5 m`).",
+        "unit": "m",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-09-water-discharge"
+    ],
+    "relatedSimulationVariables": [
+      "actualFlowRateM3s",
+      "netHeadM"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-draft-tube-outlet",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_DraftTubeOutlet",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        9.0,
+        5.0,
+        9.0
+      ],
+      "boundingRadiusM": 5.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-tailrace",
+    "officialName": "Tailrace",
+    "alternativeNames": [
+      "Tailrace Channel",
+      "Tailwater Pool"
+    ],
+    "subsystemId": "sub-discharge",
+    "physicalLocation": "Engineered open channel extending immediately downstream from `comp-draft-tube-outlet` (and adjacent to spillway stilling apron) out toward the natural river.",
+    "purpose": "Convey turbined discharge smoothly away from the powerhouse without backing up tailwater elevation (which would steal net head) while absorbing turbulence before rejoining the natural river channel.",
+    "engineeringPrinciple": "Open-channel subcritical flow (Manning's equation $Q = \\frac{1}{n} A R_h^{2/3} S^{1/2}$): wide, gently sloped cross-section keeps tailwater elevation stable and defines the downstream reference datum ($Z_{\\text{tailwater}}$) determining gross plant head ($H_{\\text{gross}} = Z_{\\text{headwater}} - Z_{\\text{tailwater}}$).",
+    "constructionAndMaterials": "Excavated rock or reinforced concrete trapezoidal/rectangular channel with riprap bank stabilization, training walls separating powerhouse outflow from spillway turbulence, and tailwater level gauging staff/transducer.",
+    "operatingMechanism": "Continuously collects steady outflow from the draft tube outlet and regulates downstream backpressure elevation naturally via channel geometry and river stage.",
+    "typicalOperatingConsiderations": "Rapid flow increases from `0 → 60 m³/s` during unit load pick-up create mild downstream surge waves; high river floods raise tailwater elevation, temporarily reducing available `Net Head (H)`.",
+    "potentialFailureModes": [
+      "Sediment bar deposition or rockslide raising tailwater elevation (reducing head and power output)",
+      "bank erosion/undercutting during spillway co-discharge"
+    ],
+    "maintenanceConsiderations": [
+      "Periodic bathymetric dredging of gravel bars, riprap slope repair, tailwater level sensor calibration"
+    ],
+    "educationalExplanation": "*General principle:* Every meter that water backs up in the tailrace is one full meter of net head stolen directly from the turbine. Keeping the tailrace wide, deep, and unobstructed preserves maximum head across the Francis runner.",
+    "engineeringParameters": [
+      {
+        "key": "comp-tailrace-param-1",
+        "label": "Tailwater elevation",
+        "valueText": "Tailwater elevation ($Z_{\\text{tw}}$, illustrative `~395 m` ASL, `90 m` below `485 m` headwater)",
+        "unit": "s",
+        "isPlantDependent": true
+      },
+      {
+        "key": "comp-tailrace-param-2",
+        "label": "channel width & roughness",
+        "valueText": "channel width & roughness",
+        "unit": "s",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-tailrace-param-3",
+        "label": "tailwater rise curve vs. discharge",
+        "valueText": "tailwater rise curve vs. discharge ($Z_{\\text{tw}}(Q)$).",
+        "unit": "s",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-09-water-discharge"
+    ],
+    "relatedSimulationVariables": [
+      "actualFlowRateM3s",
+      "netHeadM"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-tailrace",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_Tailrace",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        18.0,
+        10.0,
+        18.0
+      ],
+      "boundingRadiusM": 14.0,
+      "supportsCutawayTransparency": true,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  },
+  {
+    "id": "comp-downstream-channel",
+    "officialName": "Downstream Channel",
+    "alternativeNames": [
+      "Natural River Channel",
+      "Downstream River Reach"
+    ],
+    "subsystemId": "sub-discharge",
+    "physicalLocation": "Downstream riverbed beyond the plant tailrace and spillway stilling apron limits.",
+    "purpose": "Return turbined (and any bypassed spillway) water cleanly back into the natural river ecosystem with preserved water volume, controlled velocity, and environmental flow continuity.",
+    "engineeringPrinciple": "**Conservation of Mass (Non-Consumptive Energy Extraction):** Hydroelectric power extracts **gravitational potential and pressure energy**, NOT water molecules! Mass flow leaving the plant equals mass flow entering ($Q_{\\text{out}} = Q_{\\text{in}}$ in steady state), returning oxygen-managed water downstream for ecology, agriculture, and downstream communities.",
+    "constructionAndMaterials": "Natural river morphology stabilized near the plant exit with river-training riprap and ecological monitoring gauging stations.",
+    "operatingMechanism": "Passive downstream river boundary receiving steady tailrace flow and periodic spillway flood releases.",
+    "typicalOperatingConsiderations": "Abrupt load rejections or rapid turbine startups cause downstream river level fluctuations; plants obey strict environmental ramping schedules.",
+    "potentialFailureModes": [
+      "Downstream riverbank erosion, rapid-ramping aquatic stranding (operational/environmental risk), gravel bar migration altering tailwater rating curve"
+    ],
+    "maintenanceConsiderations": [
+      "Downstream stream-gauge calibration, environmental dissolved-oxygen/temperature monitoring, bank stabilization checks"
+    ],
+    "educationalExplanation": "*Closing engineering lesson:* Unlike coal or gas plants that burn fuel into exhaust gases, a hydroelectric plant does not consume water—it simply borrows water's elevation drop, converts that gravitational potential into electricity inside the Francis unit, and gives every drop back to the river downstream.",
+    "engineeringParameters": [
+      {
+        "key": "comp-downstream-channel-param-1",
+        "label": "Environmental minimum flow requirement",
+        "valueText": "Environmental minimum flow requirement (plant/regulatory dependent)",
+        "unit": "m",
+        "isPlantDependent": false
+      },
+      {
+        "key": "comp-downstream-channel-param-2",
+        "label": "river ramping rate limits",
+        "valueText": "river ramping rate limits (how rapidly discharge can increase/decrease to protect downstream river safety & aquatic habitat).",
+        "unit": "m",
+        "isPlantDependent": false
+      }
+    ],
+    "relatedStageIds": [
+      "stage-09-water-discharge"
+    ],
+    "relatedSimulationVariables": [
+      "actualFlowRateM3s"
+    ],
+    "supportsRunnerModes": false,
+    "assetRef": {
+      "componentId": "comp-downstream-channel",
+      "glbPath": "models/denryu-unit-01.glb",
+      "nodeName": "Node_Comp_DownstreamChannel",
+      "lodSupported": false,
+      "explodeVector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cameraFocusOffset": [
+        20.0,
+        12.0,
+        20.0
+      ],
+      "boundingRadiusM": 16.0,
+      "supportsCutawayTransparency": false,
+      "defaultGeometryFallback": "procedural_mesh"
+    }
+  }
+]

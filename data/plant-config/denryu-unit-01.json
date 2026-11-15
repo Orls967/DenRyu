@@ -1,0 +1,25 @@
+{
+  "id": "denryu-hydro-unit-01",
+  "name": "DENRYU Reference Plant — Unit 01",
+  "plantType": "conventional_hydroelectric",
+  "turbineType": "francis",
+  "unitCount": 1,
+  "dataOrigin": "synthetic_educational",
+  "disclaimer": "Illustrative synthetic reference configuration for engineering education only; not validated real-world plant data or SCADA telemetry.",
+  "nominalSpecs": {
+    "ratedNetHeadM": 85.0,
+    "ratedFlowRateM3s": 60.0,
+    "nominalElectricalOutputW": 44551816.33,
+    "synchronousSpeedRpm": 250.0,
+    "gridFrequencyHz": 50,
+    "poleCount": 24
+  },
+  "subsystemIds": [
+    "sub-reservoir-dam",
+    "sub-water-conveyance",
+    "sub-turbine",
+    "sub-generator",
+    "sub-electrical-transmission",
+    "sub-discharge"
+  ]
+}

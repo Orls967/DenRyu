@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --denryu-bg-canvas: #0b1016;
+  --denryu-bg-surface: #151e27;
+  --denryu-bg-elevated: #202c37;
+  --denryu-border-subtle: #2b3b4a;
+  --denryu-border-focus: #36c5d9;
+  --denryu-text-primary: #eef4f8;
+  --denryu-text-secondary: #9fb1c2;
+  --denryu-text-muted: #697d91;
+  --denryu-accent-cyan: #36c5d9;
+  --denryu-accent-water: #2589d8;
+  --denryu-accent-energy: #f5b942;
+  --denryu-status-success: #32c786;
+  --denryu-status-warning: #f59e0b;
+  --denryu-status-error: #ef4444;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  background-color: var(--denryu-bg-canvas);
+  color: var(--denryu-text-primary);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--denryu-border-focus);
+  outline-offset: 2px;
+}
+
+/* Custom slim technical scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--denryu-bg-canvas);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--denryu-border-subtle);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--denryu-text-muted);
+}

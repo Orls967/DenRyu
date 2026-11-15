@@ -1,0 +1,104 @@
+[
+  {
+    "id": "scenario-a-normal",
+    "code": "A",
+    "name": "Scenario A — Normal Operation",
+    "shortLabel": "A: Normal",
+    "summary": "Nominal design head (85 m), rated flow (60 m³/s) near Best Efficiency Point, 85% guide vanes, 40 MW grid demand with healthy reserve margin.",
+    "input": {
+      "netHeadM": 85.0,
+      "requestedFlowRateM3s": 60.0,
+      "guideVaneOpeningPct": 85.0,
+      "turbineEfficiencyRef": 0.92,
+      "generatorEfficiencyRef": 0.975,
+      "requestedLoadW": 40000000,
+      "operatingCondition": "normal",
+      "efficiencyMode": "operating_curve"
+    }
+  },
+  {
+    "id": "scenario-b-reduced-flow",
+    "code": "B",
+    "name": "Scenario B — Reduced Water Flow",
+    "shortLabel": "B: Reduced Flow",
+    "summary": "Dry-season / throttled discharge (32 m³/s at 50% wicket gate opening). Demonstrates Francis part-load efficiency drop (~81.3%) and load deficit against 35 MW demand.",
+    "input": {
+      "netHeadM": 85.0,
+      "requestedFlowRateM3s": 32.0,
+      "guideVaneOpeningPct": 50.0,
+      "turbineEfficiencyRef": 0.92,
+      "generatorEfficiencyRef": 0.975,
+      "requestedLoadW": 35000000,
+      "operatingCondition": "partial_load",
+      "efficiencyMode": "operating_curve"
+    }
+  },
+  {
+    "id": "scenario-c-reduced-head",
+    "code": "C",
+    "name": "Scenario C — Reduced Head",
+    "shortLabel": "C: Reduced Head",
+    "summary": "Reservoir drawdown lowers net head to 55 m. Even at 85% gate opening, orifice scaling caps actual flow to 49.23 m³/s, cutting electrical generation nearly in half.",
+    "input": {
+      "netHeadM": 55.0,
+      "requestedFlowRateM3s": 60.0,
+      "guideVaneOpeningPct": 85.0,
+      "turbineEfficiencyRef": 0.92,
+      "generatorEfficiencyRef": 0.975,
+      "requestedLoadW": 40000000,
+      "operatingCondition": "partial_load",
+      "efficiencyMode": "operating_curve"
+    }
+  },
+  {
+    "id": "scenario-d-efficiency-degradation",
+    "code": "D",
+    "name": "Scenario D — Efficiency Degradation",
+    "shortLabel": "D: Degraded Eff.",
+    "summary": "Simulates cavitation/seal wear and stator cooling degradation (turbine ref 78%, generator ref 90%) at full 85 m head and 60 m³/s flow, losing >10 MW to losses.",
+    "input": {
+      "netHeadM": 85.0,
+      "requestedFlowRateM3s": 60.0,
+      "guideVaneOpeningPct": 85.0,
+      "turbineEfficiencyRef": 0.78,
+      "generatorEfficiencyRef": 0.90,
+      "requestedLoadW": 40000000,
+      "operatingCondition": "normal",
+      "efficiencyMode": "operating_curve"
+    }
+  },
+  {
+    "id": "scenario-e-load-variation",
+    "code": "E",
+    "name": "Scenario E — Load Variation (High Demand)",
+    "shortLabel": "E: High Load",
+    "summary": "Grid demand rises to 48 MW while hydraulic conditions remain nominal. Synchronous rotor speed remains locked at 250 rpm while a 3.45 MW generation deficit occurs.",
+    "input": {
+      "netHeadM": 85.0,
+      "requestedFlowRateM3s": 60.0,
+      "guideVaneOpeningPct": 85.0,
+      "turbineEfficiencyRef": 0.92,
+      "generatorEfficiencyRef": 0.975,
+      "requestedLoadW": 48000000,
+      "operatingCondition": "high_load",
+      "efficiencyMode": "operating_curve"
+    }
+  },
+  {
+    "id": "scenario-f-fixed-manual",
+    "code": "F",
+    "name": "Scenario F — Fixed-Manual Textbook Verification",
+    "shortLabel": "F: Fixed Manual",
+    "summary": "Uses fixed manual efficiency mode (0.91 turbine, 0.97 generator) for direct hand-calculation verification of Pe = rho * g * Q * H * eta_t * eta_g.",
+    "input": {
+      "netHeadM": 85.0,
+      "requestedFlowRateM3s": 60.0,
+      "guideVaneOpeningPct": 85.0,
+      "turbineEfficiencyRef": 0.91,
+      "generatorEfficiencyRef": 0.97,
+      "requestedLoadW": 45000000,
+      "operatingCondition": "normal",
+      "efficiencyMode": "fixed_manual"
+    }
+  }
+]

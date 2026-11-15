@@ -1,0 +1,15 @@
+{
+  "name": "denryu-monorepo",
+  "private": true,
+  "scripts": {
+    "build:wasm": "wasm-pack build crates/denryu-engine --target web --out-dir ../../apps/web/src/wasm/pkg",
+    "dev": "npm --prefix apps/web run dev",
+    "build": "npm run build:wasm && npm --prefix apps/web run build",
+    "typecheck": "npm --prefix apps/web run typecheck",
+    "lint": "npm --prefix apps/web run lint",
+    "test:rust": "cd crates/denryu-engine && cargo test",
+    "test:web": "npm --prefix apps/web run test",
+    "test:api": "cd apps/api && .venv/bin/pytest",
+    "preview": "npm --prefix apps/web run preview"
+  }
+}

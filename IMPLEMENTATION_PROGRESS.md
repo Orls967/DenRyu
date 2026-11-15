@@ -2,7 +2,7 @@
 
 **Project:** DENRYU — Power Plant Anatomy & Energy Systems Explorer  
 **Last Updated:** 2026-11-16  
-**Current Stage:** **Phase 0 — Documentation & Blueprint Engineering** (Pre-Implementation)
+**Current Stage:** **Phase 1 Complete — Foundation, Canonical Data, Rust/WASM Engine & API Scaffold** (Moving to Phase 2)
 
 ---
 
@@ -66,7 +66,12 @@
 
 ---
 
-## 6. Recommended Next Actions (Phase 1 Kickoff)
+## 6. Implementation Milestone Log
 
-1. Owner enables GitHub Pages (`GitHub Actions` source) on `Orls967/DenRyu` when ready for Phase 1/2 previews.
-2. Hand off `/Users/orl123456/Documents/DenRyu` directly to implementation agent starting **Phase 1 (`flow.md`)**: scaffold `apps/web`, `crates/denryu-engine`, `apps/api`, and canonical `data/*.json` files.
+- **Phase 1 (Complete):**
+  - Hardened `.gitignore` for Node, Rust/WASM, Python, OS, IDE, and test artifacts.
+  - Scaffolded `apps/web` (React 18 + TypeScript + Vite + Tailwind CSS + Three.js/R3F/Drei + Zustand + Recharts + KaTeX + Vitest + ESLint) with `HashRouter` and `VITE_BASE_PATH` support.
+  - Authored canonical `data/` JSON datasets (`denryu-unit-01.json`, `subsystems.json`, `components.json` with all 36 components, `relationships.json`, `stages.json` with all 9 stages, `scenarios.json`, `glossary-and-refs.json`) and `apps/web/public/models/manifest.json`.
+  - Implemented `crates/denryu-engine` (`hydraulics`, `turbine`, `generator`, `energy_conversion`, `simulation`, `wasm-bindgen` exports) and verified `cargo test` (9/9 passing, Scenario A–F + 500-case fuzz) and `wasm-pack build`.
+  - Scaffolded `apps/api` FastAPI service (`/api/v1/health`, Dockerfile, `pytest` 1/1 passing).
+  - Verified `npm run typecheck`, `npm run lint`, `vitest` (5/5 integrity tests passing), and `VITE_BASE_PATH=/DenRyu/ vite build`.
