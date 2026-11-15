@@ -2,6 +2,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import { AppShell } from '@/app/AppShell';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { OverviewPage } from '@/features/overview/OverviewPage';
+import { PlantAnatomyPage } from '@/features/plant-anatomy/PlantAnatomyPage';
 
 function PlaceholderRoute({ title }: { title: string }) {
   return (
@@ -18,7 +19,7 @@ export function App() {
         <Routes>
           <Route element={<AppShell />}>
             <Route path="/" element={<OverviewPage />} />
-            <Route path="/anatomy" element={<PlaceholderRoute title="Plant Anatomy" />} />
+            <Route path="/anatomy" element={<PlantAnatomyPage />} />
             <Route path="/journey" element={<PlaceholderRoute title="Energy Journey" />} />
             <Route path="/simulator" element={<PlaceholderRoute title="Generation Simulator" />} />
             <Route path="/insights" element={<PlaceholderRoute title="Engineering Insights" />} />

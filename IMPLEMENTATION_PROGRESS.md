@@ -2,7 +2,7 @@
 
 **Project:** DENRYU — Power Plant Anatomy & Energy Systems Explorer  
 **Last Updated:** 2026-11-16  
-**Current Stage:** **Phase 2 Complete — App Shell, Overview Page & 36-Component 3D Plant Environment** (Moving to Phase 3: Plant Anatomy Workspace)
+**Current Stage:** **Phase 3 Complete — Interactive Plant Anatomy Workspace (`/anatomy`)** (Moving to Phase 4: Guided Energy Journey)
 
 ---
 
@@ -80,3 +80,7 @@
   - Implemented `OverviewPage` with `PlantScene` hero, synthetic nominal plant KPIs, quick subsystem preview strip, and route cards.
   - Built 3D environment (`StudioLighting`, `PlantScene`, `presets`, `FlowVisualizers`, `plantModelLoader`, `ComponentGroup`, and Subsystems A–F covering all 36 `comp-*` IDs with helical spiral casing, 20 pivoting guide vanes, 15 double-curved Francis blades, 24-pole rotor, explode/section-cut clipping planes, and 5-mode Francis Runner inspection highlights).
   - Verified `npm run typecheck`, `npm run lint`, `npm run test:web` (5/5 passing), and `VITE_BASE_PATH=/DenRyu/ vite build`.
+- **Phase 3 (Complete):**
+  - Implemented `PlantAnatomyPage` responsive 3-pane workbench (`HierarchyTree`, `AnatomyToolbar`, `ComponentInspector`) wired to `/anatomy` and URL deep-links (`?component=...&mode=...`).
+  - Supported searchable 6-subsystem / 36-component hierarchy, eye visibility toggles, camera focus, 7-preset camera dropdown, Exploded View slider (`0–100%`), X/Y/Z Section Cut controls, Isolate toggle, Labels toggle, 5-mode Francis Runner inspection bar, and 7-tab technical inspector with clickable upstream/downstream chips.
+  - Verified `npm run typecheck`, `npm run lint`, `npm run test:web` (8/8 passing), and `VITE_BASE_PATH=/DenRyu/ vite build`.

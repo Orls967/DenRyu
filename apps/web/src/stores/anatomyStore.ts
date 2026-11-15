@@ -167,18 +167,26 @@ export const useAnatomyStore = create<AnatomyState>((set, get) => ({
         next.explodeFactor = 0.85;
         next.isolatedComponentId = null;
         next.sectionCut = { ...s.sectionCut, enabled: false };
+        next.activeCameraPreset = 'cam-preset-turbine-cutaway';
+        next.cameraResetTick = s.cameraResetTick + 1;
       } else if (mode === 'cross_section') {
         next.explodeFactor = 0;
         next.isolatedComponentId = null;
         next.sectionCut = { enabled: true, axis: 'z', positionPct: 50 };
+        next.activeCameraPreset = 'cam-preset-turbine-cutaway';
+        next.cameraResetTick = s.cameraResetTick + 1;
       } else if (mode === 'blade_inspection') {
         next.explodeFactor = 0;
         next.isolatedComponentId = 'comp-runner-blades';
         next.sectionCut = { ...s.sectionCut, enabled: false };
+        next.activeCameraPreset = 'cam-preset-blade-inspection';
+        next.cameraResetTick = s.cameraResetTick + 1;
       } else if (mode === 'water_flow') {
         next.explodeFactor = 0;
         next.isolatedComponentId = null;
         next.sectionCut = { ...s.sectionCut, enabled: false };
+        next.activeCameraPreset = 'cam-preset-turbine-cutaway';
+        next.cameraResetTick = s.cameraResetTick + 1;
       }
       return { ...s, ...next };
     }),
