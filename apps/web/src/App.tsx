@@ -1,22 +1,31 @@
 import { HashRouter, Route, Routes } from 'react-router-dom';
-import { PLANT_CONFIG } from '@/services/dataLoader';
+import { AppShell } from '@/app/AppShell';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { OverviewPage } from '@/features/overview/OverviewPage';
+
+function PlaceholderRoute({ title }: { title: string }) {
+  return (
+    <div className="p-6 text-sm text-text-secondary">
+      Loading {title}...
+    </div>
+  );
+}
 
 export function App() {
   return (
     <HashRouter>
-      <div className="min-h-screen bg-canvas text-text-primary p-6">
-        <header className="border-b border-subtle pb-4 mb-6">
-          <h1 className="font-display text-2xl font-semibold">{PLANT_CONFIG.name}</h1>
-        </header>
+      <ErrorBoundary fallbackTitle="DENRYU Application Error">
         <Routes>
-          <Route path="/" element={<div>Overview</div>} />
-          <Route path="/anatomy" element={<div>Plant Anatomy</div>} />
-          <Route path="/journey" element={<div>Energy Journey</div>} />
-          <Route path="/simulator" element={<div>Generation Simulator</div>} />
-          <Route path="/insights" element={<div>Engineering Insights</div>} />
-          <Route path="/library" element={<div>Technical Library</div>} />
+          <Route element={<AppShell />}>
+            <Route path="/" element={<OverviewPage />} />
+            <Route path="/anatomy" element={<PlaceholderRoute title="Plant Anatomy" />} />
+            <Route path="/journey" element={<PlaceholderRoute title="Energy Journey" />} />
+            <Route path="/simulator" element={<PlaceholderRoute title="Generation Simulator" />} />
+            <Route path="/insights" element={<PlaceholderRoute title="Engineering Insights" />} />
+            <Route path="/library" element={<PlaceholderRoute title="Technical Library" />} />
+          </Route>
         </Routes>
-      </div>
+      </ErrorBoundary>
     </HashRouter>
   );
 }

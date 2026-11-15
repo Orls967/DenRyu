@@ -2,7 +2,7 @@
 
 **Project:** DENRYU — Power Plant Anatomy & Energy Systems Explorer  
 **Last Updated:** 2026-11-16  
-**Current Stage:** **Phase 1 Complete — Foundation, Canonical Data, Rust/WASM Engine & API Scaffold** (Moving to Phase 2)
+**Current Stage:** **Phase 2 Complete — App Shell, Overview Page & 36-Component 3D Plant Environment** (Moving to Phase 3: Plant Anatomy Workspace)
 
 ---
 
@@ -75,3 +75,8 @@
   - Implemented `crates/denryu-engine` (`hydraulics`, `turbine`, `generator`, `energy_conversion`, `simulation`, `wasm-bindgen` exports) and verified `cargo test` (9/9 passing, Scenario A–F + 500-case fuzz) and `wasm-pack build`.
   - Scaffolded `apps/api` FastAPI service (`/api/v1/health`, Dockerfile, `pytest` 1/1 passing).
   - Verified `npm run typecheck`, `npm run lint`, `vitest` (5/5 integrity tests passing), and `VITE_BASE_PATH=/DenRyu/ vite build`.
+- **Phase 2 (Complete):**
+  - Implemented Zustand stores (`uiStore`, `anatomyStore`, `journeyStore`), responsive `AppShell` with Reduced Motion toggle, `ErrorBoundary`, `WebGLBoundary`, and `PlantSchematic2DFallback`.
+  - Implemented `OverviewPage` with `PlantScene` hero, synthetic nominal plant KPIs, quick subsystem preview strip, and route cards.
+  - Built 3D environment (`StudioLighting`, `PlantScene`, `presets`, `FlowVisualizers`, `plantModelLoader`, `ComponentGroup`, and Subsystems A–F covering all 36 `comp-*` IDs with helical spiral casing, 20 pivoting guide vanes, 15 double-curved Francis blades, 24-pole rotor, explode/section-cut clipping planes, and 5-mode Francis Runner inspection highlights).
+  - Verified `npm run typecheck`, `npm run lint`, `npm run test:web` (5/5 passing), and `VITE_BASE_PATH=/DenRyu/ vite build`.
