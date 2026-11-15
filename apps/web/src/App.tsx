@@ -1,6 +1,7 @@
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { AppShell } from '@/app/AppShell';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { EnergyJourneyPage } from '@/features/energy-journey/EnergyJourneyPage';
 import { OverviewPage } from '@/features/overview/OverviewPage';
 import { PlantAnatomyPage } from '@/features/plant-anatomy/PlantAnatomyPage';
 
@@ -20,7 +21,7 @@ export function App() {
           <Route element={<AppShell />}>
             <Route path="/" element={<OverviewPage />} />
             <Route path="/anatomy" element={<PlantAnatomyPage />} />
-            <Route path="/journey" element={<PlaceholderRoute title="Energy Journey" />} />
+            <Route path="/journey" element={<EnergyJourneyPage />} />
             <Route path="/simulator" element={<PlaceholderRoute title="Generation Simulator" />} />
             <Route path="/insights" element={<PlaceholderRoute title="Engineering Insights" />} />
             <Route path="/library" element={<PlaceholderRoute title="Technical Library" />} />

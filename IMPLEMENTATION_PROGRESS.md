@@ -2,7 +2,7 @@
 
 **Project:** DENRYU — Power Plant Anatomy & Energy Systems Explorer  
 **Last Updated:** 2026-11-16  
-**Current Stage:** **Phase 3 Complete — Interactive Plant Anatomy Workspace (`/anatomy`)** (Moving to Phase 4: Guided Energy Journey)
+**Current Stage:** **Phase 4 Complete — Guided 9-Stage Energy Journey (`/journey`)** (Moving to Phase 5 & 6: Rust/WASM Simulation Worker & Generation Simulator)
 
 ---
 
@@ -84,3 +84,6 @@
   - Implemented `PlantAnatomyPage` responsive 3-pane workbench (`HierarchyTree`, `AnatomyToolbar`, `ComponentInspector`) wired to `/anatomy` and URL deep-links (`?component=...&mode=...`).
   - Supported searchable 6-subsystem / 36-component hierarchy, eye visibility toggles, camera focus, 7-preset camera dropdown, Exploded View slider (`0–100%`), X/Y/Z Section Cut controls, Isolate toggle, Labels toggle, 5-mode Francis Runner inspection bar, and 7-tab technical inspector with clickable upstream/downstream chips.
   - Verified `npm run typecheck`, `npm run lint`, `npm run test:web` (8/8 passing), and `VITE_BASE_PATH=/DenRyu/ vite build`.
+- **Phase 4 (Complete):**
+  - Implemented `EnergyJourneyPage` (`/journey`) with camera choreography presets, highlight/transparent shell states, physics animation modes, manual-orbit detection with **Re-center Stage Camera**, auto-play dwell timer, keyboard Arrow navigation, KaTeX governing formulas, loss mechanisms, clickable active component chips (`/anatomy?component=...`), Stage 04 5-mode Runner CTA, and Stage 09 Replay/Simulator completion flow.
+  - Verified `npm run typecheck`, `npm run lint`, `npm run test:web` (10/10 passing), and `VITE_BASE_PATH=/DenRyu/ vite build`.
