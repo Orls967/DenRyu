@@ -172,6 +172,18 @@ export function PlantScene({
   const reducedMotion = useUiStore((s) => s.reducedMotion);
   const setWebglContextLost = useUiStore((s) => s.setWebglContextLost);
 
+  // R3F calls gl.forceContextLoss() ~500 ms after a <Canvas> unmounts (route change).
+  // That intentional loss must not flip the global fallback flag, so the listener is
+  // detached in this effect's cleanup, which runs before R3F's delayed disposal.
+  const contextLostCleanupRef = useRef<(() => void) | null>(null);
+  useEffect(
+    () => () => {
+      contextLostCleanupRef.current?.();
+      contextLostCleanupRef.current = null;
+    },
+    []
+  );
+
   const clippingPlanes = useMemo(() => {
     if (!sectionCut.enabled) return [];
     const frac = sectionCut.positionPct / 100;
@@ -209,14 +221,13 @@ export function PlantScene({
       gl={{ localClippingEnabled: true, antialias: true, powerPreference: 'high-performance' }}
       onCreated={({ gl }) => {
         const canvas = gl.domElement;
-        canvas.addEventListener(
-          'webglcontextlost',
-          (e) => {
-            e.preventDefault();
-            setWebglContextLost(true);
-          },
-          false
-        );
+        const handleContextLost = (e: Event) => {
+          e.preventDefault();
+          setWebglContextLost(true);
+        };
+        canvas.addEventListener('webglcontextlost', handleContextLost, false);
+        contextLostCleanupRef.current = () =>
+          canvas.removeEventListener('webglcontextlost', handleContextLost, false);
       }}
     >
       <StudioLighting />

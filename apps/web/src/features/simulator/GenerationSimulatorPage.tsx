@@ -44,7 +44,7 @@ export function GenerationSimulatorPage() {
   return (
     <div className="mx-auto max-w-[1600px] px-4 py-6 sm:px-6 space-y-5">
       <SectionHeader
-        eyebrow="Phase 5/6 · Rust/WASM Deterministic Physics Engine"
+        eyebrow="Rust/WASM Deterministic Physics Engine"
         title="Hydroelectric Power Generation Simulator"
         description="Explore how net hydraulic head, wicket gate opening, flow rate, Francis efficiency curves, and grid load dispatch interact across energy conversion stages."
         right={

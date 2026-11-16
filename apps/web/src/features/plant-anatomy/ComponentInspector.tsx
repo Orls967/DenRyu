@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { InlineMarkdown } from '@/components/ui/InlineMarkdown';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Compass, Cpu, Wrench } from 'lucide-react';
 import {
@@ -88,7 +89,7 @@ export function ComponentInspector() {
               <h3 className="text-xs font-mono uppercase tracking-wider text-text-muted mb-1">
                 Physical Location
               </h3>
-              <p className="text-text-primary">{comp.physicalLocation}</p>
+              <p className="text-text-primary"><InlineMarkdown text={comp.physicalLocation} /></p>
             </div>
             <div>
               <h3 className="text-xs font-mono uppercase tracking-wider text-text-muted mb-1">
@@ -101,7 +102,7 @@ export function ComponentInspector() {
                 Educational Takeaway
               </h3>
               <div className="rounded-md border border-cyan-accent/30 bg-cyan-accent/5 p-3 text-text-primary">
-                {comp.educationalExplanation}
+                <InlineMarkdown text={comp.educationalExplanation} />
               </div>
             </div>
             {comp.supportsRunnerModes ? (
@@ -126,7 +127,7 @@ export function ComponentInspector() {
               <h3 className="text-xs font-mono uppercase tracking-wider text-text-muted mb-1">
                 Engineering Principle
               </h3>
-              <p>{comp.engineeringPrinciple}</p>
+              <p><InlineMarkdown text={comp.engineeringPrinciple} /></p>
             </div>
             <div>
               <h3 className="text-xs font-mono uppercase tracking-wider text-text-muted mb-1">
@@ -152,7 +153,7 @@ export function ComponentInspector() {
               <h3 className="text-xs font-mono uppercase tracking-wider text-text-muted mb-1">
                 Construction & Materials
               </h3>
-              <p>{comp.constructionAndMaterials}</p>
+              <p><InlineMarkdown text={comp.constructionAndMaterials} /></p>
             </div>
             <div className="rounded border border-subtle bg-elevated/40 p-3 text-xs space-y-1">
               <div className="flex justify-between">
@@ -179,13 +180,13 @@ export function ComponentInspector() {
               <h3 className="text-xs font-mono uppercase tracking-wider text-text-muted mb-1">
                 Operating Mechanism
               </h3>
-              <p>{comp.operatingMechanism}</p>
+              <p><InlineMarkdown text={comp.operatingMechanism} /></p>
             </div>
             <div>
               <h3 className="text-xs font-mono uppercase tracking-wider text-text-muted mb-1">
                 Typical Operating Considerations
               </h3>
-              <p>{comp.typicalOperatingConsiderations}</p>
+              <p><InlineMarkdown text={comp.typicalOperatingConsiderations} /></p>
             </div>
           </>
         ) : null}

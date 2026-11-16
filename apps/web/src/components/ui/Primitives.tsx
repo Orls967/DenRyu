@@ -109,7 +109,7 @@ export function TabList<T extends string>({
   return (
     <div
       role="tablist"
-      className={`flex items-center gap-1 border-b border-subtle overflow-x-auto ${className}`}
+      className={`flex flex-wrap items-center gap-x-1 border-b border-subtle ${className}`}
     >
       {tabs.map((tab) => {
         const active = tab.id === activeTab;

@@ -326,7 +326,7 @@ export function EnergyJourneyPage() {
                   }`}
                 >
                   <span className="font-mono text-[10px]">0{st.order}</span>
-                  <span className="hidden xl:inline">{st.shortLabel}</span>
+                  <span className="hidden xl:inline">{st.shortLabel.replace(/^\d+\s*/, '')}</span>
                 </button>
               );
             })}
