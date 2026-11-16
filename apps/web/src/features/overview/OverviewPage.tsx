@@ -43,7 +43,7 @@ export function OverviewPage() {
         <WebGLBoundary onSelectComponent={handle3DSelect}>
           <Suspense fallback={<LoadingState message="Loading 3D hydroelectric facility..." />}>
             <PlantScene
-              cameraPresetKey="cam-preset-full-plant"
+              cameraPresetKey="cam-preset-overview-hero"
               autoOrbit
               flowMode="ambient"
               hoveredId={hoveredId}

@@ -133,30 +133,21 @@ export function EngineeringInsightsPage() {
     setAnalyticsBusy(false);
   };
 
-  const lossBreakdownData = currentOutput
-    ? [
-        {
-          name: 'Hydraulic In',
-          mw: Number((currentOutput.hydraulicPowerW / 1e6).toFixed(2)),
-          fill: '#2589D8',
-        },
-        {
-          name: 'Turbine Loss',
-          mw: Number((currentOutput.turbineLossW / 1e6).toFixed(2)),
-          fill: '#F59E0B',
-        },
-        {
-          name: 'Gen. Loss',
-          mw: Number((currentOutput.generatorLossW / 1e6).toFixed(2)),
-          fill: '#EF4444',
-        },
-        {
-          name: 'Elec. Out',
-          mw: Number((currentOutput.electricalGeneratedPowerW / 1e6).toFixed(2)),
-          fill: '#F5B942',
-        },
-      ]
-    : [];
+  // True waterfall: each loss bar floats between the power level before and after it.
+  const lossBreakdownData = (() => {
+    if (!currentOutput) return [];
+    const mw = (w: number) => Number((w / 1e6).toFixed(2));
+    const pH = mw(currentOutput.hydraulicPowerW);
+    const lT = mw(currentOutput.turbineLossW);
+    const lG = mw(currentOutput.generatorLossW);
+    const pE = mw(currentOutput.electricalGeneratedPowerW);
+    return [
+      { name: 'Hydraulic In', base: 0, mw: pH, fill: '#2589D8' },
+      { name: 'Turbine Loss', base: Number((pH - lT).toFixed(2)), mw: lT, fill: '#F59E0B' },
+      { name: 'Gen. Loss', base: pE, mw: lG, fill: '#EF4444' },
+      { name: 'Elec. Out', base: 0, mw: pE, fill: '#F5B942' },
+    ];
+  })();
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 space-y-6">
@@ -248,13 +239,29 @@ export function EngineeringInsightsPage() {
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart
                       data={lossBreakdownData}
-                      margin={{ top: 8, right: 12, left: 0, bottom: 4 }}
+                      margin={{ top: 8, right: 16, left: 4, bottom: 4 }}
+                      barCategoryGap="22%"
                     >
                       <CartesianGrid stroke="#2B3B4A" strokeDasharray="3 3" vertical={false} />
-                      <XAxis dataKey="name" tick={AXIS_STYLE} />
-                      <YAxis tick={AXIS_STYLE} unit=" MW" width={54} />
-                      <Tooltip contentStyle={TOOLTIP_STYLE} />
-                      <Bar dataKey="mw" radius={[4, 4, 0, 0]}>
+                      <XAxis dataKey="name" tick={AXIS_STYLE} interval={0} />
+                      <YAxis
+                        tick={AXIS_STYLE}
+                        width={58}
+                        tickFormatter={(v: number) => `${v} MW`}
+                      />
+                      <Tooltip
+                        contentStyle={TOOLTIP_STYLE}
+                        cursor={{ fill: 'rgba(54,197,217,0.06)' }}
+                        formatter={(value: number, key: string) =>
+                          key === 'base' ? [null, null] : [`${value.toFixed(2)} MW`, 'Power']
+                        }
+                      />
+                      <Bar dataKey="base" stackId="w" fillOpacity={0} strokeOpacity={0} isAnimationActive={false} legendType="none">
+                        {lossBreakdownData.map((entry) => (
+                          <Cell key={`base-${entry.name}`} fill="#000" fillOpacity={0} />
+                        ))}
+                      </Bar>
+                      <Bar dataKey="mw" stackId="w" radius={[4, 4, 0, 0]}>
                         {lossBreakdownData.map((entry) => (
                           <Cell key={entry.name} fill={entry.fill} />
                         ))}

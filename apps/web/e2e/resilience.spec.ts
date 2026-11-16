@@ -28,6 +28,30 @@ test.describe('DENRYU Resilience, Accessibility & Responsive Checks', () => {
     await expect(page.getByText('Plant Hierarchy (36)')).toBeVisible();
   });
 
+  test('keeps the 3D scene (not the 2D fallback) across client-side route changes', async ({
+    page,
+  }) => {
+    // Regression: R3F calls forceContextLoss() on the unmounted canvas after a route
+    // change; that must not flip the global WebGL-lost flag for later pages.
+    await page.goto('./#/');
+    await expect(page.locator('canvas').first()).toBeVisible();
+
+    for (const [link, ready] of [
+      ['Plant Anatomy', 'Plant Hierarchy (36)'],
+      ['Energy Journey', 'Stage 01 / 09'],
+      ['Simulator', 'WASM Worker: ready'],
+      ['Overview', 'Reference Unit Specification'],
+      ['Plant Anatomy', 'Plant Hierarchy (36)'],
+    ] as const) {
+      await page.getByRole('link', { name: link }).first().click();
+      await expect(page.getByText(ready).first()).toBeVisible({ timeout: 15_000 });
+      // Give R3F's delayed (~500 ms) context disposal of the previous canvas time to fire.
+      await page.waitForTimeout(900);
+      await expect(page.getByTestId('webgl-2d-fallback')).toHaveCount(0);
+      await expect(page.locator('canvas').first()).toBeVisible();
+    }
+  });
+
   test('AC-18: supports Reduced Motion preference and UI toggle without errors', async ({
     page,
   }) => {

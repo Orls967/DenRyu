@@ -87,7 +87,7 @@ The top bar has six pages. On the right, two badges show the motion setting (`St
 
 ### 01 · Overview
 
-The landing page. A 3D diorama of the complete plant (reservoir, dam, penstock, powerhouse, switchyard, transmission line and tailrace) with animated water flow and a slowly orbiting camera. Drag to orbit, scroll to zoom, click any structure to open it in Plant Anatomy.
+The landing page. A 3D diorama of the complete plant (reservoir, a 140 m concrete gravity dam with a gated ogee spillway, surface penstock, cut-away powerhouse, switchyard, transmission line and tailrace) set in a valley, with animated water flow and a slowly orbiting camera. Drag to orbit, scroll to zoom, click any structure to open it in Plant Anatomy.
 
 Below the hero:
 
@@ -396,7 +396,7 @@ npm --prefix apps/web run test:e2e                  # Playwright (builds + previ
 | **Rust** (9 tests) | Scenarios A–E, fixed-manual textbook parity, shutdown / zero-flow guards, synchronous speed invariance, 500-case energy-conservation fuzz test |
 | **Python** (6 tests) | Health, plant config, head sensitivity sweep, validation errors, scenario comparison parity, output validation |
 | **Web** (17 tests) | Data integrity of all canonical JSON, anatomy tree / inspector, journey stages, simulator store + worker bridge, insights and library |
-| **E2E** (6 tests) | All 6 routes with zero console errors, 36-component search, 5-mode Runner, 9 stages, live WASM simulator + validation, offline Insights, WebGL2 fallback, reduced motion, no overflow at 1440 / 834 / 390 px |
+| **E2E** (7 tests) | All 6 routes with zero console errors, 36-component search, 5-mode Runner, 9 stages, live WASM simulator + validation, offline Insights, WebGL2 fallback, 3D surviving route changes, reduced motion, no overflow at 1440 / 834 / 390 px |
 
 **GitHub Actions** ([`ci-deploy.yml`](.github/workflows/ci-deploy.yml)) runs on every push and PR to `main`: Rust tests → pytest → `wasm-pack` build → typecheck, lint and Vitest → `/DenRyu/` production build → deploy to GitHub Pages (on `main` only).
 
@@ -433,7 +433,7 @@ Images are written to `docs/screenshots/`.
 ## Known limitations
 
 1. **Synthetic physics.** Steady-state and quasi-static equations with smooth synthetic curves. No CFD, no water-hammer transients, no governor dynamics.
-2. **Procedural 3D geometry.** The plant is built from Three.js primitives, not detailed CAD/GLB models. Proportions are simplified, and the runner and generator are stylised.
+2. **Procedural 3D geometry.** The plant is generated in code (extruded profiles, lathe surfaces and parametric blades), not from CAD/GLB models. The dam, runner and powerhouse follow real proportions, but details such as the generator internals and switchyard are simplified, and the powerhouse is an open cut-away.
 3. **The hosted demo has no backend.** GitHub Pages serves static files only, so sweeps and parity checks need a local or separately hosted API.
 4. **Locale-formatted inputs.** Numeric inputs follow the browser locale (for example `0,92` instead of `0.92`).
 

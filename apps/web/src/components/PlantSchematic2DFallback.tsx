@@ -51,6 +51,53 @@ const HOTSPOTS: Hotspot[] = [
   { id: 'comp-downstream-channel', x: 842, y: 334, w: 140, h: 36, label: 'River Channel', color: '#1D6AA8' },
 ];
 
+/**
+ * Nested or tiny hotspots (turbine and generator internals) cannot hold their
+ * own label, so they get an outside callout with a leader line instead.
+ * Values are the label anchor point in SVG coordinates.
+ */
+const CALLOUTS: Partial<Record<ComponentId, [number, number]>> = {
+  'comp-trash-rack': [150, 205],
+  'comp-water-intake': [222, 205],
+  'comp-intake-gate': [262, 108],
+  'comp-surge-tank': [430, 62],
+  'comp-main-inlet-valve': [452, 318],
+  'comp-spiral-casing': [452, 300],
+  'comp-stay-vanes': [452, 336],
+  'comp-guide-vanes': [452, 354],
+  'comp-runner': [636, 244],
+  'comp-runner-blades': [636, 258],
+  'comp-main-shaft': [520, 232],
+  'comp-bearings': [636, 218],
+  'comp-generator-housing': [520, 104],
+  'comp-stator': [520, 118],
+  'comp-stator-winding': [520, 132],
+  'comp-rotor': [520, 146],
+  'comp-field-winding': [520, 160],
+  'comp-excitation-system': [600, 92],
+  'comp-cooling-system': [676, 132],
+  'comp-generator-terminal': [636, 232],
+  'comp-circuit-breaker': [721, 232],
+  'comp-step-up-transformer': [769, 150],
+  'comp-draft-tube-outlet': [681, 392],
+};
+
+const LABEL_CHAR_W = 5.2;
+
+function labelFits(spot: Hotspot) {
+  return spot.label.length * LABEL_CHAR_W <= spot.w - 4 && spot.h >= 13;
+}
+
+function leaderTarget(spot: Hotspot, [lx, ly]: [number, number]): [number, number] {
+  const cx = clampRange(lx, spot.x, spot.x + spot.w);
+  const cy = clampRange(ly, spot.y, spot.y + spot.h);
+  return [cx, cy];
+}
+
+function clampRange(v: number, lo: number, hi: number) {
+  return Math.min(hi, Math.max(lo, v));
+}
+
 export function PlantSchematic2DFallback({
   selectedComponentId,
   highlightedComponentIds = [],
@@ -135,12 +182,54 @@ export function PlantSchematic2DFallback({
                   stroke={isSelected ? '#36C5D9' : isHighlighted ? '#F5B942' : '#2B3B4A'}
                   strokeWidth={isSelected ? 2.5 : isHighlighted ? 2 : 1}
                 />
+                {CALLOUTS[spot.id] ? null : labelFits(spot) || isSelected ? (
+                  <text
+                    x={spot.x + spot.w / 2}
+                    y={spot.id === 'comp-dam' ? spot.y + spot.h - 40 : spot.y + spot.h / 2 + 3}
+                    textAnchor="middle"
+                    fill="#EEF4F8"
+                    fontSize="9.5"
+                    fontFamily="Inter, sans-serif"
+                    fontWeight={isSelected ? 700 : 500}
+                  >
+                    {spot.label}
+                  </text>
+                ) : null}
+              </g>
+            );
+          })}
+
+          {/* Callout labels for nested / small hotspots */}
+          {HOTSPOTS.filter((spot) => CALLOUTS[spot.id]).map((spot) => {
+            const anchor = CALLOUTS[spot.id] as [number, number];
+            const [tx, ty] = leaderTarget(spot, anchor);
+            const isSelected = selectedComponentId === spot.id;
+            const isHighlighted = highlightedComponentIds.includes(spot.id);
+            const textAnchor = anchor[0] < spot.x ? 'end' : anchor[0] > spot.x + spot.w ? 'start' : 'middle';
+            const color = isSelected ? '#36C5D9' : isHighlighted ? '#F5B942' : '#C7D3DE';
+            return (
+              <g
+                key={`callout-${spot.id}`}
+                onClick={() => onSelectComponent?.(spot.id)}
+                className="cursor-pointer"
+                aria-hidden="true"
+              >
+                <line
+                  x1={anchor[0] + (textAnchor === 'end' ? 3 : textAnchor === 'start' ? -3 : 0)}
+                  y1={anchor[1] - 3}
+                  x2={tx}
+                  y2={ty}
+                  stroke={color}
+                  strokeOpacity={0.55}
+                  strokeWidth={0.8}
+                />
+                <circle cx={tx} cy={ty} r={1.6} fill={color} />
                 <text
-                  x={spot.x + spot.w / 2}
-                  y={spot.y + spot.h / 2 + 3}
-                  textAnchor="middle"
-                  fill="#EEF4F8"
-                  fontSize="9.5"
+                  x={anchor[0]}
+                  y={anchor[1]}
+                  textAnchor={textAnchor}
+                  fill={color}
+                  fontSize="9"
                   fontFamily="Inter, sans-serif"
                   fontWeight={isSelected ? 700 : 500}
                 >

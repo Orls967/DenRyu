@@ -63,6 +63,11 @@ export function ComponentGroup({
       !(isolatedId === 'comp-runner-blades' && componentId === 'comp-runner')
   );
 
+  // Runner inspection isolates parts buried inside the distributor; ghosting the
+  // surrounding vanes and shaft still clutters a close-up, so hide them instead.
+  const hideWhenDimmed =
+    isDimmed && (isolatedId === 'comp-runner-blades' || isolatedId === 'comp-runner');
+
   const explodeVec = manifest?.explodeVector ?? [0, 0, 0];
   const targetX = basePosition[0] + explodeVec[0] * explodeFactor;
   const targetY = basePosition[1] + explodeVec[1] * explodeFactor;
@@ -134,7 +139,7 @@ export function ComponentGroup({
       ref={groupRef}
       name={manifest?.nodeName ?? componentId}
       userData={{ componentId }}
-      visible={!hidden}
+      visible={!hidden && !hideWhenDimmed}
       position={basePosition}
       onPointerDown={handlePointerDown}
       onClick={handleClick}
@@ -146,7 +151,6 @@ export function ComponentGroup({
       {(showLabel || isSelected) && !hidden && !isDimmed && meta ? (
         <Html
           center
-          distanceFactor={26}
           zIndexRange={[10, 0]}
           style={{ pointerEvents: 'none' }}
         >

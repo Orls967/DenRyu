@@ -5,6 +5,7 @@ import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import * as THREE from 'three';
 
 import { StudioLighting } from '@/components-3d/StudioLighting';
+import { Powerhouse } from '@/components-3d/Powerhouse';
 import { CAMERA_PRESETS } from '@/components-3d/presets';
 import { SubAReservoirDam } from '@/components-3d/subsystems/SubAReservoirDam';
 import { SubBConveyance } from '@/components-3d/subsystems/SubBConveyance';
@@ -88,7 +89,7 @@ function CameraRig({
       enableDamping
       dampingFactor={0.07}
       minDistance={2.5}
-      maxDistance={165}
+      maxDistance={250}
       maxPolarAngle={Math.PI * 0.495}
       autoRotate={autoOrbit && !reducedMotion && !userInteractedRef.current}
       autoRotateSpeed={0.45}
@@ -105,8 +106,8 @@ function CutawayPlinth() {
   return (
     <group userData={{ isDecorative: true }}>
       {/* Main architectural museum plinth slab */}
-      <mesh position={[0, -9.2, 0]} receiveShadow>
-        <boxGeometry args={[175, 2.5, 90]} />
+      <mesh position={[-10, -9.2, 0]} receiveShadow>
+        <boxGeometry args={[230, 2.5, 160]} />
         <meshStandardMaterial color="#1B242E" roughness={0.95} metalness={0.0} />
       </mesh>
       {/* Powerhouse substructure concrete floor & outdoor yard terrace */}
@@ -115,7 +116,7 @@ function CutawayPlinth() {
         <meshStandardMaterial color="#232E3A" roughness={0.9} metalness={0.05} />
       </mesh>
       {/* Subtle architectural reference grid */}
-      <gridHelper args={[170, 34, '#2B3B4A', '#17202A']} position={[0, -7.92, 0]} />
+      <gridHelper args={[220, 44, '#2B3B4A', '#17202A']} position={[-10, -7.92, 0]} />
     </group>
   );
 }
@@ -217,7 +218,7 @@ export function PlantScene({
     <Canvas
       shadows
       dpr={[1, 2]}
-      camera={{ fov: 42, near: 0.2, far: 450, position: [48, 46, 78] }}
+      camera={{ fov: 42, near: 0.2, far: 600, position: [48, 46, 78] }}
       gl={{ localClippingEnabled: true, antialias: true, powerPreference: 'high-performance' }}
       onCreated={({ gl }) => {
         const canvas = gl.domElement;
@@ -232,6 +233,7 @@ export function PlantScene({
     >
       <StudioLighting />
       <CutawayPlinth />
+      <Powerhouse clippingPlanes={clippingPlanes} ghosted={Boolean(isolatedId)} />
 
       {/* Visual clipping plane boundary frame when Section Cut active */}
       {sectionCut.enabled && clippingPlanes[0] ? (

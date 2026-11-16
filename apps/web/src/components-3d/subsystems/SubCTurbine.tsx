@@ -58,65 +58,86 @@ function buildTaperingSpiralGeometry(): THREE.BufferGeometry {
 }
 
 /**
- * Generates a double-curved radial-to-axial twisted Francis runner blade
- * using smooth parametric surface interpolation from leading edge (outer radial)
- * to trailing edge (inner axial exit).
+ * Double-curved Francis runner blade. The mid-surface runs spanwise from the
+ * crown (u = 0) to the band (u = 1) and streamwise from the radial leading edge
+ * (v = 0) to the axial trailing edge (v = 1), wrapping ~60° at the crown and
+ * ~40° at the band. Pressure and suction skins are offset along the true
+ * surface normal with a hydrofoil thickness distribution, and the edges are
+ * stitched closed so the blade reads as a solid part.
  */
+const BLADE_COUNT = 15;
+
+function bladeMidSurface(u: number, v: number, out: THREE.Vector3): THREE.Vector3 {
+  const rLE = THREE.MathUtils.lerp(1.34, 1.41, u);
+  const yLE = THREE.MathUtils.lerp(0.22, -0.3, u);
+  const rTE = THREE.MathUtils.lerp(0.42, 1.12, u);
+  const yTE = THREE.MathUtils.lerp(-0.18, -0.8, u);
+  // Crown streamlines turn axial early; band streamlines stay radial longer.
+  const radialEase = 1 - Math.pow(1 - v, THREE.MathUtils.lerp(1.9, 1.15, u));
+  const r = THREE.MathUtils.lerp(rLE, rTE, radialEase);
+  const y = THREE.MathUtils.lerp(yLE, yTE, Math.pow(v, THREE.MathUtils.lerp(1.5, 1.1, u)));
+  const wrap = THREE.MathUtils.lerp(1.05, 0.7, u);
+  const theta = -wrap * Math.pow(v, 0.85) + 0.1 * u;
+  return out.set(r * Math.cos(theta), y, r * Math.sin(theta));
+}
+
 function buildTwistedFrancisBladeGeometry(): THREE.BufferGeometry {
-  const uSteps = 12; // spanwise from crown (0) to band (1)
-  const vSteps = 14; // streamwise from leading edge (0) to trailing edge (1)
-  const thickness = 0.042;
+  const uSteps = 14;
+  const vSteps = 22;
   const positions: number[] = [];
   const indices: number[] = [];
+  const p = new THREE.Vector3();
+  const du = new THREE.Vector3();
+  const dv = new THREE.Vector3();
+  const tmp = new THREE.Vector3();
+  const n = new THREE.Vector3();
+  const eps = 1e-3;
+  const stride = vSteps + 1;
+  const layer = (uSteps + 1) * stride;
 
-  const evalMidSurface = (u: number, v: number): THREE.Vector3 => {
-    // Radius decreases smoothly from outer radial edge (~1.42 m) to axial eye (~0.48..1.05 m)
-    const rIn = 1.42 - 0.14 * u;
-    const rOut = 0.42 + 0.65 * u;
-    const r = THREE.MathUtils.lerp(rIn, rOut, Math.pow(v, 0.9));
-
-    // Axial drop curves downward strongly near band and trailing edge
-    const yIn = 0.36 - 0.42 * u;
-    const yOut = -0.35 - 0.58 * u;
-    const y = THREE.MathUtils.lerp(yIn, yOut, Math.pow(v, 1.25));
-
-    // Angular sweep twists strongly between crown and band (hydrofoil warp)
-    const theta = 0.48 * v + 0.32 * u * (1 - v) - 0.25 * Math.sin(v * Math.PI);
-    return new THREE.Vector3(r * Math.cos(theta), y, r * Math.sin(theta));
-  };
-
-  // Top & bottom blade skin
-  for (const side of [-1, 1]) {
+  for (const side of [1, -1]) {
     for (let i = 0; i <= uSteps; i++) {
       const u = i / uSteps;
       for (let j = 0; j <= vSteps; j++) {
         const v = j / vSteps;
-        const p = evalMidSurface(u, v);
-        // Taper thickness cleanly at leading & trailing edges
-        const edgeProfile = Math.sin(Math.max(0.08, Math.min(0.92, v)) * Math.PI);
-        const offset = side * thickness * (0.35 + 0.65 * edgeProfile);
-        positions.push(p.x + offset * 0.25, p.y + offset * 0.65, p.z + offset * 0.72);
+        bladeMidSurface(u, v, p);
+        bladeMidSurface(Math.min(1, u + eps), v, tmp);
+        du.copy(tmp);
+        bladeMidSurface(Math.max(0, u - eps), v, tmp);
+        du.sub(tmp);
+        bladeMidSurface(u, Math.min(1, v + eps), tmp);
+        dv.copy(tmp);
+        bladeMidSurface(u, Math.max(0, v - eps), tmp);
+        dv.sub(tmp);
+        n.crossVectors(du, dv).normalize();
+        // NACA-like thickness: blunt leading edge, thin trailing edge.
+        const thick = 0.006 + 0.055 * Math.pow(Math.sin(Math.PI * Math.min(1, Math.sqrt(v) * 0.98)), 1.1) * (1 - 0.6 * v);
+        positions.push(p.x + n.x * thick * side, p.y + n.y * thick * side, p.z + n.z * thick * side);
       }
     }
   }
 
-  const stride = vSteps + 1;
-  const layerSize = (uSteps + 1) * (vSteps + 1);
-
   for (let i = 0; i < uSteps; i++) {
     for (let j = 0; j < vSteps; j++) {
       const a = i * stride + j;
-      const b = (i + 1) * stride + j;
+      const b2 = (i + 1) * stride + j;
       const c = (i + 1) * stride + j + 1;
       const d = i * stride + j + 1;
-      indices.push(a, b, d, b, c, d);
-
-      const a2 = layerSize + a;
-      const b2 = layerSize + b;
-      const c2 = layerSize + c;
-      const d2 = layerSize + d;
-      indices.push(a2, d2, b2, b2, d2, c2);
+      indices.push(a, b2, d, b2, c, d);
+      indices.push(layer + a, layer + d, layer + b2, layer + b2, layer + d, layer + c);
     }
+  }
+  // Close the four edges (LE, TE, crown root, band root).
+  const stitch = (i0: number, i1: number) => {
+    indices.push(i0, layer + i0, i1, i1, layer + i0, layer + i1);
+  };
+  for (let i = 0; i < uSteps; i++) {
+    stitch((i + 1) * stride, i * stride); // leading edge
+    stitch(i * stride + vSteps, (i + 1) * stride + vSteps); // trailing edge
+  }
+  for (let j = 0; j < vSteps; j++) {
+    stitch(j, j + 1); // crown root
+    stitch(uSteps * stride + j + 1, uSteps * stride + j); // band root
   }
 
   const geo = new THREE.BufferGeometry();
@@ -124,6 +145,47 @@ function buildTwistedFrancisBladeGeometry(): THREE.BufferGeometry {
   geo.setIndex(indices);
   geo.computeVertexNormals();
   return geo;
+}
+
+function buildCrownGeometry(): THREE.BufferGeometry {
+  const pts = [
+    [0.0, 0.64],
+    [0.42, 0.64],
+    [0.95, 0.6],
+    [1.3, 0.44],
+    [1.4, 0.3],
+    [1.36, 0.2],
+    [1.05, 0.17],
+    [0.7, 0.08],
+    [0.46, -0.06],
+    [0.38, -0.12],
+  ].map(([r, y]) => new THREE.Vector2(r, y));
+  return new THREE.LatheGeometry(pts, 48);
+}
+
+function buildBandGeometry(): THREE.BufferGeometry {
+  const pts = [
+    [1.4, -0.26],
+    [1.47, -0.3],
+    [1.47, -0.48],
+    [1.36, -0.72],
+    [1.2, -0.88],
+    [1.1, -0.84],
+    [1.24, -0.68],
+    [1.37, -0.46],
+    [1.4, -0.26],
+  ].map(([r, y]) => new THREE.Vector2(r, y));
+  return new THREE.LatheGeometry(pts, 48);
+}
+
+function buildNoseConeGeometry(): THREE.BufferGeometry {
+  const pts: THREE.Vector2[] = [];
+  for (let k = 0; k <= 12; k++) {
+    const t = k / 12;
+    pts.push(new THREE.Vector2(0.4 * Math.cos((t * Math.PI) / 2) ** 0.8, -0.12 - 0.85 * t));
+  }
+  pts.reverse();
+  return new THREE.LatheGeometry(pts, 32);
 }
 
 export function SubCTurbine(
@@ -141,6 +203,9 @@ export function SubCTurbine(
 
   const spiralGeo = useMemo(() => buildTaperingSpiralGeometry(), []);
   const bladeGeo = useMemo(() => buildTwistedFrancisBladeGeometry(), []);
+  const crownGeo = useMemo(() => buildCrownGeometry(), []);
+  const bandGeo = useMemo(() => buildBandGeometry(), []);
+  const noseGeo = useMemo(() => buildNoseConeGeometry(), []);
 
   const hydrofoilGeo = useMemo(() => {
     const s = new THREE.Shape();
@@ -325,40 +390,49 @@ export function SubCTurbine(
       <ComponentGroup {...shared('comp-runner')} basePosition={[0, 0, 0]}>
         {(st: ComponentGroupRenderState) => (
           <group ref={runnerSpinRef}>
-            {/* Upper Crown */}
-            <mesh position={[0, 0.42, 0]} castShadow>
-              <cylinderGeometry args={[0.55, 1.38, 0.36, 28]} />
+            {/* Upper Crown (hub) */}
+            <mesh geometry={crownGeo} castShadow>
               <meshStandardMaterial
-                color="#B6C4D1"
-                roughness={0.24}
-                metalness={0.92}
-                clippingPlanes={props.clippingPlanes}
-                {...matOpacityProps(st, isBladeInspection ? 0.25 : 1)}
-              />
-            </mesh>
-            {/* Lower Shroud Band */}
-            <mesh position={[0, -0.54, 0]}>
-              <cylinderGeometry args={[1.44, 1.12, 0.56, 28, 1, true]} />
-              <meshStandardMaterial
-                color="#9EB0C0"
-                roughness={0.26}
-                metalness={0.9}
+                color="#B9C6D2"
+                roughness={0.22}
+                metalness={0.93}
                 side={THREE.DoubleSide}
                 clippingPlanes={props.clippingPlanes}
                 {...matOpacityProps(st, isBladeInspection ? 0.25 : 1)}
               />
             </mesh>
-            {/* Nose Cone */}
-            <mesh position={[0, -0.1, 0]}>
-              <coneGeometry args={[0.38, 0.78, 20]} />
+            {/* Lower Shroud Band */}
+            <mesh geometry={bandGeo}>
               <meshStandardMaterial
-                color="#B6C4D1"
+                color="#A4B4C3"
+                roughness={0.25}
+                metalness={0.9}
+                side={THREE.DoubleSide}
+                clippingPlanes={props.clippingPlanes}
+                {...matOpacityProps(st, isBladeInspection ? 0.18 : 1)}
+              />
+            </mesh>
+            {/* Nose Cone */}
+            <mesh geometry={noseGeo}>
+              <meshStandardMaterial
+                color="#B9C6D2"
                 roughness={0.22}
                 metalness={0.92}
+                side={THREE.DoubleSide}
                 clippingPlanes={props.clippingPlanes}
                 {...matOpacityProps(st, 1)}
               />
             </mesh>
+            {/* Crown-to-shaft coupling bolts */}
+            {Array.from({ length: 12 }).map((_, k) => {
+              const ang = (k / 12) * Math.PI * 2;
+              return (
+                <mesh key={k} position={[Math.cos(ang) * 0.52, 0.68, Math.sin(ang) * 0.52]}>
+                  <cylinderGeometry args={[0.05, 0.05, 0.08, 8]} />
+                  <meshStandardMaterial color="#6A7A89" metalness={0.9} roughness={0.3} />
+                </mesh>
+              );
+            })}
           </group>
         )}
       </ComponentGroup>
@@ -367,16 +441,16 @@ export function SubCTurbine(
       <ComponentGroup {...shared('comp-runner-blades')} basePosition={[0, 0, 0]}>
         {(st: ComponentGroupRenderState) => (
           <group ref={bladesSpinRef}>
-            {Array.from({ length: 15 }).map((_, idx) => {
-              const rotY = (idx / 15) * Math.PI * 2;
+            {Array.from({ length: BLADE_COUNT }).map((_, idx) => {
+              const rotY = (idx / BLADE_COUNT) * Math.PI * 2;
               const isHeroBlade = isBladeInspection && idx === 0;
               return (
                 <group key={idx} rotation={[0, rotY, 0]}>
                   <mesh geometry={bladeGeo} castShadow>
                     <meshStandardMaterial
-                      color={isHeroBlade ? '#36C5D9' : '#C4D2DF'}
-                      roughness={0.22}
-                      metalness={0.92}
+                      color={isHeroBlade ? '#36C5D9' : '#C9A86A'}
+                      roughness={0.28}
+                      metalness={0.85}
                       side={THREE.DoubleSide}
                       clippingPlanes={props.clippingPlanes}
                       {...matOpacityProps(st, isBladeInspection && !isHeroBlade ? 0.35 : 1)}
@@ -384,12 +458,12 @@ export function SubCTurbine(
                   </mesh>
                   {isHeroBlade ? (
                     <>
-                      <Html position={[1.45, 0.25, 0]} center style={{ pointerEvents: 'none' }}>
+                      <Html position={[1.75, 0.05, 0]} center style={{ pointerEvents: 'none' }}>
                         <div className="rounded border border-cyan-accent bg-canvas/95 px-1.5 py-0.5 text-[10px] font-mono text-cyan-accent whitespace-nowrap">
                           Leading Edge (Radial Inlet)
                         </div>
                       </Html>
-                      <Html position={[0.6, -0.75, 0.4]} center style={{ pointerEvents: 'none' }}>
+                      <Html position={[0.55, -0.95, -0.62]} center style={{ pointerEvents: 'none' }}>
                         <div className="rounded border border-energy-accent bg-canvas/95 px-1.5 py-0.5 text-[10px] font-mono text-energy-accent whitespace-nowrap">
                           Trailing Edge (Axial Exit)
                         </div>

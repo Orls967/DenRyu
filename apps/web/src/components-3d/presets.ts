@@ -9,14 +9,20 @@ export const CAMERA_PRESETS: Record<string, CameraPreset> = {
   'cam-preset-full-plant': {
     key: 'cam-preset-full-plant',
     label: 'Full Plant Overview',
-    position: [48, 46, 78],
-    target: [0, 14, 0],
+    position: [64, 150, 120],
+    target: [-22, 20, 0],
+  },
+  'cam-preset-overview-hero': {
+    key: 'cam-preset-overview-hero',
+    label: 'Overview Hero',
+    position: [62, 168, 124],
+    target: [-30, 22, 4],
   },
   'cam-preset-dam-overview': {
     key: 'cam-preset-dam-overview',
     label: 'Dam & Reservoir',
-    position: [-8, 72, 68],
-    target: [-35, 38, 0],
+    position: [-150, 150, 150],
+    target: [-36, 36, 0],
   },
   'cam-preset-intake-submerged': {
     key: 'cam-preset-intake-submerged',

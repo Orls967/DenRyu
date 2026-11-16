@@ -54,7 +54,12 @@ export function PlantAnatomyPage() {
     [selectedComponentId],
   );
 
-  const flowMode = runnerMode === 'water_flow' ? 'water_flow_runner' : 'ambient';
+  const flowMode =
+    runnerMode === 'water_flow'
+      ? 'water_flow_runner'
+      : runnerMode === 'blade_inspection' || runnerMode === 'cross_section'
+        ? 'none'
+        : 'ambient';
 
   const handle3DSelect = (id: ComponentId) => {
     selectComponent(id, { focusCamera: false });

@@ -5,6 +5,7 @@ import type { EnergyJourneyStage } from '@/types/domain';
 
 export type FlowMode =
   | 'ambient'
+  | 'none'
   | 'water_flow_runner'
   | EnergyJourneyStage['animationMode'];
 

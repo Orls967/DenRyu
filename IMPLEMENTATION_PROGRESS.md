@@ -102,3 +102,22 @@
   - Added `assets/ASSET_LICENSE_LOG.md` and synchronized `README.md` with actual monorepo build, test, and deployment procedures.
   - Added `apps/web/playwright.config.ts`, `apps/web/e2e/core-journey.spec.ts`, and `apps/web/e2e/resilience.spec.ts`; hardened `simulation.worker.ts` `serde_wasm_bindgen` `Map`/enum validation unwrapping and mobile grid `min-w-0`/`overflow-x-hidden` constraints.
   - Full verification run passing cleanly: `cargo test` (9/9), `pytest` (6/6), `vitest` (17/17), `typecheck`, `eslint`, `VITE_BASE_PATH=/DenRyu/ vite build`, and `playwright test` (6/6 in Chromium against `/DenRyu/` preview).
+- **Post-release hardening (2026-11-16):**
+  - **GitHub Pages went live** at https://orls967.github.io/DenRyu/. The first deploy had failed: `setup-node` cached against a missing root lockfile, `npm ci` ran at the root, and pytest was not installed. Pages was also not enabled with the GitHub Actions source.
+  - **Fixed a 3D regression that escaped the E2E suite.** After any client-side route change, every later 3D view fell back to the 2D schematic. R3F calls `forceContextLoss()` on the unmounted canvas, and the `webglcontextlost` listener flipped the global flag. The listener is now detached on unmount, and `e2e/resilience.spec.ts` covers this (verified to fail without the fix).
+  - **3D remodel.**
+    - Dam: realistic gravity-dam profile, 140 m crest length (was 56 m), lift and monolith joints, crest road with parapets and lamps, and a hoist house.
+    - Spillway: rebuilt as an ogee crest with radial gates, a chute on the downstream face, a flip bucket and a stilling basin. It replaces the 108 m slab that cut across the powerhouse.
+    - Reservoir: wedged water body with a free surface.
+    - Site: valley backdrop and a cut-away powerhouse (walls, generator floor, roof trusses, bridge crane).
+    - Francis runner: 15 closed double-curved blades with ~60°/40° crown/band wrap, plus lathe-profiled crown, band and nose cone.
+    - Cameras: overview, full-plant and dam presets re-framed for the new geometry.
+  - **UI fixes.**
+    - Component inspector renders inline markdown, and its tabs wrap.
+    - Journey chips no longer show the stage number twice.
+    - Insights loss chart is a true floating waterfall.
+    - Overlapping 2D-fallback labels became callouts with leader lines.
+    - Simulator control deck is sticky.
+    - Runner close-up hides surrounding parts and flow particles.
+  - **README rewritten** with a screenshot tour captured from the live site (`apps/web/screenshots/capture.spec.ts`, run with `npm run screenshots`). Vitest now excludes `screenshots/`.
+  - **Verification:** `typecheck`, `eslint`, `vitest` (17/17) and `playwright test` (7/7) all pass.

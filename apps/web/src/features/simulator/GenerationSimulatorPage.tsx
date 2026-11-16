@@ -74,8 +74,10 @@ export function GenerationSimulatorPage() {
       ) : null}
 
       <div className="grid grid-cols-1 lg:grid-cols-[330px_minmax(0,1fr)] gap-5 items-start">
-        {/* Left Control Deck */}
-        <ControlDeck />
+        {/* Left Control Deck (sticks beside the charts on wide screens) */}
+        <div className="lg:sticky lg:top-[4.5rem] lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto">
+          <ControlDeck />
+        </div>
 
         {/* Right Telemetry + Paired 3D Cutaway + Charts */}
         <div className="space-y-5">
