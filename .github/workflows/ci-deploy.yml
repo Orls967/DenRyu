@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -26,8 +26,9 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
+          cache-dependency-path: apps/web/package-lock.json
 
       - name: Set up Rust toolchain with wasm32 target
         uses: dtolnay/rust-toolchain@stable
@@ -40,7 +41,7 @@ jobs:
           workspaces: crates/denryu-engine -> target
 
       - name: Install wasm-pack
-        run: cargo install wasm-pack --locked
+        run: curl -sSf https://rustwasm.github.io/wasm-pack/installer/init.sh | sh
 
       - name: Run Rust physics engine tests
         run: cargo test --manifest-path crates/denryu-engine/Cargo.toml
@@ -53,14 +54,14 @@ jobs:
       - name: Install Python API dependencies and run pytest
         run: |
           python -m pip install --upgrade pip
-          pip install -e ./apps/api
-          pytest apps/api/tests
+          pip install -e "./apps/api[dev]"
+          cd apps/api && pytest
 
       - name: Build Rust/WASM package for web worker
         run: npm run build:wasm
 
       - name: Install Node dependencies
-        run: npm ci
+        run: npm --prefix apps/web ci
 
       - name: Run frontend typecheck, lint, and unit tests
         run: |
