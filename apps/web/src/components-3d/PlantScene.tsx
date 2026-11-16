@@ -111,9 +111,14 @@ function CutawayPlinth() {
         <meshStandardMaterial color="#1B242E" roughness={0.95} metalness={0.0} />
       </mesh>
       {/* Powerhouse substructure concrete floor & outdoor yard terrace */}
-      <mesh position={[20, 5.6, -12]} receiveShadow>
-        <boxGeometry args={[36, 1.0, 16]} />
-        <meshStandardMaterial color="#232E3A" roughness={0.9} metalness={0.05} />
+      {/* Solid yard terrace (switchyard + line corridor) rising from the plinth to yard level */}
+      <mesh position={[56.25, -0.92, -14.8]} receiveShadow castShadow>
+        <boxGeometry args={[87.5, 14.06, 12.4]} />
+        <meshStandardMaterial color="#232E3A" roughness={0.95} metalness={0.02} />
+      </mesh>
+      <mesh position={[56.25, 6.12, -8.62]}>
+        <boxGeometry args={[87.5, 0.1, 0.12]} />
+        <meshStandardMaterial color="#F5B942" roughness={0.6} />
       </mesh>
       {/* Subtle architectural reference grid */}
       <gridHelper args={[220, 44, '#2B3B4A', '#17202A']} position={[-10, -7.92, 0]} />

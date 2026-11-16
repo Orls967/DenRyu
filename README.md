@@ -87,7 +87,7 @@ The top bar has six pages. On the right, two badges show the motion setting (`St
 
 ### 01 · Overview
 
-The landing page. A 3D diorama of the complete plant (reservoir, a 140 m concrete gravity dam with a gated ogee spillway, surface penstock, cut-away powerhouse, switchyard, transmission line and tailrace) set in a valley, with animated water flow and a slowly orbiting camera. Drag to orbit, scroll to zoom, click any structure to open it in Plant Anatomy.
+The landing page. A 3D diorama of the complete plant (reservoir, a 140 m concrete gravity dam with a gated ogee spillway, surface penstock, cut-away powerhouse and generator, step-up transformer, air-insulated switchyard bay, lattice transmission towers and tailrace) set in a valley, with animated water flow and a slowly orbiting camera. Drag to orbit, scroll to zoom, click any structure to open it in Plant Anatomy.
 
 Below the hero:
 
@@ -433,7 +433,7 @@ Images are written to `docs/screenshots/`.
 ## Known limitations
 
 1. **Synthetic physics.** Steady-state and quasi-static equations with smooth synthetic curves. No CFD, no water-hammer transients, no governor dynamics.
-2. **Procedural 3D geometry.** The plant is generated in code (extruded profiles, lathe surfaces and parametric blades), not from CAD/GLB models. The dam, runner and powerhouse follow real proportions, but details such as the generator internals and switchyard are simplified, and the powerhouse is an open cut-away.
+2. **Procedural 3D geometry.** The plant is generated in code (extruded profiles, lathe surfaces, parametric blades and instanced lattice steel), not from CAD/GLB models. Proportions follow real plants, but it is an illustrative model rather than a specific facility, and the powerhouse and generator barrel are open cut-aways.
 3. **The hosted demo has no backend.** GitHub Pages serves static files only, so sweeps and parity checks need a local or separately hosted API.
 4. **Locale-formatted inputs.** Numeric inputs follow the browser locale (for example `0,92` instead of `0.92`).
 

@@ -121,3 +121,21 @@
     - Runner close-up hides surrounding parts and flow particles.
   - **README rewritten** with a screenshot tour captured from the live site (`apps/web/screenshots/capture.spec.ts`, run with `npm run screenshots`). Vitest now excludes `screenshots/`.
   - **Verification:** `typecheck`, `eslint`, `vitest` (17/17) and `playwright test` (7/7) all pass.
+- **Generator & switchyard detail pass (2026-11-16):**
+  - Generator:
+    - The barrel and stator are cut away on the camera-facing quadrant.
+    - Rotor: hub, 8-arm spider, laminated rim, and 24 pole bodies with pole shoes and DC field coils.
+    - Stator: core in 6 lamination packets with vent ducts, a ribbed frame, 72 copper slot bars and involute end-turn baskets.
+    - Five finned air-to-water coolers with cold/warm headers.
+    - Slip rings with brush gear, and AVR/thyristor cubicles standing on the generator floor.
+    - Thrust bearing collar on a 6-arm bracket.
+  - Electrical:
+    - Terminal box with bushings and CTs.
+    - Isolated-phase bus ducts on support frames.
+    - GCB with three SF6 pole tanks.
+    - GSU transformer with stiffeners, radiator fin banks and fans, conservator, and HV/LV bushings.
+  - AIS switchyard bay with, per phase: surge arrester, live-tank breaker, centre-break disconnector, CT and tube bus. Also a lattice gantry with strain strings, a perimeter fence and a relay kiosk.
+  - Lines: lattice suspension tower with insulator strings. The grid dead-end tower continues to two receding towers.
+  - New `structural.tsx` helpers: `SegmentLattice` (instanced steel members), `latticeTowerSegments`, and `Insulator`.
+  - The floating yard slab is replaced by a solid terrace, and the transformer camera preset is re-framed.
+  - Verification: `typecheck`, `eslint`, `vitest` (17/17), `vite build` and `playwright test` (7/7) all pass.

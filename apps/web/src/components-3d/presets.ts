@@ -63,8 +63,8 @@ export const CAMERA_PRESETS: Record<string, CameraPreset> = {
   'cam-preset-transformer-bay': {
     key: 'cam-preset-transformer-bay',
     label: 'Transformer & Busbar Bay',
-    position: [14, 14, -2],
-    target: [11.5, 8.8, -9.5],
+    position: [26, 18, 4],
+    target: [12, 8.6, -9],
   },
   'cam-preset-switchyard-grid': {
     key: 'cam-preset-switchyard-grid',
